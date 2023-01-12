@@ -44,13 +44,6 @@ class objeto
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
 
     /**
      * @return string
@@ -172,13 +165,6 @@ class objeto
         return $this->idCategoria;
     }
 
-    /**
-     * @param int $idCategoria
-     */
-    public function setIdCategoria(int $idCategoria): void
-    {
-        $this->idCategoria = $idCategoria;
-    }
 
 
 }

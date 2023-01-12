@@ -1,38 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>Tables - Atlantis Lite Bootstrap 4 Admin Dashboard</title>
-    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
-          name='template/assets/img/icon.ico" type="image/x-icon"/'>
-    <link rel="icon" href="../../../../dashboard/template/examples/assets/img/icon.ico" type="image/x-icon"/>
-    <!-- Fonts and icons -->
-    <script src="../../../dashboard/template/examples/assets/js/plugin/webfont/webfont.min.js"></script>
-    <script>
-        WebFont.load({
-            google: {"families": ["Lato:300,400,700,900"]},
-            custom: {
-                "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
-                urls: ['../../../dashboard/template/examples/assets/css/fonts.min.css']
-            },
-            active: function () {
-                sessionStorage.fonts = true;
-            }
-        });
-    </script>
-    <link rel="stylesheet" href="../../../dashboard/template/examples/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../../dashboard/template/examples/assets/css/atlantis.min.css">
-</head>
-
-<body>
 <div class="">
     <div class="main-header">
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="blue">
-            <a href="../../../dashboard/template/examples/demo1/index.html" class="logo"><img
-                        src="../../../dashboard/img/logo.png" alt="navbar brand" class="navbar-brand"
-                        style="width: 25%"></a>
+            <a href="/php/proyectointegrador/backend/dashboard/template/examples/demo1/index.html" class="logo"><img
+                    src="/php/proyectointegrador/backend/dashboard/img/logo.png" alt="navbar brand" class="navbar-brand"
+                    style="width: 25%"></a>
             <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                     data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon">
@@ -75,8 +47,7 @@
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
                            aria-expanded="false">
                             <div class="avatar-sm">
-                                <img src="../../../dashboard/template/examples/assets/img/profile.jpg"
-                                     alt="../../../..."
+                                <img src="/php/proyectointegrador/backend/dashboard/template/examples/assets/img/profile.jpg" alt="../..."
                                      class="avatar-img rounded-circle">
                             </div>
                         </a>
@@ -85,14 +56,14 @@
                                 <li>
                                     <div class="user-box">
                                         <div class="avatar-lg"><img
-                                                    src="../../../../dashboard/template/examples/assets/img/profile.jpg"
-                                                    alt="image profile" class="avatar-img rounded">
+                                                src="../../dashboard/template/examples/assets/img/profile.jpg"
+                                                alt="image profile" class="avatar-img rounded">
                                         </div>
                                         <div class="u-text">
                                             <h4><?php echo $_SESSION["login"] ?></h4>
                                             <p class="text-muted"></p><a
-                                                    href="profile.html"
-                                                    class="btn btn-xs btn-secondary btn-sm">View
+                                                href="profile.html"
+                                                class="btn btn-xs btn-secondary btn-sm">View
                                                 Profile</a>
                                         </div>
                                     </div>
@@ -121,7 +92,7 @@
             <div class="sidebar-content">
                 <div class="user">
                     <div class="avatar-sm float-left mr-2">
-                        <img src="../../../dashboard/template/examples/assets/img/profile.jpg" alt="../../../..."
+                        <img src="../../dashboard/template/examples/assets/img/profile.jpg" alt="../..."
                              class="avatar-img rounded-circle">
                     </div>
                     <div class="info">
@@ -156,8 +127,8 @@
                     </div>
                 </div>
                 <ul class="nav nav-primary">
-                    <li class="nav-item">
-                        <a data-toggle="collapse" href="../dashboard" class="collapsed" aria-expanded="false">
+                    <li class="nav-item active">
+                        <a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
                             <i class="fas fa-home"></i>
                             <p>Dashboard</p>
                         </a>
@@ -171,60 +142,60 @@
                         <div class="collapse" id="base">
                             <ul class="nav nav-collapse">
                                 <li>
-                                    <a href="../../../../components/avatars.html">
+                                    <a href="../../components/avatars.html">
                                         <span class="sub-item">Avatars</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../../../../components/buttons.html">
+                                    <a href="../../components/buttons.html">
                                         <span class="sub-item">Buttons</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../../../../components/gridsystem.html">
+                                    <a href="../../components/gridsystem.html">
                                         <span class="sub-item">Grid System</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../../../../components/panels.html">
+                                    <a href="../../components/panels.html">
                                         <span class="sub-item">Panels</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../../../../components/notifications.html">
+                                    <a href="../../components/notifications.html">
                                         <span class="sub-item">Notifications</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../../../../components/sweetalert.html">
+                                    <a href="../../components/sweetalert.html">
                                         <span class="sub-item">Sweet Alert</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../../../../components/font-awesome-icons.html">
+                                    <a href="../../components/font-awesome-icons.html">
                                         <span class="sub-item">Font Awesome Icons</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../../../../components/simple-line-icons.html">
+                                    <a href="../../components/simple-line-icons.html">
                                         <span class="sub-item">Simple Line Icons</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../../../../components/flaticons.html">
+                                    <a href="../../components/flaticons.html">
                                         <span class="sub-item">Flaticons</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../../../../components/typography.html">
+                                    <a href="../../components/typography.html">
                                         <span class="sub-item">Typography</span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item active">
-                        <a data-toggle="collapse" href="#sidebarLayouts">
+                    <li class="nav-item">
+                        <a data-toggle="collapse" href="dashboard/ficha">
                             <i class="fas fa-book"></i>
                             <p>Categories</p>
                             <span class="caret"></span>
@@ -232,22 +203,22 @@
                         <div class="collapse" id="sidebarLayouts">
                             <ul class="nav nav-collapse">
                                 <li>
-                                    <a href="../../../../sidebar-style-1.html">
+                                    <a href="../../sidebar-style-1.html">
                                         <span class="sub-item">Imposible Sports</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../../../../overlay-sidebar.html">
+                                    <a href="../../overlay-sidebar.html">
                                         <span class="sub-item">Gastronomics Pleasures</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../../../../compact-sidebar.html">
+                                    <a href="../../compact-sidebar.html">
                                         <span class="sub-item">Clothes</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../../../../static-sidebar.html">
+                                    <a href="../../static-sidebar.html">
                                         <span class="sub-item">Travelling</span>
                                     </a>
                                 </li>
@@ -263,7 +234,7 @@
                         <div class="collapse" id="forms">
                             <ul class="nav nav-collapse">
                                 <li>
-                                    <a href="../../../../forms/forms.html">
+                                    <a href="../../forms/forms.html">
                                         <span class="sub-item">Basic Form</span>
                                     </a>
                                 </li>
@@ -279,12 +250,12 @@
                         <div class="collapse" id="tables">
                             <ul class="nav nav-collapse">
                                 <li>
-                                    <a href="../../../../tables/tables.html">
+                                    <a href="../../tables/tables.html">
                                         <span class="sub-item">Basic Table</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../../../../tables/datatables.html">
+                                    <a href="../../tables/datatables.html">
                                         <span class="sub-item">Datatables</span>
                                     </a>
                                 </li>
@@ -300,7 +271,7 @@
                         <div class="collapse" id="maps">
                             <ul class="nav nav-collapse">
                                 <li>
-                                    <a href="../../../../maps/jqvmap.html">
+                                    <a href="../../maps/jqvmap.html">
                                         <span class="sub-item">JQVMap</span>
                                     </a>
                                 </li>
@@ -316,12 +287,12 @@
                         <div class="collapse" id="charts">
                             <ul class="nav nav-collapse">
                                 <li>
-                                    <a href="../../../../charts/charts.html">
+                                    <a href="../../charts/charts.html">
                                         <span class="sub-item">Chart Js</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../../../../charts/sparkline.html">
+                                    <a href="../../charts/sparkline.html">
                                         <span class="sub-item">Sparkline</span>
                                     </a>
                                 </li>
@@ -329,7 +300,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a href="../logout">
+                        <a href="logout">
                             <i class="fas fa-sign-out-alt"></i>
                             <p>Logout</p>
                         </a>
@@ -339,6 +310,3 @@
         </div>
     </div>
 </div>
-</body>
-
-</html>

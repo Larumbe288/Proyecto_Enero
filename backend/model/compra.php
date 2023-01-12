@@ -32,13 +32,6 @@ public string $fechacompra;
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
 
     /**
      * @return int
@@ -48,13 +41,6 @@ public string $fechacompra;
         return $this->idUsuario;
     }
 
-    /**
-     * @param int $idUsuario
-     */
-    public function setIdUsuario(int $idUsuario): void
-    {
-        $this->idUsuario = $idUsuario;
-    }
 
     /**
      * @return int
@@ -62,14 +48,6 @@ public string $fechacompra;
     public function getIdProducto(): int
     {
         return $this->idProducto;
-    }
-
-    /**
-     * @param int $idProducto
-     */
-    public function setIdProducto(int $idProducto): void
-    {
-        $this->idProducto = $idProducto;
     }
 
     /**
@@ -96,13 +74,6 @@ public string $fechacompra;
         return $this->fechacompra;
     }
 
-    /**
-     * @param string $fechacompra
-     */
-    public function setFechacompra(string $fechacompra): void
-    {
-        $this->fechacompra = $fechacompra;
-    }
 
 
 

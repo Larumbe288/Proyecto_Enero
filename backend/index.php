@@ -1,7 +1,8 @@
 <?php
 //Incluyo los archivos necesarios
 require("model/Conexion.php");
-require("repositories/bbdd.php");
+require("repositories/bdUsuario.php");
+require "repositories/bdCategoria.php";
 require "./controller/controller.php";
 session_start();
 //Instancio el controlador
@@ -15,15 +16,25 @@ $ruta = str_replace($home, "", $_SERVER["REQUEST_URI"]);
 $array_ruta = array_filter(explode("/", $ruta));
 //Decido la ruta en función de los elementos del array
 if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "login" && !isset($array_ruta[2])) {
-    $controller->showLogin();
+    if(isset($_SESSION["login"])) {
+      header("Location: dashboard");
+    } else {
+        $controller->showLogin();
+    }
+
+}else if(isset($array_ruta[0]) && $array_ruta[0]=="admin" && !isset($array_ruta[1])) {
+    $controller->admin();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "remember") {
     $controller->rememberPassword();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == 'login' && isset($array_ruta[2]) && $array_ruta[2] == "process") {
     $controller->autenticacion();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "dashboard" && !isset($array_ruta[2])) {
-    $controller->home();
+//    $controller->home();
+    $controller->template("tabla.php","template.php");
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "dashboard" && isset($array_ruta[2]) && $array_ruta[2] == "ficha") {
-    $controller->ficha();
+    $controller->template("home.php","template.php");
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "logout") {
     $controller->logout();
+} else {
+    $controller->error();
 }

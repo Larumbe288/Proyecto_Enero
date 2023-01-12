@@ -32,7 +32,7 @@
     <div class="container py-5 h-100">
         <?php if (isset($_SESSION["error"])) {
             echo "<div class='alert alert-danger' role='alert'>
-            Te has equivocado al iniciar sesión!
+            The username and/or the password are incorrect
         </div>";
         } ?>
 
