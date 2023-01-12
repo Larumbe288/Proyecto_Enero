@@ -24,7 +24,7 @@ class controller
                     header("Location:../dashboard");
                 } else {
                     $db = new bbdd();
-                    if ($db->login($user, $password)) {
+                    if ($db->login($user, sha1($password))) {
                         $_SESSION["login"] = $user;
                         header("Location:../dashboard");
                     } else {

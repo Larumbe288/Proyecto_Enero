@@ -329,7 +329,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a href="logout">
+                        <a href="../logout">
                             <i class="fas fa-sign-out-alt"></i>
                             <p>Logout</p>
                         </a>
