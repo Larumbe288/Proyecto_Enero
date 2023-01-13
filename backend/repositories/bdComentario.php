@@ -57,29 +57,16 @@ class bdComentario
     function update(int $id, $array)
     {
         $comentario = $this->getById($id);
-        if (isset($array["Texto"]) && !empty($array["Texto"])) {
-            $texto = $array["Texto"];
-        } else {
-            $texto = $comentario->getTexto();
-        }
-        if (isset($array["Id_Usuario"]) && !empty($array["Id_Usuario"])) {
-            $idusr = (int)$array["Id_Usuario"];
-        } else {
-            $idusr = $comentario->getIdUsuario();
-        }
-        if (isset($array["Id_Objeto"]) && !empty($array["Id_Objeto"])) {
-            $idprod = (int)$array["Id_Objeto"];
-        } else {
-            $idprod = $comentario->getIdObjeto();
-        }
-        if (isset($array["Fecha"]) && !empty($array["Fecha"])) {
-            $fecha = $array["Fecha"];
-        } else {
-            $fecha = $comentario->getFecha();
+        $arrayAtributos = ["Texto", "IdUsuario", "Fecha", "IdObjeto"];
+        foreach ($arrayAtributos as $atr) {
+            if (isset($array[$atr]) && !empty($array[$atr])) {
+                $metodo = "set" . $atr;
+                $comentario->$metodo($array[$atr]);
+            }
         }
         $db = Conexion::acceso();
         try {
-            $sql = "update comentario set Texto='$texto',Id_Usuario=$idusr,Id_Objeto=$idprod,Fecha='$fecha' where Id_Comentario=$id";
+            $sql = "update comentario set Texto='".$comentario->getTexto()."',Id_Usuario=".$comentario->getIdUsuario().",Id_Objeto=".$comentario->getIdObjeto().",Fecha='".$comentario->getFecha()."' where Id_Comentario=$id";
             $resultado = $db->query($sql);
             if (!$resultado) {
                 echo "Error: " . $db->errorInfo();

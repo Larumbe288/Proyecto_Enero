@@ -14,10 +14,10 @@ class controller
         $password = "";
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($_POST["submit"])) {
-                if (isset($_POST["username"]) && !empty($_POST["username"]) && preg_match("/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/",$_POST["username"])) {
+                if (isset($_POST["username"]) && !empty($_POST["username"]) && preg_match("/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/", $_POST["username"])) {
                     $user = $_POST["username"];
                 }
-                if (isset($_POST["password"]) && !empty($_POST["password"]) && preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/",$_POST["password"])) {
+                if (isset($_POST["password"]) && !empty($_POST["password"]) && preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/", $_POST["password"])) {
                     $password = $_POST["password"];
                 }
                 if (isset($_SESSION["login"])) {
@@ -71,8 +71,13 @@ class controller
         }
     }
 
-    public function template($contenido,$plantilla)
+    public function prueba()
     {
-        require "view/".$plantilla;
+        require "view/prueba.php";
+    }
+
+    public function template($contenido, $plantilla,$info)
+    {
+        require "view/" . $plantilla;
     }
 }

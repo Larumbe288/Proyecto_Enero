@@ -18,12 +18,12 @@ class bdObjeto
         }
     }
 
-    function read()
+    function read($principio, $final)
     {
         $arrayObjetos = [];
         $db = Conexion::acceso();
         try {
-            $sql = "select * from objeto";
+            $sql = "select * from objeto limit $principio,$final";
             $objetos = $db->query($sql);
             foreach ($objetos as $obj) {
                 $ob = new objeto((int)$obj["ID_Producto"], $obj["Nombre"], (float)$obj["Precio"], $obj["Imagen_1"], $obj["Imagen_2"], $obj["Imagen_3"], (float)$obj["Latitud"], (float)$obj["Longitud"], (int)$obj["Id_Categoria"]);
@@ -57,49 +57,16 @@ class bdObjeto
     function update(int $id, $array)
     {
         $obj = $this->getById($id);
-        if (isset($array["Nombre"]) && !empty($array["Nombre"])) {
-            $nombre = $array["Nombre"];
-        } else {
-            $nombre = $obj->getNombre();
-        }
-        if (isset($array["Precio"]) && !empty($array["Precio"])) {
-            $precio = (float)$array["Precio"];
-        } else {
-            $precio = $obj->getPrecio();
-        }
-        if (isset($array["Imagen_1"]) && !empty($array["Imagen_1"])) {
-            $imagen1 = $array["Imagen_1"];
-        } else {
-            $imagen1 = $obj->getImagen1();
-        }
-        if (isset($array["Imagen_2"]) && !empty($array["Imagen_2"])) {
-            $imagen2 = $array["Imagen_2"];
-        } else {
-            $imagen2 = $obj->getImagen2();
-        }
-        if (isset($array["Imagen_3"]) && !empty($array["Imagen_3"])) {
-            $imagen3 = $array["Imagen_3"];
-        } else {
-            $imagen3 = $obj->getImagen3();
-        }
-        if (isset($array["Latitud"]) && !empty($array["Latitud"])) {
-            $latitud = (float)$array["Latitud"];
-        } else {
-            $latitud = $obj->getLatitud();
-        }
-        if (isset($array["Longitud"]) && !empty($array["Longitud"])) {
-            $longitud = (float)$array["Longitud"];
-        } else {
-            $longitud = $obj->getLongitud();
-        }
-        if (isset($array["Id_Categoria"]) && !empty($array["Id_Categoria"])) {
-            $idcat = (int)$array["Id_Categoria"];
-        } else {
-            $idcat = $obj->getIdCategoria();
+        $arrayAtributos = ["Nombre", "Precio", "Imagen1", "Imagen2", "Imagen3", "Latitud", "Longitud", "IdCategoria"];
+        foreach ($arrayAtributos as $atr) {
+            if (isset($array[$atr]) && !empty($array[$atr])) {
+                $metodo = "set" . $atr;
+                $obj->$metodo($array[$atr]);
+            }
         }
         $db = Conexion::acceso();
         try {
-            $sql = "update objeto set Nombre='$nombre',Precio=$precio,Imagen_1='$imagen1',Latitud=$latitud,Imagen_2='$imagen2',Imagen_3='$imagen3',Longitud=$longitud,Id_Categoria=$idcat where ID_Producto = $id";
+            $sql = "update objeto set Nombre='" . $obj->getNombre() . "',Precio=" . $obj->getPrecio() . ",Imagen_1='" . $obj->getImagen1() . "',Latitud=" . $obj->getLatitud() . ",Imagen_2='" . $obj->getImagen2() . "',Imagen_3='" . $obj->getImagen3() . "',Longitud=" . $obj->getLongitud() . ",Id_Categoria=" . $obj->getIdCategoria() . " where ID_Producto = $id";
             $resultado = $db->query($sql);
             if (!$resultado) {
                 echo "Error: " . $db->errorInfo();
@@ -120,6 +87,24 @@ class bdObjeto
             if (!$resultado) {
                 echo "Error: " . $db->errorInfo();
             }
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
+        }
+    }
+
+    function getColumnsName()
+    {
+        $columns = [];
+        $db = Conexion::acceso();
+        try {
+            $sql = "SELECT `COLUMN_NAME` FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'objeto'";
+            $columnas = $db->query($sql);
+            foreach ($columnas as $col) {
+                array_push($columns, $col);
+            }
+            return $columns;
         } catch (\PDOException $e) {
             echo "Error: " . $e->getMessage();
         } finally {

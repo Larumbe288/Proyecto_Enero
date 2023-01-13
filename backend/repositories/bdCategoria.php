@@ -60,24 +60,16 @@ class bdCategoria
     public function update(int $id, $array)
     {
         $cat = $this->getById($id);
-        if (isset($array["nombre"]) && !empty($array["nombre"])) {
-            $nombre = $array["nombre"];
-        } else {
-            $nombre = $cat->getNombre();
-        }
-        if (isset($array["descripcion"]) && !empty($array["descripcion"])) {
-            $descripcion = $array["descripcion"];
-        } else {
-            $descripcion = $cat->getDescripcion();
-        }
-        if (isset($array["imagen"]) && !empty($array["imagen"])) {
-            $imagen = $array["imagen"];
-        } else {
-            $imagen = $cat->getImagen();
+        $arrayAtributos = ["Nombre", "Descripcion", "Imagen"];
+        foreach ($arrayAtributos as $atr) {
+            if (isset($array[$atr]) && !empty($array[$atr])) {
+                $metodo = "set" . $atr;
+                $cat->$metodo($array[$atr]);
+            }
         }
         $db = Conexion::acceso();
         try {
-            $sql = "update categoria set Nombre='$nombre',Descripcion='$descripcion',Imagen='$imagen' where Id_Categoria=$id";
+            $sql = "update categoria set Nombre='".$cat->getNombre()."',Descripcion='".$cat->getDescripcion()."',Imagen='".$cat->getImagen()."' where Id_Categoria=$id";
             $result = $db->query($sql);
             if (!$result) {
                 echo $db->errorInfo();

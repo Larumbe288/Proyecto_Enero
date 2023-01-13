@@ -71,39 +71,16 @@ class bdUsuario
     function update(int $id, $array)
     {
         $usr = $this->getById($id);
-        if (isset($array["Correo"]) && !empty($array["Correo"])) {
-            $correo = $array["Correo"];
-        } else {
-            $correo = $usr->getCorreo();
-        }
-        if (isset($array["Nombre"]) && !empty($array["Nombre"])) {
-            $nombre = $array["Nombre"];
-        } else {
-            $nombre = $usr->getNombre();
-        }
-        if (isset($array["Telefono"]) && !empty($array["Telefono"])) {
-            $telefono = $array["Telefono"];
-        } else {
-            $telefono = $usr->getTelefono();
-        }
-        if (isset($array["Christokens"]) && !empty($array["Christokens"])) {
-            $dinero = (float)$array["Christokens"];
-        } else {
-            $dinero = $usr->getChristokens();
-        }
-        if (isset($array["Password"]) && !empty($array["Password"])) {
-            $password = $array["Password"];
-        } else {
-            $password = $usr->getPassword();
-        }
-        if (isset($array["Rol"]) && !empty($array["Rol"])) {
-            $rol = $array["Rol"];
-        } else {
-            $rol = $usr->getRol();
+        $arrayAtributos = ["Correo", "Nombre", "Telefono", "Christokens", "Password", "Rol"];
+        foreach ($arrayAtributos as $atr) {
+            if (isset($array[$atr]) && !empty($array[$atr])) {
+                $metodo = "set" . $atr;
+                $usr->$metodo($array[$atr]);
+            }
         }
         $db = Conexion::acceso();
         try {
-            $sql = "update usuario set Correo='$correo',Nombre='$nombre',Telefono='$telefono',Christokens=$dinero,Password='$password',Rol='$rol' where Id_Usuario=$id";
+            $sql = "update usuario set Correo='" . $usr->getCorreo() . "',Nombre='" . $usr->getNombre() . "',Telefono='" . $usr->getTelefono() . "',Christokens=" . $usr->getChristokens() . ",Password='" . $usr->getPassword() . "',Rol='" . $usr->getRol() . "' where Id_Usuario=$id";
             $resultado = $db->query($sql);
             if (!$resultado) {
                 echo "Error: " . $db->errorInfo();
