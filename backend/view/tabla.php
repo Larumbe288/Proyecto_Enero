@@ -17,10 +17,9 @@
                                     <thead>
                                     <tr>
                                         <?php
-                                        $i=0;
-                                        foreach ($info as $key) {
-                                            echo "<th>" . $key[0][0][0] . "</th>";
-                                            $i=$i+1;
+                                        $columnas = $info[0];
+                                        for ($i=0;$i<count($columnas);$i++) {
+                                            echo "<th>".$columnas[$i][0]."</th>";
                                         }
                                         ?>
                                     </tr>
