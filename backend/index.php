@@ -41,8 +41,10 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     $controller->template("home.php", "template.php");
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "logout") {
     $controller->logout();
-} else if (isset($array_ruta[0]) && $array_ruta[0] == "prueba") {
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "prueba" && !isset($array_ruta[1])) {
     $controller->prueba();
+}else if(isset($array_ruta[0]) && $array_ruta[0]=="productos") {
+    echo $controller->productos();
 } else {
     $controller->error();
 }

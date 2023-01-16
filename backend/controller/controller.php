@@ -80,4 +80,8 @@ class controller
     {
         require "view/" . $plantilla;
     }
+    public function productos() {
+        $db = new bdObjeto();
+        return $db->read(0,10);
+    }
 }
