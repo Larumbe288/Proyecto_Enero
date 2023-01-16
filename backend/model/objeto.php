@@ -2,7 +2,7 @@
 
 class objeto
 {
-    private int $id;
+    public int $id;
     public string $nombre;
     public float $precio;
     public string $imagen1;

@@ -111,4 +111,38 @@ class bdObjeto
             $db = null;
         }
     }
+
+    function getMaxId()
+    {
+        $db = Conexion::acceso();
+        try {
+            $sql = "SELECT MAX(ID_Producto) FROM objeto";
+            $ides = $db->query($sql);
+            $ID = 0;
+            foreach ($ides as $id) {
+                $ID = $id['MAX(ID_Producto)'];
+            }
+            return $ID;
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
+        }
+    }
+    function getCategorias() {
+        $db = Conexion::acceso();
+        $arrayCat = array();
+        try {
+            $sql = "SELECT Id_Categoria,Nombre from categoria";
+            $result = $db->query($sql);
+            foreach ($result as $cat) {
+               $arrayCat[]=array($cat['Id_Categoria']=>$cat['Nombre']);
+            }
+            return json_encode($arrayCat);
+        } catch(\PDOException $e) {
+        echo "Error: ".$e->getMessage();
+        } finally {
+        $db=null;
+        }
+    }
 }

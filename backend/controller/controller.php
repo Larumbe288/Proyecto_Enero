@@ -73,15 +73,37 @@ class controller
 
     public function prueba()
     {
-        require "view/prueba.php";
+        $dbObjecto = new bdObjeto();
+        return $dbObjecto->getCategorias();
     }
 
-    public function template($contenido, $plantilla,$info)
+    public function template($contenido, $plantilla, $info)
     {
         require "view/" . $plantilla;
     }
-    public function productos() {
+
+    public function productos()
+    {
         $db = new bdObjeto();
-        return $db->read(0,10);
+        if(isset($_POST["inicio"])) {
+            $inicio = (int) $_POST["inicio"];
+        } else {
+            $inicio = 0;
+        }
+        return $db->read( $inicio, 10);
+    }
+    public function categorias() {
+        $dbObjecto = new bdObjeto();
+        return $dbObjecto->getCategorias();
+    }
+
+    public function id() {
+        $db = new bdObjeto();
+        return $db->getMaxId();
+    }
+
+    public function error()
+    {
+
     }
 }

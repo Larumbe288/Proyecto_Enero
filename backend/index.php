@@ -34,17 +34,19 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "dashboard" && !isset($array_ruta[2])) {
 //    $controller->home();
     $cabecera = $dbObjeto->getColumnsName();
-    $contenido = $dbObjeto->read(0,10);
-    $info = [$cabecera,$contenido];
-    $controller->template("tabla.php", "template.php",$info);
+    $contenido = $dbObjeto->read(0, 10);
+    $info = [$cabecera, $contenido];
+    $controller->template("tabla.php", "template.php", $info);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "dashboard" && isset($array_ruta[2]) && $array_ruta[2] == "ficha") {
     $controller->template("home.php", "template.php");
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "logout") {
     $controller->logout();
-} else if (isset($array_ruta[0]) && $array_ruta[0] == "prueba" && !isset($array_ruta[1])) {
-    $controller->prueba();
-}else if(isset($array_ruta[0]) && $array_ruta[0]=="productos") {
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "categorias" && !isset($array_ruta[1])) {
+    echo $controller->categorias();
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "productos" && !isset($array_ruta[1])) {
     echo $controller->productos();
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "idProd" && !isset($array_ruta[1])) {
+    echo $controller->id();
 } else {
     $controller->error();
 }
