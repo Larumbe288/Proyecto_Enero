@@ -116,9 +116,21 @@ class controller
         $dbCategoria = new bdCategoria();
         $principio = 0;
         if (isset($_POST["inicio"])) {
-            $principio = (int) $_POST["inicio"];
+            $principio = (int)$_POST["inicio"];
         }
         return $dbCategoria->read($principio, 10);
+    }
+
+    public function eliminarCategoria($id)
+    {
+        $dbCategoria = new bdCategoria();
+        if ($dbCategoria->delete($id)) {
+            header("Location: ../admin/categories");
+        }
+    }
+
+    public function showEdit($info) {
+        require "view/editarCategoria.php";
     }
 
     public function error()

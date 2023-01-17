@@ -85,10 +85,13 @@ class bdCategoria
     {
         $db = Conexion::acceso();
         try {
-            $sql = "delete from categoria where id=$id";
+            $sql = "delete from categoria where Id_Categoria=$id";
             $result = $db->query($sql);
             if (!$result) {
                 echo "Error:" . $db->errorInfo();
+                return false;
+            } else {
+                return true;
             }
         } catch (\PDOException $e) {
             echo "Error: " . $e->getMessage();

@@ -59,10 +59,14 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     echo $controller->productos();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "categories" && !isset($array_ruta[1])) {
     echo $controller->categories();
-} else if (isset($array_ruta[0]) && $array_ruta[0] == "products" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
+}else if(isset($array_ruta[0]) && $array_ruta[0] == "eliminarCategories" && isset($array_ruta[1])) {
+    $controller->eliminarCategoria((int) $array_ruta[1]);
+}
+else if (isset($array_ruta[0]) && $array_ruta[0] == "products" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
     echo $controller->idProd();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "categories" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
     echo $controller->idCat();
 } else {
-    $controller->error();
+    $info = [1,"Pepe","Pepa","url.png"];
+    $controller->showEdit($info);
 }
