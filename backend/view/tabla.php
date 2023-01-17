@@ -54,6 +54,16 @@
         cargarDatos();
     }
 
+    function ordenar() {
+        let accion = "productos/ordenar";
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+
+            }
+        }
+    }
+
     function getMaxId() {
         let accion = "idProd";
         var xhttp = new XMLHttpRequest();
@@ -77,6 +87,7 @@
         xhttp.open("POST", urlBase + accion, true);
         xhttp.send();
     }
+    
 
     function cargarDatos() {
         let accion = "productos";
@@ -109,32 +120,35 @@
     }
 
     function siguiente() {
-        if (inicio <= id - 10) {
+        if (inicio < id - 10) {
             inicio += 10;
+            document.getElementById("listado").innerHTML = "";
+            cargarDatos();
+            if (inicio >= id - 10) {
+                let boton = document.getElementById("siguiente");
+                boton.setAttribute("disabled", "");
+            }
         }
         if (inicio > 0) {
             let boton = document.getElementById("anterior");
             boton.removeAttribute("disabled");
         }
-        document.getElementById("listado").innerHTML = "";
-        cargarDatos();
-        if (inicio >= id-9) {
-            let boton = document.getElementById("siguiente");
-            boton.setAttribute("disabled", "");
-        }
     }
 
     function anterior() {
+
         if (inicio > 0) {
             inicio -= 10;
         }
         document.getElementById("listado").innerHTML = "";
         cargarDatos();
+        if (inicio < id - 10) {
+            let boton = document.getElementById("siguiente");
+            boton.removeAttribute("disabled");
+        }
         if (inicio === 0) {
             let boton = document.getElementById("anterior");
             boton.setAttribute("disabled", "");
-            let bototn = document.getElementById("siguiente");
-            bototn.removeAttribute("disabled");
         }
     }
 </script>
