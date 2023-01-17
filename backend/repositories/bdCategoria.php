@@ -19,12 +19,12 @@ class bdCategoria
 
     }
 
-    public function read()
+    public function read($principio,$final)
     {
         $arrayCat = [];
         $db = Conexion::acceso();
         try {
-            $sql = "select * from categoria";
+            $sql = "select * from categoria limit $principio,$final";
             $resultado = $db->query($sql);
             foreach ($resultado as $cat) {
                 $c = new Categoria((int)$cat["Id_Categoria"], $cat["Nombre"], $cat["Descripcion"], $cat["Imagen"]);
@@ -90,6 +90,41 @@ class bdCategoria
             if (!$result) {
                 echo "Error:" . $db->errorInfo();
             }
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
+        }
+    }
+    function getColumnsName()
+    {
+        $columns = [];
+        $db = Conexion::acceso();
+        try {
+            $sql = "SELECT `COLUMN_NAME` FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'categoria' AND TABLE_SCHEMA = 'metaverso'";
+            $columnas = $db->query($sql);
+            foreach ($columnas as $col) {
+                array_push($columns, $col);
+            }
+            return $columns;
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
+        }
+    }
+
+    function getMaxId()
+    {
+        $db = Conexion::acceso();
+        try {
+            $sql = "SELECT MAX(Id_Categoria) FROM categoria";
+            $ides = $db->query($sql);
+            $ID = 0;
+            foreach ($ides as $id) {
+                $ID = $id['MAX(Id_Categoria)'];
+            }
+            return $ID;
         } catch (\PDOException $e) {
             echo "Error: " . $e->getMessage();
         } finally {

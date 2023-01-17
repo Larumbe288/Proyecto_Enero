@@ -85,21 +85,40 @@ class controller
     public function productos()
     {
         $db = new bdObjeto();
-        if(isset($_POST["inicio"])) {
-            $inicio = (int) $_POST["inicio"];
+        if (isset($_POST["inicio"])) {
+            $inicio = (int)$_POST["inicio"];
         } else {
             $inicio = 0;
         }
-        return $db->read( $inicio, 10);
+        return $db->read($inicio, 10);
     }
-    public function categorias() {
+
+    public function categorias()
+    {
         $dbObjecto = new bdObjeto();
         return $dbObjecto->getCategorias();
     }
 
-    public function id() {
+    public function idProd()
+    {
         $db = new bdObjeto();
         return $db->getMaxId();
+    }
+
+    public function idCat()
+    {
+        $db = new bdCategoria();
+        return $db->getMaxId();
+    }
+
+    public function categories()
+    {
+        $dbCategoria = new bdCategoria();
+        $principio = 0;
+        if (isset($_POST["inicio"])) {
+            $principio = (int) $_POST["inicio"];
+        }
+        return $dbCategoria->read($principio, 10);
     }
 
     public function error()

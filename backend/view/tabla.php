@@ -9,9 +9,10 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Products</h4>
+                            <h4 id="titulo" class="card-title"><?php echo $_SESSION["tabla"] ?></h4>
                         </div>
                         <div class="card-body">
+
                             <div class="table-responsive">
                                 <table width="100%">
                                     <thead>
@@ -22,9 +23,11 @@
                                             echo "<th>" . $columnas[$i][0] . "</th>";
                                         }
                                         ?>
+                                        <th>Edit</th>
+                                        <th>Erase</th>
                                     </tr>
                                     </thead>
-                                    <tbody id="listado">
+                                    <tbody id="listado" onchange="cargarDatos()">
                                     </tbody>
                                 </table>
                             </div>
@@ -43,6 +46,51 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Editing</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Name: </label>
+                        <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Description: </label>
+                        <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="mb-3"><label for="message-text" class="col-form-label">Image: </label>
+                        <input type="file" class="form-control" id="recipient-name"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" id="deleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Are you sure?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>You are about to delete. Do you want to proceed?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Yes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     var inicio = 0;
     var id;
@@ -52,6 +100,10 @@
         getMaxId();
         getCategorias();
         cargarDatos();
+        if (inicio >= id - 10) {
+            let boton = document.getElementById("siguiente");
+            boton.setAttribute("disabled", "");
+        }
     }
 
     function ordenar() {
@@ -65,7 +117,7 @@
     }
 
     function getMaxId() {
-        let accion = "idProd";
+        let accion = document.getElementById("titulo").innerText.toLowerCase() + "/id";
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
@@ -87,10 +139,10 @@
         xhttp.open("POST", urlBase + accion, true);
         xhttp.send();
     }
-    
+
 
     function cargarDatos() {
-        let accion = "productos";
+        let accion = document.getElementById("titulo").innerText.toLowerCase();
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
@@ -102,13 +154,19 @@
                     let valores = Object.values(productos[i]);
                     for (let j = 0; j < valores.length; j++) {
                         let td = document.createElement("td");
-                        if (j === valores.length - 1) {
+                        if (j === valores.length - 1 && accion === "products") {
                             td.innerText = categorias[valores[j] - 1][valores[j]];
                         } else {
                             td.innerHTML = valores[j];
                         }
                         tr.appendChild(td);
                     }
+                    let iconoEditar = document.createElement("td");
+                    iconoEditar.innerHTML = "<button class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fas fa-pencil-alt'></i></button>"
+                    tr.appendChild(iconoEditar);
+                    let iconoBorrar = document.createElement("td");
+                    iconoBorrar.innerHTML = "<button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#deleteModal'><i class='fas fa-trash-alt'></i></button>";
+                    tr.appendChild(iconoBorrar);
                     tabla.appendChild(tr);
                 }
             }
@@ -123,11 +181,14 @@
         if (inicio < id - 10) {
             inicio += 10;
             document.getElementById("listado").innerHTML = "";
-            cargarDatos();
-            if (inicio >= id - 10) {
+            setTimeout(cargarDatos, 200);
+            if (inicio > id - 10) {
                 let boton = document.getElementById("siguiente");
                 boton.setAttribute("disabled", "");
             }
+        } else {
+            let boton = document.getElementById("siguiente");
+            boton.setAttribute("disabled", "");
         }
         if (inicio > 0) {
             let boton = document.getElementById("anterior");
@@ -141,7 +202,7 @@
             inicio -= 10;
         }
         document.getElementById("listado").innerHTML = "";
-        cargarDatos();
+        setTimeout(cargarDatos, 200);
         if (inicio < id - 10) {
             let boton = document.getElementById("siguiente");
             boton.removeAttribute("disabled");

@@ -99,7 +99,7 @@ class bdObjeto
         $columns = [];
         $db = Conexion::acceso();
         try {
-            $sql = "SELECT `COLUMN_NAME` FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'objeto'";
+            $sql = "SELECT `COLUMN_NAME` FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'objeto' AND TABLE_SCHEMA = 'metaverso'";
             $columnas = $db->query($sql);
             foreach ($columnas as $col) {
                 array_push($columns, $col);

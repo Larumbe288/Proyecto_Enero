@@ -2,12 +2,14 @@
 //Incluyo los archivos necesarios
 require("model/Conexion.php");
 require "model/objeto.php";
+require "model/categoria.php";
 require("repositories/bdUsuario.php");
 require "repositories/bdCategoria.php";
 require "repositories/bdObjeto.php";
 require "./controller/controller.php";
 session_start();
 $dbObjeto = new bdObjeto();
+$dbCategoria = new bdCategoria();
 //Instancio el controlador
 $controller = new controller();
 //Ruta de la home
@@ -31,22 +33,36 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     $controller->rememberPassword();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == 'login' && isset($array_ruta[2]) && $array_ruta[2] == "process") {
     $controller->autenticacion();
-} else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "dashboard" && !isset($array_ruta[2])) {
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "products" && !isset($array_ruta[2])) {
 //    $controller->home();
+    unset($_SESSION['tabla']);
+    $_SESSION["tabla"] = "Products";
     $cabecera = $dbObjeto->getColumnsName();
     $contenido = $dbObjeto->read(0, 10);
     $info = [$cabecera, $contenido];
     $controller->template("tabla.php", "template.php", $info);
-} else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "dashboard" && isset($array_ruta[2]) && $array_ruta[2] == "ficha") {
-    $controller->template("home.php", "template.php");
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "dashboard" && !isset($array_ruta[2])) {
+    $info = 0;
+    $controller->template("home.php","template.php",$info);
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "categories" && !isset($array_ruta[2])) {
+    unset($_SESSION['tabla']);
+    $_SESSION["tabla"] = "Categories";
+    $cabecera2 = $dbCategoria->getColumnsName();
+    $contenido2 = $dbCategoria->read(0, 10);
+    $info = [$cabecera2, $contenido2];
+    $controller->template("tabla.php", "template.php", $info);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "logout") {
     $controller->logout();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "categorias" && !isset($array_ruta[1])) {
     echo $controller->categorias();
-} else if (isset($array_ruta[0]) && $array_ruta[0] == "productos" && !isset($array_ruta[1])) {
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "products" && !isset($array_ruta[1])) {
     echo $controller->productos();
-} else if (isset($array_ruta[0]) && $array_ruta[0] == "idProd" && !isset($array_ruta[1])) {
-    echo $controller->id();
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "categories" && !isset($array_ruta[1])) {
+    echo $controller->categories();
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "products" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
+    echo $controller->idProd();
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "categories" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
+    echo $controller->idCat();
 } else {
     $controller->error();
 }

@@ -2,7 +2,7 @@
 
 class categoria
 {
-private int $id;
+public int $id;
 public string $nombre;
 public string $descripcion;
 public string $imagen;

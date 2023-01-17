@@ -39,14 +39,14 @@
                 </div>
             </div>
             <ul class="nav nav-primary">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a data-toggle="collapse" href="/php/proyectointegrador/backend/index.php/admin/dashboard" class="collapsed" aria-expanded="false">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a data-toggle="collapse" href="#base">
+                    <a data-toggle="collapse" href="users">
                         <i class="fas fa-user-alt"></i>
                         <p>Users</p>
                         <span class="caret"></span>
@@ -107,7 +107,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a data-toggle="collapse" href="dashboard/ficha">
+                    <a data-toggle="collapse" href="categories">
                         <i class="fas fa-book"></i>
                         <p>Categories</p>
                         <span class="caret"></span>
@@ -138,7 +138,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a data-toggle="collapse" href="#forms">
+                    <a data-toggle="collapse" href="products">
                         <i class="fas fa-box"></i>
                         <p>Products</p>
                         <span class="caret"></span>
