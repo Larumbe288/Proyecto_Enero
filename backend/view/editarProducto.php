@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="<?php echo $_SERVER["HTTP_HOST"] ?>/../../../view/formulario.css">
 <div>
     <form class="form">
-        <h2>Editar Categoría</h2>
+        <h2>Editar Producto</h2>
         <p>
             <label for="idCat">ID: </label>
             <input id="idCat" readonly value="<?php echo $info[0]?>">
@@ -14,8 +14,8 @@
             <input type="text" id="nombre" placeholder="Indica el nombre de la categoría..." value="<?php echo $info[1] ?>">
         </p>
         <p>
-            <label for="descripcion">Descricpción:</label>
-            <input id="desripcion" placeholder="Indica la descripción de la categoría..." value="<?php echo $info[2] ?>">
+            <label for="descripcion">Precio: </label>
+            <input id="desripcion" type="number" step="0.0001" placeholder="Indica la descripción de la categoría..." value="<?php echo $info[2] ?>">
         </p>
         <p>
             <label for="imagen">Imagen:</label>

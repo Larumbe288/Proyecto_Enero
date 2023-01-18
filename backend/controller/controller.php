@@ -129,8 +129,17 @@ class controller
         }
     }
 
-    public function showEdit($info) {
-        require "view/editarCategoria.php";
+    public function eliminarProducto($id)
+    {
+        $dbObjeto = new bdObjeto();
+        if ($dbObjeto->delete($id)) {
+            header("Location: ../admin/products");
+        }
+    }
+
+    public function showEdit($info)
+    {
+        require "view/editarProducto.php";
     }
 
     public function error()

@@ -144,7 +144,7 @@
                     iconoMostrar.innerHTML = "<button class='btn btn-success' data-bs-toggle='modal' data-bs-target='#show'><i class='fas fa-eye'></i></button>";
                     tr.appendChild(iconoMostrar);
                     let iconoEditar = document.createElement("td");
-                    iconoEditar.innerHTML = "<button class='btn btn-primary edit' itemid='" + valores[0] + "' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fas fa-pencil-alt'></i></button>"
+                    iconoEditar.innerHTML = "<a href='http://localhost/php/proyectointegrador/backend/index.php/editar<?php echo $_SESSION["tabla"] ?>/"+valores[0]+"' class='btn btn-primary edit'><i class='fas fa-pencil-alt'></i></a>"
                     tr.appendChild(iconoEditar);
                     let iconoBorrar = document.createElement("td");
                     iconoBorrar.innerHTML = "<a href='http://localhost/php/proyectointegrador/backend/index.php/eliminar<?php echo $_SESSION["tabla"] ?>/" + valores[0] + "' class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
@@ -164,13 +164,15 @@
             inicio += 10;
             document.getElementById("listado").innerHTML = "";
             cargarDatos();
-            if (inicio > id - 10) {
-                let boton = document.getElementById("siguiente");
-                boton.setAttribute("disabled", "");
-            }
+
         } else {
             let boton = document.getElementById("siguiente");
             boton.setAttribute("disabled", "");
+        }
+        if (inicio >= id - 10) {
+            let boton = document.getElementById("siguiente");
+            boton.setAttribute("disabled", "");
+            return;
         }
         if (inicio > 0) {
             let boton = document.getElementById("anterior");
@@ -185,7 +187,6 @@
         }
         document.getElementById("listado").innerHTML = "";
         cargarDatos();
-        let tr = document.getElementById("tr");
         if (inicio < id - 10) {
             let boton = document.getElementById("siguiente");
             boton.removeAttribute("disabled");

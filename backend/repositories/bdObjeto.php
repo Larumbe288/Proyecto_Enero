@@ -116,11 +116,11 @@ class bdObjeto
     {
         $db = Conexion::acceso();
         try {
-            $sql = "SELECT MAX(ID_Producto) FROM objeto";
+            $sql = "SELECT COUNT(ID_Producto) FROM objeto";
             $ides = $db->query($sql);
             $ID = 0;
             foreach ($ides as $id) {
-                $ID = $id['MAX(ID_Producto)'];
+                $ID = $id['COUNT(ID_Producto)'];
             }
             return $ID;
         } catch (\PDOException $e) {

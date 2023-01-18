@@ -19,7 +19,7 @@ class bdCategoria
 
     }
 
-    public function read($principio,$final)
+    public function read($principio, $final)
     {
         $arrayCat = [];
         $db = Conexion::acceso();
@@ -42,13 +42,10 @@ class bdCategoria
     {
         $db = Conexion::acceso();
         try {
-            $sql = "select * from categoria where id=$id";
+            $sql = "select * from categoria where Id_Categoria=$id";
             $cat = $db->query($sql);
-            if ($cat->fetch()) {
-                return new Categoria((int)$cat["Id_Categoria"], $cat["Nombre"], $cat["Descripcion"], $cat["Imagen"]);
-            } else {
-                echo "Error:" . $db->errorInfo();
-            }
+            $c = $cat->fetch();
+            return new categoria((int)$c["Id_Categoria"], $c["Nombre"], $c["Descripcion"], $c["Imagen"]);
         } catch (\PDOException $e) {
             echo "Error: " . $e->getMessage();
         } finally {
@@ -69,7 +66,7 @@ class bdCategoria
         }
         $db = Conexion::acceso();
         try {
-            $sql = "update categoria set Nombre='".$cat->getNombre()."',Descripcion='".$cat->getDescripcion()."',Imagen='".$cat->getImagen()."' where Id_Categoria=$id";
+            $sql = "update categoria set Nombre='" . $cat->getNombre() . "',Descripcion='" . $cat->getDescripcion() . "',Imagen='" . $cat->getImagen() . "' where Id_Categoria=$id";
             $result = $db->query($sql);
             if (!$result) {
                 echo $db->errorInfo();
@@ -99,6 +96,7 @@ class bdCategoria
             $db = null;
         }
     }
+
     function getColumnsName()
     {
         $columns = [];
@@ -121,11 +119,11 @@ class bdCategoria
     {
         $db = Conexion::acceso();
         try {
-            $sql = "SELECT MAX(Id_Categoria) FROM categoria";
+            $sql = "SELECT COUNT(Id_Categoria) FROM categoria";
             $ides = $db->query($sql);
             $ID = 0;
             foreach ($ides as $id) {
-                $ID = $id['MAX(Id_Categoria)'];
+                $ID = $id['COUNT(Id_Categoria)'];
             }
             return $ID;
         } catch (\PDOException $e) {

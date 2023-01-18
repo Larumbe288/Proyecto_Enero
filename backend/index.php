@@ -43,7 +43,7 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     $controller->template("tabla.php", "template.php", $info);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "dashboard" && !isset($array_ruta[2])) {
     $info = 0;
-    $controller->template("home.php","template.php",$info);
+    $controller->template("home.php", "template.php", $info);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "categories" && !isset($array_ruta[2])) {
     unset($_SESSION['tabla']);
     $_SESSION["tabla"] = "Categories";
@@ -59,14 +59,24 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     echo $controller->productos();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "categories" && !isset($array_ruta[1])) {
     echo $controller->categories();
-}else if(isset($array_ruta[0]) && $array_ruta[0] == "eliminarCategories" && isset($array_ruta[1])) {
-    $controller->eliminarCategoria((int) $array_ruta[1]);
-}
-else if (isset($array_ruta[0]) && $array_ruta[0] == "products" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "eliminarCategories" && isset($array_ruta[1])) {
+    $controller->eliminarCategoria((int)$array_ruta[1]);
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "eliminarProducts" && isset($array_ruta[1])) {
+    $controller->eliminarProducto((int)$array_ruta[1]);
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "products" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
     echo $controller->idProd();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "categories" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
     echo $controller->idCat();
-} else {
-    $info = [1,"Pepe","Pepa","url.png"];
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "editarCategories" && isset($array_ruta[1])) {
+    $cat = $dbCategoria->getById((int)$array_ruta[1]);
+    $info = array_values(json_decode(json_encode($cat),true));
     $controller->showEdit($info);
+}else if (isset($array_ruta[0]) && $array_ruta[0] == "editarProducts" && isset($array_ruta[1])) {
+    $cat = $dbCategoria->getById((int)$array_ruta[1]);
+    $info = array_values(json_decode(json_encode($cat),true));
+    $controller->showEdit($info);
+}
+else {
+
+    $controller->error();
 }
