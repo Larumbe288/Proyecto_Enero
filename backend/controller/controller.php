@@ -111,6 +111,12 @@ class controller
         return $db->getMaxId();
     }
 
+    public function maxIdCat()
+    {
+        $db = new bdCategoria();
+        return $db->getMaxIdCat();
+    }
+
     public function categories()
     {
         $dbCategoria = new bdCategoria();
@@ -145,6 +151,27 @@ class controller
     public function showEditCat($info)
     {
         require "view/editarCategoria.php";
+    }
+
+    public function processCategoria()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['submit'])) {
+                if (isset($_POST['idCat']) && !empty($_POST['idCat'])) {
+                    $id = (int)$_POST['idCat'];
+                } else {
+                    header("Location: ../../admin/categories");
+                }
+                if (isset($_POST["nombre"]) && isset($_POST["descripcion"]) && isset($_POST["imagen"])) {
+                    $array = array("Nombre" => $_POST["nombre"], "Descripcion"=>$_POST["descripcion"],"Imagen"=> $_POST["imagen"],);
+                    $dbCategoria = new bdCategoria();
+                    $dbCategoria->update($id,$array);
+                    /*
+                     * meter la imagen nueva si la hay en la carpeta*/
+                    header("Location: ../../admin/categories");
+                }
+            }
+        }
     }
 
     public function error()

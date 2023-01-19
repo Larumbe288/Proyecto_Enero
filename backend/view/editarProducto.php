@@ -33,6 +33,19 @@
             <input onchange="previewFile(this)" type="file" accept="image/*" id="imagen3">
         </p>
         <img id="previewImg" src="<?php echo $info[6] ?>" width="100px" height="100px">
+        <p>
+            <label for="latitud">Latitud:</label>
+            <input type="number" step="0.00000000000001" id="latitud" min="-90" max="90" value="<?php echo $info[4] ?>">
+        </p>
+        <p>
+            <label for="longitud">Longitud:</label>
+            <input type="number" step="0.00000000000001" id="longitud" min="-180" max="180" value="<?php echo $info[7]?>">
+        </p>
+        <p>
+            <label for="idCat">Id Categoría:</label>
+            <input type="number" id="longitud" min="1" max="<?php echo $info[9] ?>" value="<?php echo $info[8]?>">
+        </p>
+
         <a href="#">Editar</a>
     </form>
 

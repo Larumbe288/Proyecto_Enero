@@ -132,4 +132,20 @@ class bdCategoria
             $db = null;
         }
     }
+    function getMaxIdCat() {
+        $db = Conexion::acceso();
+        try {
+            $sql = "SELECT MAX(Id_Categoria) FROM categoria";
+            $ides = $db->query($sql);
+            $ID = 0;
+            foreach ($ides as $id) {
+                $ID = $id['MAX(Id_Categoria)'];
+            }
+            return $ID;
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
+        }
+    }
 }

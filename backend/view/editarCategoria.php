@@ -3,25 +3,25 @@
         crossorigin="anonymous"></script>
 <link rel="stylesheet" href="<?php echo $_SERVER["HTTP_HOST"] ?>/../../../view/formulario.css">
 <div>
-    <form class="form">
+    <form class="form" action="<?php echo $info[0] ?>/processCategoria" method="post">
         <h2>Editar Categoría</h2>
         <p>
             <label for="idCat">ID: </label>
-            <input id="idCat" readonly value="<?php echo $info[0]?>">
+            <input id="idCat" name="idCat" readonly value="<?php echo $info[0]?>" required>
         </p>
         <p>
             <label for="nombre">Nombre: </label>
-            <input type="text" id="nombre" placeholder="Indica el nombre de la categoría..." value="<?php echo $info[1] ?>">
+            <input type="text" name="nombre" id="nombre" placeholder="Indica el nombre de la categoría..." value="<?php echo $info[1] ?>">
         </p>
         <p>
-            <label for="descripcion">Descricpción:</label>
-            <input id="desripcion" placeholder="Indica la descripción de la categoría..." value="<?php echo $info[2] ?>">
+            <label for="descripcion">Descripción:</label>
+            <input id="desripcion" name="descripcion" placeholder="Indica la descripción de la categoría..." value="<?php echo $info[2] ?>">
         </p>
         <p>
             <label for="imagen">Imagen:</label>
-            <input onchange="previewFile(this)" type="file" id="imagen">
+            <input onchange="previewFile(this)" name="imagen" type="file" id="imagen">
         </p>
-        <a href="#">Editar</a>
+        <input type="submit" name="submit" value="Editar"></input>
         <img id="previewImg" src="<?php echo $info[3] ?>" width="100px" height="100px">
     </form>
 
