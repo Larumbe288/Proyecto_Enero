@@ -19,10 +19,21 @@
         </p>
         <p>
             <label for="imagen">Imagen:</label>
-            <input onchange="previewFile(this)" type="file" id="imagen">
+            <input onchange="previewFile(this)" type="file" accept="image/*" id="imagen">
         </p>
-        <a href="#">Editar</a>
+
         <img id="previewImg" src="<?php echo $info[3] ?>" width="100px" height="100px">
+        <p>
+            <label for="imagen2">Imagen 2:</label>
+            <input onchange="previewFile(this)" type="file" accept="image/*" id="imagen2">
+        </p>
+        <img id="previewImg" src="<?php echo $info[5] ?>" width="100px" height="100px">
+        <p>
+            <label for="imagen3">Imagen 3:</label>
+            <input onchange="previewFile(this)" type="file" accept="image/*" id="imagen3">
+        </p>
+        <img id="previewImg" src="<?php echo $info[6] ?>" width="100px" height="100px">
+        <a href="#">Editar</a>
     </form>
 
 </div>

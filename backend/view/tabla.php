@@ -141,10 +141,10 @@
                         tr.appendChild(td);
                     }
                     let iconoMostrar = document.createElement("td");
-                    iconoMostrar.innerHTML = "<button class='btn btn-success' data-bs-toggle='modal' data-bs-target='#show'><i class='fas fa-eye'></i></button>";
+                    iconoMostrar.innerHTML = "<button class='btn btn-success'  itemid='" + valores[0] + "' data-bs-toggle='modal' data-bs-target='#show'><i class='fas fa-eye'></i></button>";
                     tr.appendChild(iconoMostrar);
                     let iconoEditar = document.createElement("td");
-                    iconoEditar.innerHTML = "<a href='http://localhost/php/proyectointegrador/backend/index.php/editar<?php echo $_SESSION["tabla"] ?>/"+valores[0]+"' class='btn btn-primary edit'><i class='fas fa-pencil-alt'></i></a>"
+                    iconoEditar.innerHTML = "<a href='http://localhost/php/proyectointegrador/backend/index.php/editar<?php echo $_SESSION["tabla"] ?>/" + valores[0] + "' class='btn btn-primary edit'><i class='fas fa-pencil-alt'></i></a>"
                     tr.appendChild(iconoEditar);
                     let iconoBorrar = document.createElement("td");
                     iconoBorrar.innerHTML = "<a href='http://localhost/php/proyectointegrador/backend/index.php/eliminar<?php echo $_SESSION["tabla"] ?>/" + valores[0] + "' class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";

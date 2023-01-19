@@ -70,13 +70,12 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "editarCategories" && isset($array_ruta[1])) {
     $cat = $dbCategoria->getById((int)$array_ruta[1]);
     $info = array_values(json_decode(json_encode($cat),true));
-    $controller->showEdit($info);
+    $controller->showEditCat($info);
 }else if (isset($array_ruta[0]) && $array_ruta[0] == "editarProducts" && isset($array_ruta[1])) {
-    $cat = $dbCategoria->getById((int)$array_ruta[1]);
+    $cat = $dbObjeto->getById((int)$array_ruta[1]);
     $info = array_values(json_decode(json_encode($cat),true));
     $controller->showEdit($info);
 }
 else {
-
     $controller->error();
 }
