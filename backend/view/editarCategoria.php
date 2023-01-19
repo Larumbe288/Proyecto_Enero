@@ -3,7 +3,7 @@
         crossorigin="anonymous"></script>
 <link rel="stylesheet" href="<?php echo $_SERVER["HTTP_HOST"] ?>/../../../view/formulario.css">
 <div>
-    <form class="form" action="<?php echo $info[0] ?>/processCategoria" method="post">
+    <form class="form" action="<?php echo $info[0] ?>/processCategoria" method="post" enctype="multipart/form-data">
         <h2>Editar Categoría</h2>
         <p>
             <label for="idCat">ID: </label>

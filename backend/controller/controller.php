@@ -162,19 +162,28 @@ class controller
                 } else {
                     header("Location: ../../admin/categories");
                 }
-                if (isset($_POST["nombre"]) && isset($_POST["descripcion"]) && isset($_POST["imagen"])) {
-                    $array = array("Nombre" => $_POST["nombre"], "Descripcion"=>$_POST["descripcion"],"Imagen"=> $_POST["imagen"],);
-                    $dbCategoria = new bdCategoria();
-                    $dbCategoria->update($id,$array);
-                    /*
-                     * meter la imagen nueva si la hay en la carpeta*/
-                    header("Location: ../../admin/categories");
+                $dbCategoria = new bdCategoria();
+                $temporal = $_FILES["imagen"]["tmp_name"];
+                $fileName = $_FILES["imagen"]["name"];
+                $path = $_SERVER['DOCUMENT_ROOT'] . "/php/proyectointegrador/backend/view/imgCategories/" . $_POST['idCat'] . "/{$fileName}";
+                $absolutePath = __DIR__ . '/' . $path;
+                if (!file_exists($absolutePath)) {
+
+                    move_uploaded_file($temporal, $path);
+                    $categoryImg = "http://localhost/php/proyectointegrador/backend/view/imgCategories/" . $_POST['idCat'] . "/{$fileName}";
                 }
+                $array = array("Nombre" => $_POST["nombre"], "Descripcion" => $_POST["descripcion"], "Imagen" => $categoryImg,);
+                $dbCategoria->update($id, $array);
+                /*
+                 * meter la imagen nueva si la hay en la carpeta*/
+                header("Location: ../../admin/categories");
             }
         }
     }
 
-    public function error()
+
+    public
+    function error()
     {
 
     }
