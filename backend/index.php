@@ -71,7 +71,7 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     $cat = $dbCategoria->getById((int)$array_ruta[1]);
     $info = array_values(json_decode(json_encode($cat), true));
     $controller->showEditCat($info);
-} else if (isset($array_ruta[0]) && $array_ruta[0] == "editarProducts" && isset($array_ruta[1])) {
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "editarProducts" && isset($array_ruta[1]) && !isset($array_ruta[2])) {
     $cat = $dbObjeto->getById((int)$array_ruta[1]);
     $info = json_decode(json_encode($cat), true);
     $info[9] = $controller->maxIdCat();
@@ -79,6 +79,8 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     $controller->showEdit($prod);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "editarCategories" && isset($array_ruta[1]) && isset($array_ruta[2]) && $array_ruta[2] == "processCategoria") {
     $controller->processCategoria();
+}else if (isset($array_ruta[0]) && $array_ruta[0] == "editarProducts" && isset($array_ruta[1]) && isset($array_ruta[2]) && $array_ruta[2] == "processProduct") {
+    $controller->processProducto();
 } else {
     $controller->error();
 }

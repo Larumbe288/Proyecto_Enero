@@ -3,50 +3,49 @@
         crossorigin="anonymous"></script>
 <link rel="stylesheet" href="<?php echo $_SERVER["HTTP_HOST"] ?>/../../../view/formulario.css">
 <div>
-    <form class="form">
+    <form class="form" method="post" action="<?php echo $info[0] ?>/processProduct" enctype="multipart/form-data">
         <h2>Editar Producto</h2>
         <p>
-            <label for="idCat">ID: </label>
-            <input id="idCat" readonly value="<?php echo $info[0]?>">
+            <label for="idProd">ID: </label>
+            <input id="idProd" name="idProd" readonly value="<?php echo $info[0]?>">
         </p>
         <p>
             <label for="nombre">Nombre: </label>
-            <input type="text" id="nombre" placeholder="Indica el nombre de la categoría..." value="<?php echo $info[1] ?>">
+            <input type="text" name="nombre" id="nombre" placeholder="Indica el nombre de la categoría..." value="<?php echo $info[1] ?>">
         </p>
         <p>
             <label for="descripcion">Precio: </label>
-            <input id="desripcion" type="number" step="0.0001" placeholder="Indica la descripción de la categoría..." value="<?php echo $info[2] ?>">
+            <input id="desripcion" name="precio" type="number" step="0.0001" placeholder="Indica la descripción de la categoría..." value="<?php echo $info[2] ?>">
         </p>
         <p>
             <label for="imagen">Imagen:</label>
-            <input onchange="previewFile(this)" type="file" accept="image/*" id="imagen">
+            <input onchange="previewFile(this)" name="imagen" type="file" accept="image/*" id="imagen">
         </p>
 
         <img id="previewImg" src="<?php echo $info[3] ?>" width="100px" height="100px">
         <p>
             <label for="imagen2">Imagen 2:</label>
-            <input onchange="previewFile(this)" type="file" accept="image/*" id="imagen2">
+            <input onchange="previewFile(this)" name="imagen2" type="file" accept="image/*" id="imagen2">
         </p>
         <img id="previewImg" src="<?php echo $info[5] ?>" width="100px" height="100px">
         <p>
             <label for="imagen3">Imagen 3:</label>
-            <input onchange="previewFile(this)" type="file" accept="image/*" id="imagen3">
+            <input onchange="previewFile(this)" name="imagen3" type="file" accept="image/*" id="imagen3">
         </p>
         <img id="previewImg" src="<?php echo $info[6] ?>" width="100px" height="100px">
         <p>
             <label for="latitud">Latitud:</label>
-            <input type="number" step="0.00000000000001" id="latitud" min="-90" max="90" value="<?php echo $info[4] ?>">
+            <input type="number" step="0.00000000000001" name="latitud" id="latitud" min="-90" max="90" value="<?php echo $info[4] ?>">
         </p>
         <p>
             <label for="longitud">Longitud:</label>
-            <input type="number" step="0.00000000000001" id="longitud" min="-180" max="180" value="<?php echo $info[7]?>">
+            <input type="number" step="0.00000000000001" name="longitud" id="longitud" min="-180" max="180" value="<?php echo $info[7]?>">
         </p>
         <p>
             <label for="idCat">Id Categoría:</label>
-            <input type="number" id="longitud" min="1" max="<?php echo $info[9] ?>" value="<?php echo $info[8]?>">
+            <input type="number" name="idCat" id="idCat" min="1" max="<?php echo $info[9] ?>" value="<?php echo $info[8]?>">
         </p>
-
-        <a href="#">Editar</a>
+        <input type="submit" name="submit" value="Editar">
     </form>
 
 </div>

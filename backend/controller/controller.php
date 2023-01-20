@@ -166,21 +166,67 @@ class controller
                 $temporal = $_FILES["imagen"]["tmp_name"];
                 $fileName = $_FILES["imagen"]["name"];
                 $path = $_SERVER['DOCUMENT_ROOT'] . "/php/proyectointegrador/backend/view/imgCategories/" . $_POST['idCat'] . "/{$fileName}";
-                $absolutePath = __DIR__ . '/' . $path;
-                if (!file_exists($absolutePath)) {
 
+                $absolutePath = __DIR__ . '/' . $path;
+                $dir = $_SERVER['DOCUMENT_ROOT'] . "/php/proyectointegrador/backend/view/imgCategories/" . $_POST['idCat'];
+                if (!file_exists($absolutePath)) {
+                    $files = glob($dir . "/*"); //obtenemos todos los nombres de los ficheros
+                    foreach ($files as $file) {
+                        if (is_file($file))
+                            unlink($file); //elimino el fichero
+                    }
                     move_uploaded_file($temporal, $path);
                     $categoryImg = "http://localhost/php/proyectointegrador/backend/view/imgCategories/" . $_POST['idCat'] . "/{$fileName}";
                 }
                 $array = array("Nombre" => $_POST["nombre"], "Descripcion" => $_POST["descripcion"], "Imagen" => $categoryImg,);
                 $dbCategoria->update($id, $array);
-                /*
-                 * meter la imagen nueva si la hay en la carpeta*/
                 header("Location: ../../admin/categories");
             }
         }
     }
 
+    public function processProducto()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_POST["submit"])) {
+                if (isset($_POST['idProd']) && !empty($_POST['idProd'])) {
+                    $id = (int)$_POST['idProd'];
+                } else {
+                    header("Location: ../../admin/categories");
+                }
+                $dbObjeto = new bdObjeto();
+                $this->vaciarCarpeta();
+                $img = $this->imagen("");
+                $img2 = $this->imagen(2);
+                $img3 = $this->imagen(3);
+                $array = array("Nombre" => $_POST["nombre"], "Precio" => (float)$_POST["precio"], "Imagen1" => $img, "Imagen2" => $img2, "Imagen3" => $img3, "Latitud" => (float)$_POST["latitud"], "Longitud" => (float)$_POST["longitud"], "IdCategoria" => (int)$_POST["idCat"]);
+                $dbObjeto->update($id, $array);
+                header("Location: ../../admin/products");
+            }
+        }
+    }
+
+    private function imagen($id)
+    {
+        $temporal = $_FILES["imagen" . $id]["tmp_name"];
+        $fileName = $_FILES["imagen" . $id]["name"];
+        $path = $_SERVER['DOCUMENT_ROOT'] . "/php/proyectointegrador/backend/view/imgProducts/" . $_POST['idProd'] . "/{$fileName}";
+        $absolutePath = __DIR__ . '/' . $path;
+        if (!file_exists($absolutePath)) {
+            move_uploaded_file($temporal, $path);
+            return "http://localhost/php/proyectointegrador/backend/view/imgProducts/" . $_POST['idProd'] . "/{$fileName}";
+        }
+    }
+
+    private function vaciarCarpeta()
+    {
+        $dir = $_SERVER['DOCUMENT_ROOT'] . "/php/proyectointegrador/backend/view/imgProducts/" . $_POST['idProd'];
+        $files = glob($dir . "/*"); //obtenemos todos los nombres de los ficheros
+        foreach ($files as $file) {
+            if (is_file($file))
+                unlink($file); //elimino el fichero
+        }
+    }
 
     public
     function error()
