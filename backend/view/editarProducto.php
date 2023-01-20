@@ -19,20 +19,20 @@
         </p>
         <p>
             <label for="imagen">Imagen:</label>
-            <input onchange="previewFile(this)" name="imagen" type="file" accept="image/*" id="imagen">
+            <input onchange="previewFile(this,1)" name="imagen" type="file" accept="image/*" id="imagen">
         </p>
 
-        <img id="previewImg" src="<?php echo $info[3] ?>" width="100px" height="100px">
+        <img id="previewImg1" src="<?php echo $info[3] ?>" width="100px" height="100px">
         <p>
             <label for="imagen2">Imagen 2:</label>
-            <input onchange="previewFile(this)" name="imagen2" type="file" accept="image/*" id="imagen2">
+            <input onchange="previewFile(this,2)" name="imagen2" type="file" accept="image/*" id="imagen2">
         </p>
-        <img id="previewImg" src="<?php echo $info[5] ?>" width="100px" height="100px">
+        <img id="previewImg2" src="<?php echo $info[5] ?>" width="100px" height="100px">
         <p>
             <label for="imagen3">Imagen 3:</label>
-            <input onchange="previewFile(this)" name="imagen3" type="file" accept="image/*" id="imagen3">
+            <input onchange="previewFile(this,3)" name="imagen3" type="file" accept="image/*" id="imagen3">
         </p>
-        <img id="previewImg" src="<?php echo $info[6] ?>" width="100px" height="100px">
+        <img id="previewImg3" src="<?php echo $info[6] ?>" width="100px" height="100px">
         <p>
             <label for="latitud">Latitud:</label>
             <input type="number" step="0.00000000000001" name="latitud" id="latitud" min="-90" max="90" value="<?php echo $info[4] ?>">
@@ -51,14 +51,14 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
-    function previewFile(input){
-        var file = $("input[type=file]").get(0).files[0];
+    function previewFile(input,id){
+        var file = $("input[type=file]").get(id).files[0];
 
         if(file){
             var reader = new FileReader();
 
             reader.onload = function(){
-                $("#previewImg").attr("src", reader.result);
+                $("#previewImg"+id).attr("src", reader.result);
             }
 
             reader.readAsDataURL(file);

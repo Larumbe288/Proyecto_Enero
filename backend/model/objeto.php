@@ -29,10 +29,10 @@ class objeto
         $this->nombre = $nombre;
         $this->precio = $precio;
         $this->imagen1 = $imagen1;
-        $this->imagen2 = $imagen2 || null;
-        $this->imagen3 = $imagen3 || null;
-        $this->latitud = $latitud || null;
-        $this->longitud = $longitud || null;
+        $this->imagen2 = $imagen2 ?? '';
+        $this->imagen3 = $imagen3 ?? '';
+        $this->latitud = $latitud ?? '';
+        $this->longitud = $longitud ?? '';
         $this->idCategoria = $idCategoria;
     }
 
@@ -172,7 +172,6 @@ class objeto
     {
         $this->idCategoria = $idCategoria;
     }
-
 
 
 }

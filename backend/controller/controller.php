@@ -54,7 +54,7 @@ class controller
     public function logout()
     {
         session_destroy();
-        header("Location: http://localhost/php/proyectointegrador/backend/index.php/admin/login");
+        header("Location: http://localhost/proyectointegrador/backend/index.php/admin/login");
     }
 
     public function ficha()
@@ -120,9 +120,10 @@ class controller
     public function categories()
     {
         $dbCategoria = new bdCategoria();
-        $principio = 0;
         if (isset($_POST["inicio"])) {
             $principio = (int)$_POST["inicio"];
+        } else {
+            $principio = 0;
         }
         return $dbCategoria->read($principio, 10);
     }
@@ -225,6 +226,76 @@ class controller
         foreach ($files as $file) {
             if (is_file($file))
                 unlink($file); //elimino el fichero
+        }
+    }
+
+    public function users()
+    {
+        $dbUsers = new bdUsuario();
+        if (isset($_POST['inicio'])) {
+            $principio = (int)$_POST['inicio'];
+        } else {
+            $principio = 0;
+        }
+        return $dbUsers->read($principio, 10);
+    }
+
+    public function idUser()
+    {
+        $db = new bdUsuario();
+        return $db->getMaxId();
+    }
+
+    public function idSales()
+    {
+        $db = new bdVentas();
+        return $db->getMaxId();
+    }
+
+    public function sales()
+    {
+        $dbCategoria = new bdVentas();
+        if (isset($_POST["inicio"])) {
+            $principio = (int)$_POST["inicio"];
+        } else {
+            $principio = 0;
+        }
+        return $dbCategoria->read($principio, 10);
+    }
+
+    public function comments()
+    {
+        $dbCategoria = new bdComentario();
+        if (isset($_POST["inicio"])) {
+            $principio = (int)$_POST["inicio"];
+        } else {
+            $principio = 0;
+        }
+        return $dbCategoria->read($principio);
+    }
+
+    public function idComments()
+    {
+        $db = new bdComentario();
+        return $db->getMaxId();
+    }
+
+    public function control()
+    {
+        include "model/control.php";
+    }
+
+    public function processUsers()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if(isset($_POST["submit"])) {
+                if(isset($_POST["idUsr"]) && !empty($_POST["idUsr"])) {
+                    $id = (int) $_POST["idUsr"];
+                    
+                } else {
+                    header("Location: ../../admin/users");
+                }
+            }
         }
     }
 

@@ -4,7 +4,7 @@
         <div class="sidebar-content">
             <div class="user">
                 <div class="avatar-sm float-left mr-2">
-                    <img src="/php/proyectointegrador/backend/dashboard/template/examples/assets/img/profile.jpg" alt="../..."
+                    <img src="/proyectointegrador/backend/dashboard/template/examples/assets/img/profile.jpg" alt="../..."
                          class="avatar-img rounded-circle">
                 </div>
                 <div class="info">
@@ -40,7 +40,7 @@
             </div>
             <ul class="nav nav-primary">
                 <li class="nav-item">
-                    <a data-toggle="collapse" href="/php/proyectointegrador/backend/index.php/admin/dashboard" class="collapsed" aria-expanded="false">
+                    <a data-toggle="collapse" href="/proyectointegrador/backend/index.php/admin/dashboard" class="collapsed" aria-expanded="false">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
@@ -154,7 +154,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a data-toggle="collapse" href="#tables">
+                    <a data-toggle="collapse" href="sales">
                         <i class="fas fa-money-bill-wave"></i>
                         <p>Sales</p>
                         <span class="caret"></span>
@@ -175,7 +175,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a data-toggle="collapse" href="#maps">
+                    <a data-toggle="collapse" href="comments">
                         <i class="fab fa-rocketchat"></i>
                         <p>Comments</p>
                         <span class="caret"></span>
@@ -185,27 +185,6 @@
                             <li>
                                 <a href="../../maps/jqvmap.html">
                                     <span class="sub-item">JQVMap</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a data-toggle="collapse" href="#charts">
-                        <i class="fab fa-wpforms"></i>
-                        <p>Contact</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="charts">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="../../charts/charts.html">
-                                    <span class="sub-item">Chart Js</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="../../charts/sparkline.html">
-                                    <span class="sub-item">Sparkline</span>
                                 </a>
                             </li>
                         </ul>

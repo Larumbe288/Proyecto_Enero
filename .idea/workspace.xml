@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="14e6a985-c25c-4205-bd50-939e6cf245b2" name="Changes" comment="" />
+    <list default="true" id="14e6a985-c25c-4205-bd50-939e6cf245b2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/MOCK_DATA.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/bdVentas.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/view/editarUsuario.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/view/imgProducts/25/fichaazul.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/view/imgProducts/25/henny.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/view/imgProducts/25/rosalia_cara.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/usuario (1).sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controller/controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controller/controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/model/comentario.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/model/comentario.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/model/compra.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/model/compra.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/model/control.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/model/control.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/model/objeto.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/model/objeto.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/model/usuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/model/usuario.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/repositories/bdComentario.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/repositories/bdComentario.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/repositories/bdUsuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/repositories/bdUsuario.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/view/cabecera.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/cabecera.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/view/editarProducto.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/editarProducto.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/view/estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/estilos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/view/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/view/imgProducts/25/base_convert.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/view/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/view/tabla.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/tabla.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/view/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/template.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comentario.sql" beforeDir="false" afterPath="$PROJECT_DIR$/comentario.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compras.sql" beforeDir="false" afterPath="$PROJECT_DIR$/compras.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuario.sql" beforeDir="false" afterPath="$PROJECT_DIR$/usuario.sql" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,6 +55,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/DWES/xampp/htdocs/proyectointegrador",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -38,8 +68,12 @@
       <option name="presentableId" value="Default" />
       <updated>1673525121207</updated>
       <workItem from="1673525124220" duration="8000" />
+      <workItem from="1674240738464" duration="6141000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

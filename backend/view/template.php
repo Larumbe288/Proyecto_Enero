@@ -7,10 +7,10 @@
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
           name='template/assets/img/icon.ico" type="image/x-icon"/'>
     <link rel="icon"
-          href="/php/proyectointegrador/backend/dashboard/template/examples/demo1/index.html"
+          href="/proyectointegrador/backend/dashboard/template/examples/demo1/index.html"
           type="image/x-icon"/>
     <!-- Fonts and icons -->
-    <script src="/php/proyectointegrador/backend/dashboard/template/examples/assets/js/plugin/webfont/webfont.min.js"></script>
+    <script src="/proyectointegrador/backend/dashboard/template/examples/assets/js/plugin/webfont/webfont.min.js"></script>
     <script
             src="https://code.jquery.com/jquery-3.6.3.min.js"
             integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
@@ -20,7 +20,7 @@
             google: {"families": ["Lato:300,400,700,900"]},
             custom: {
                 "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
-                urls: ['/php/proyectointegrador/backend/dashboard/template/examples/assets/css/fonts.min.css']
+                urls: ['/proyectointegrador/backend/dashboard/template/examples/assets/css/fonts.min.css']
             },
             active: function () {
                 sessionStorage.fonts = true;
@@ -33,8 +33,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet"
-          href="/php/proyectointegrador/backend/dashboard/template/examples/assets/css/atlantis.min.css">
-    <link rel="stylesheet" href="/php/proyectointegrador/backend/view/estilos.css">
+          href="/proyectointegrador/backend/dashboard/template/examples/assets/css/atlantis.min.css">
+    <link rel="stylesheet" href="/proyectointegrador/backend/view/estilos.css">
 </head>
 <?php
 require "cabecera.php";

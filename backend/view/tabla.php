@@ -9,9 +9,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 id="titulo" class="card-title">
-                                <?php echo $_SESSION["tabla"] ?>
-                            </h4>
+                            <h4 id="titulo" class="card-title"><?php echo $_SESSION["tabla"] ?></h4>
                         </div>
                         <div class="card-body">
 
@@ -24,8 +22,11 @@
                                         for ($i = 0; $i < count($columnas); $i++) {
                                             echo "<th>" . $columnas[$i][0] . "</th>";
                                         }
-                                        ?>
-                                        <th>Show</th>
+                                        $arrayTitulos = ["Categories", "Products", "Users"];
+                                        if (in_array($_SESSION["tabla"], $arrayTitulos)) {
+                                            echo "<th>Show</th>";
+                                        } ?>
+
                                         <th>Edit</th>
                                         <th>Erase</th>
                                     </tr>
@@ -73,7 +74,7 @@
     var inicio = 0;
     var id;
     var categorias;
-    var urlBase = "http://localhost/php/proyectointegrador/backend/index.php/";
+    var urlBase = "http://localhost/proyectointegrador/backend/index.php/";
     window.onload = function () {
         getMaxId();
         getCategorias();
@@ -140,14 +141,17 @@
                         }
                         tr.appendChild(td);
                     }
-                    let iconoMostrar = document.createElement("td");
-                    iconoMostrar.innerHTML = "<button class='btn btn-success'  itemid='" + valores[0] + "' data-bs-toggle='modal' data-bs-target='#show'><i class='fas fa-eye'></i></button>";
-                    tr.appendChild(iconoMostrar);
+                    let arrayTabla = ["categories", "products", "users"];
+                    if (arrayTabla.includes(accion)) {
+                        let iconoMostrar = document.createElement("td");
+                        iconoMostrar.innerHTML = "<button class='btn btn-success'  itemid='" + valores[0] + "' data-bs-toggle='modal' data-bs-target='#show'><i class='fas fa-eye'></i></button>";
+                        tr.appendChild(iconoMostrar);
+                    }
                     let iconoEditar = document.createElement("td");
-                    iconoEditar.innerHTML = "<a href='http://localhost/php/proyectointegrador/backend/index.php/editar<?php echo $_SESSION["tabla"] ?>/" + valores[0] + "' class='btn btn-primary edit'><i class='fas fa-pencil-alt'></i></a>"
+                    iconoEditar.innerHTML = "<a href='http://localhost/proyectointegrador/backend/index.php/editar<?php echo $_SESSION["tabla"] ?>/" + valores[0] + "' class='btn btn-primary edit'><i class='fas fa-pencil-alt'></i></a>"
                     tr.appendChild(iconoEditar);
                     let iconoBorrar = document.createElement("td");
-                    iconoBorrar.innerHTML = "<a href='http://localhost/php/proyectointegrador/backend/index.php/eliminar<?php echo $_SESSION["tabla"] ?>/" + valores[0] + "' class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
+                    iconoBorrar.innerHTML = "<a href='http://localhost/proyectointegrador/backend/index.php/eliminar<?php echo $_SESSION["tabla"] ?>/" + valores[0] + "' class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
                     tr.appendChild(iconoBorrar);
                     tabla.appendChild(tr);
                 }

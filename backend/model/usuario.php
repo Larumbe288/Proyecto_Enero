@@ -2,12 +2,12 @@
 
 class usuario
 {
-private int $id;
+public int $id;
 public string $correo;
 public string $nombre;
 public string $telefono;
-public double $christokens;
-private string $password;
+public float $christokens;
+public string $password;
 public string $rol;
 
     /**

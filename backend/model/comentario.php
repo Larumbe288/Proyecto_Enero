@@ -2,11 +2,11 @@
 
 class comentario
 {
-private int $id;
+public int $id;
 public string $texto;
-private int $idUsuario;
-private int $idObjeto;
-private string $fecha;
+public int $idUsuario;
+public int $idObjeto;
+public string $fecha;
 
     /**
      * @param int $id

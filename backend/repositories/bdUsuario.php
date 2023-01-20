@@ -32,12 +32,12 @@ class bdUsuario
         }
     }
 
-    function read()
+    function read($principio, $final)
     {
         $arrayUsuarios = [];
         $db = Conexion::acceso();
         try {
-            $sql = "select * from usuario";
+            $sql = "select * from usuario limit $principio,$final";
             $usuarios = $db->query($sql);
             foreach ($usuarios as $usuario) {
                 $usr = new usuario((int)$usuario["Id_Usuario"], $usuario["Correo"], $usuario["Nombre"], $usuario["Telefono"], (float)$usuario["Christokens"], $usuario["Password"], $usuario["Rol"]);
@@ -71,7 +71,7 @@ class bdUsuario
     function update(int $id, $array)
     {
         $usr = $this->getById($id);
-        $arrayAtributos = ["Correo", "Nombre", "Telefono", "Christokens", "Password", "Rol"];
+        $arrayAtributos = ["Correo", "Nombre", "Telefono", "Christokens", "Password"];
         foreach ($arrayAtributos as $atr) {
             if (isset($array[$atr]) && !empty($array[$atr])) {
                 $metodo = "set" . $atr;
@@ -80,7 +80,7 @@ class bdUsuario
         }
         $db = Conexion::acceso();
         try {
-            $sql = "update usuario set Correo='" . $usr->getCorreo() . "',Nombre='" . $usr->getNombre() . "',Telefono='" . $usr->getTelefono() . "',Christokens=" . $usr->getChristokens() . ",Password='" . $usr->getPassword() . "',Rol='" . $usr->getRol() . "' where Id_Usuario=$id";
+            $sql = "update usuario set Correo='" . $usr->getCorreo() . "',Nombre='" . $usr->getNombre() . "',Telefono='" . $usr->getTelefono() . "',Christokens=" . $usr->getChristokens() . ",Password='" . $usr->getPassword() . " where Id_Usuario=$id";
             $resultado = $db->query($sql);
             if (!$resultado) {
                 echo "Error: " . $db->errorInfo();
@@ -106,6 +106,43 @@ class bdUsuario
         } finally {
             $db = null;
         }
+    }
+
+    function getColumnsName()
+    {
+        $columns = [];
+        $db = Conexion::acceso();
+        try {
+            $sql = "SELECT `COLUMN_NAME` FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'usuario' AND TABLE_SCHEMA = 'metaverso'";
+            $columnas = $db->query($sql);
+            foreach ($columnas as $col) {
+                array_push($columns, $col);
+            }
+            return $columns;
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
+        }
+    }
+
+    function getMaxId()
+    {
+        $db = Conexion::acceso();
+        try {
+            $sql = "SELECT COUNT(Id_Usuario) FROM usuario";
+            $ides = $db->query($sql);
+            $ID = 0;
+            foreach ($ides as $id) {
+                $ID = $id['COUNT(Id_Usuario)'];
+            }
+            return $ID;
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
+        }
+
     }
 
 }

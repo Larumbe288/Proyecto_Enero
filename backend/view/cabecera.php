@@ -2,8 +2,8 @@
     <div class="main-header">
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="blue">
-            <a href="/php/proyectointegrador/backend/dashboard/template/examples/demo1/index.html" class="logo"><img
-                    src="/php/proyectointegrador/backend/dashboard/img/logo.png" alt="navbar brand" class="navbar-brand"
+            <a href="/proyectointegrador/backend/dashboard/template/examples/demo1/index.html" class="logo"><img
+                    src="/proyectointegrador/backend/dashboard/img/logo.png" alt="navbar brand" class="navbar-brand"
                     style="width: 25%"></a>
             <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                     data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
                            aria-expanded="false">
                             <div class="avatar-sm">
-                                <img src="/php/proyectointegrador/backend/dashboard/template/examples/assets/img/profile.jpg" alt="../..."
+                                <img src="/proyectointegrador/backend/dashboard/template/examples/assets/img/profile.jpg" alt="../..."
                                      class="avatar-img rounded-circle">
                             </div>
                         </a>
@@ -128,7 +128,7 @@
                 </div>
                 <ul class="nav nav-primary">
                     <li class="nav-item active">
-                        <a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+                        <a data-toggle="collapse" href="dashboard" class="collapsed" aria-expanded="false">
                             <i class="fas fa-home"></i>
                             <p>Dashboard</p>
                         </a>

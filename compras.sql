@@ -1,63 +1,41 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 18-01-2023 a las 17:47:29
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `metaverso`
---
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `compras`
---
-
-CREATE TABLE `compras` (
-  `Id_Compra` int(11) NOT NULL,
-  `Id_Usuario` int(11) DEFAULT NULL,
-  `Id_Producto` int(11) DEFAULT NULL,
-  `Cantidad` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `compras`
---
-ALTER TABLE `compras`
-  ADD PRIMARY KEY (`Id_Compra`),
-  ADD UNIQUE KEY `Id_Producto` (`Id_Producto`),
-  ADD UNIQUE KEY `Id_Usuario` (`Id_Usuario`);
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `compras`
---
-ALTER TABLE `compras`
-  ADD CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`Id_Usuario`) REFERENCES `usuario` (`Id_Usuario`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `compras_ibfk_2` FOREIGN KEY (`Id_Producto`) REFERENCES `objeto` (`ID_Producto`) ON UPDATE CASCADE;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (1, 1, 17);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (2, 2, 53);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (3, 3, 52);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (4, 4, 95);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (5, 5, 39);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (6, 6, 19);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (7, 7, 47);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (8, 8, 93);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (9, 9, 72);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (10, 10, 19);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (11, 11, 2);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (12, 12, 65);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (13, 13, 80);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (14, 14, 86);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (15, 15, 84);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (16, 16, 54);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (17, 17, 65);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (18, 18, 74);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (19, 19, 30);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (20, 20, 65);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (21, 21, 34);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (22, 22, 76);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (23, 23, 15);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (24, 24, 45);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (25, 25, 1);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (26, 26, 72);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (27, 27, 43);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (28, 28, 52);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (29, 29, 12);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (30, 30, 61);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (31, 31, 84);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (32, 32, 35);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (33, 33, 3);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (34, 34, 24);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (35, 35, 17);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (36, 36, 69);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (37, 37, 100);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (38, 38, 41);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (39, 39, 82);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (40, 40, 45);
+insert into compras (Id_Usuario, Id_Producto, Cantidad) values (41, 41, 67);

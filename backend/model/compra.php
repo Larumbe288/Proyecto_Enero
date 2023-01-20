@@ -2,9 +2,9 @@
 
 class compra
 {
-private int $id;
-private int $idUsuario;
-private int $idProducto;
+public int $id;
+public int $idUsuario;
+public int $idProducto;
 public int $cantidad;
 public string $fechacompra;
 
@@ -72,6 +72,38 @@ public string $fechacompra;
     public function getFechacompra(): string
     {
         return $this->fechacompra;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param int $idUsuario
+     */
+    public function setIdUsuario(int $idUsuario): void
+    {
+        $this->idUsuario = $idUsuario;
+    }
+
+    /**
+     * @param int $idProducto
+     */
+    public function setIdProducto(int $idProducto): void
+    {
+        $this->idProducto = $idProducto;
+    }
+
+    /**
+     * @param string $fechacompra
+     */
+    public function setFechacompra(string $fechacompra): void
+    {
+        $this->fechacompra = $fechacompra;
     }
 
 

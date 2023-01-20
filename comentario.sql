@@ -1,73 +1,41 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 18-01-2023 a las 17:47:22
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `metaverso`
---
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `comentario`
---
-
-CREATE TABLE `comentario` (
-  `Id_Comentario` int(11) NOT NULL,
-  `Texto` varchar(255) COLLATE utf8mb4_spanish2_ci NOT NULL,
-  `Id_Usuario` int(11) NOT NULL,
-  `Id_Objeto` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `comentario`
---
-ALTER TABLE `comentario`
-  ADD PRIMARY KEY (`Id_Comentario`),
-  ADD KEY `Id_Objeto` (`Id_Objeto`),
-  ADD KEY `Id_Usuario` (`Id_Usuario`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `comentario`
---
-ALTER TABLE `comentario`
-  MODIFY `Id_Comentario` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `comentario`
---
-ALTER TABLE `comentario`
-  ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`Id_Objeto`) REFERENCES `objeto` (`ID_Producto`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`Id_Usuario`) REFERENCES `usuario` (`Id_Usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Relapsing fever NOS', 1, 1);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Hem early preg-delivered', 2, 2);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Acc poison-methadone', 3, 3);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Lymphomas NEC inguin', 4, 4);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Antineoplastic chemo enc', 5, 5);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('TB of bone NEC-oth test', 6, 6);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('TB pleurisy-no exam', 7, 7);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Bact arthritis-forearm', 8, 8);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Vaginal hematoma', 9, 9);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Esophag varices w bleed', 10, 10);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Late sympt syphilis NOS', 11, 11);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Adv eff antilipemics', 12, 12);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Sqam cell ca sclp/skn nk', 13, 13);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Monofixation syndrome', 14, 14);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Appendix injury-closed', 15, 15);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Late eff inj periph vess', 16, 16);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Mv coll w ped-anim rid', 17, 17);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Blood asp w resp sympt', 18, 18);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Fracture of pubis-open', 19, 19);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('NB cutaneous hemorrhage', 20, 20);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Preg w poor obs hx NEC', 21, 21);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Tobacco use disord-unsp', 22, 22);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Ben neo nasal cav/sinus', 23, 23);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Norml pressure hydroceph', 24, 24);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Cleft lip NOS', 25, 25);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Renal dis NOS-antepartum', 26, 26);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Lactation fail-unspec', 27, 27);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Opn skl base fx-coma NOS', 28, 28);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Ocl art NOS wo infrct', 29, 29);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Complic labor NEC-deliv', 30, 30);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Dis mineral metabol NEC', 31, 31);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Kaschin-beck dis NEC', 32, 32);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Pulmon TB NOS-cult dx', 33, 33);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Ankylosis-hand', 34, 34);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Pathol dislocat-pelvis', 35, 35);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Ocl vrtb art w infrct', 36, 36);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Atrophy mandible-severe', 37, 37);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Malignant neo anus NOS', 38, 38);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Disloc midtarsal-open', 39, 39);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Pseudopterygium', 40, 40);
+insert into comentario (Texto, Id_Usuario, Id_Objeto) values ('Carbuncle of foot', 41, 41);
