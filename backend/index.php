@@ -51,6 +51,13 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     $contenido2 = $dbCategoria->read(0, 10);
     $info = [$cabecera2, $contenido2];
     $controller->template("tabla.php", "template.php", $info);
+}else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "categories" && !isset($array_ruta[2])) {
+    unset($_SESSION['tabla']);
+    $_SESSION["tabla"] = "Users";
+    $cabecera2 = $dbCategoria->getColumnsName();
+    $contenido2 = $dbCategoria->read(0, 10);
+    $info = [$cabecera2, $contenido2];
+    $controller->template("tabla.php", "template.php", $info);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "logout") {
     $controller->logout();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "categorias" && !isset($array_ruta[1])) {
