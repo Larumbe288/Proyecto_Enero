@@ -32,12 +32,12 @@ class bdUsuario
         }
     }
 
-    function read($principio, $final)
+    function read($campo,$principio, $final)
     {
         $arrayUsuarios = [];
         $db = Conexion::acceso();
         try {
-            $sql = "select * from usuario limit $principio,$final";
+            $sql = "select * from usuario order by $campo asc limit $principio,$final";
             $usuarios = $db->query($sql);
             foreach ($usuarios as $usuario) {
                 $usr = new usuario((int)$usuario["Id_Usuario"], $usuario["Correo"], $usuario["Nombre"], $usuario["Telefono"], (float)$usuario["Christokens"], $usuario["Password"], $usuario["Rol"]);

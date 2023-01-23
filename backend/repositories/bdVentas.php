@@ -18,12 +18,12 @@ class bdVentas
         }
     }
 
-    function read($principio, $final)
+    function read($campo,$principio, $final)
     {
         $arrayVentas = [];
         $db = Conexion::acceso();
         try {
-            $sql = "select * from compras limit $principio,$final";
+            $sql = "select * from compras order by $campo asc limit $principio,$final";
             $resultado = $db->query($sql);
             foreach ($resultado as $v) {
                 $v = new compra((int)$v['Id_Compra'], (int)$v['Id_Usuario'], (int)$v['Id_Producto'], (int)$v['Cantidad'], $v['Fecha']);

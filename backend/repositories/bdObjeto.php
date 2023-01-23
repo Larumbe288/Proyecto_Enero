@@ -18,12 +18,12 @@ class bdObjeto
         }
     }
 
-    function read($principio, $final)
+    function read($campo,$principio, $final)
     {
         $arrayObjetos = [];
         $db = Conexion::acceso();
         try {
-            $sql = "select * from objeto limit $principio,$final";
+            $sql = "select * from objeto order by $campo asc limit $principio,$final";
             $objetos = $db->query($sql);
             foreach ($objetos as $obj) {
                 $ob = new objeto((int)$obj["ID_Producto"], $obj["Nombre"], (float)$obj["Precio"], $obj["Imagen_1"], $obj["Imagen_2"], $obj["Imagen_3"], (float)$obj["Latitud"], (float)$obj["Longitud"], (int)$obj["Id_Categoria"]);

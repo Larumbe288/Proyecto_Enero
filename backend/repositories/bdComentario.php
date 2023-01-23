@@ -18,12 +18,12 @@ class bdComentario
         }
     }
 
-    function read($principio)
+    function read($campo,$principio)
     {
         $arrayComentarios = [];
         $db = Conexion::acceso();
         try {
-            $sql = "select * from comentario limit $principio,10";
+            $sql = "select * from comentario order by $campo asc limit $principio,10";
             $comentarios = $db->query($sql);
             foreach ($comentarios as $comentario) {
                 $com = new comentario((int)$comentario["Id_Comentario"], $comentario["Texto"], (int)$comentario["Id_Usuario"], (int)$comentario["Id_Objeto"], $comentario["Fecha"]);

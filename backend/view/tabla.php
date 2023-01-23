@@ -63,14 +63,33 @@
     var inicio = 0;
     var id;
     var categorias;
+    var campo;
     var urlBase = "http://localhost/web/backend/index.php/";
     window.onload = function () {
         getMaxId();
         getCategorias();
-        cargarDatos();
+        let th = document.getElementsByTagName("th");
+        campo = th[0].innerText;
+        cargarDatos(campo);
         if (inicio >= id - 10) {
             let boton = document.getElementById("siguiente");
             boton.setAttribute("disabled", "");
+        }
+        for (let i = 0; i < th.length; i++) {
+            th[i].onclick = function () {
+                if(document.getElementById("flecha")!==null) {
+                    document.getElementById("flecha").parentElement.firstElementChild.remove();
+                }
+                inicio = 0;
+                let boton = document.getElementById("anterior");
+                boton.setAttribute("disabled", "");
+                let botonSiguiente = document.getElementById("siguiente");
+                botonSiguiente.removeAttribute("disabled");
+                document.getElementById("listado").innerHTML = "";
+                cargarDatos(th[i].innerText);
+                campo = th[i].innerText;
+                th[i].innerHTML += " <i id='flecha' class='fas fa-arrow-up'></i>";
+            }
         }
     }
 
@@ -168,7 +187,7 @@
         document.body.appendChild(div);
     }
 
-    function cargarDatos() {
+    function cargarDatos(campo) {
         let accion = document.getElementById("titulo").innerText.toLowerCase();
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
@@ -223,7 +242,7 @@
                 }
             }
         }
-        var params = "inicio=" + inicio;
+        var params = "inicio=" + inicio + "&campo=" + campo;
         xhttp.open("POST", urlBase + accion, true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(params);
@@ -233,7 +252,7 @@
         if (inicio < id - 10) {
             inicio += 10;
             document.getElementById("listado").innerHTML = "";
-            cargarDatos();
+            cargarDatos(campo);
 
         } else {
             let boton = document.getElementById("siguiente");
@@ -256,7 +275,7 @@
             inicio -= 10;
         }
         document.getElementById("listado").innerHTML = "";
-        cargarDatos();
+        cargarDatos(campo);
         if (inicio < id - 10) {
             let boton = document.getElementById("siguiente");
             boton.removeAttribute("disabled");

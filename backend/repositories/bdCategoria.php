@@ -19,12 +19,12 @@ class bdCategoria
 
     }
 
-    public function read($principio, $final)
+    public function read($campo,$principio, $final)
     {
         $arrayCat = [];
         $db = Conexion::acceso();
         try {
-            $sql = "select * from categoria limit $principio,$final";
+            $sql = "select * from categoria order by $campo asc limit $principio,$final";
             $resultado = $db->query($sql);
             foreach ($resultado as $cat) {
                 $c = new Categoria((int)$cat["Id_Categoria"], $cat["Nombre"], $cat["Descripcion"], $cat["Imagen"]);

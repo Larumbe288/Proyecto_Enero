@@ -47,19 +47,19 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     unset($_SESSION['tabla']);
     $_SESSION["tabla"] = "Products";
     $cabecera = $dbObjeto->getColumnsName();
-    $contenido = $dbObjeto->read(0, 10);
+    $contenido = $dbObjeto->read("ID_Producto", 0, 10);
     $info = [$cabecera, $contenido];
     $controller->template("tabla.php", "template.php", $info);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "dashboard" && !isset($array_ruta[2])) {
     $controller->control();
     $info = 0;
-    $controller->template("home.php", "template.php", $info);
+    $controller->template("homeAdmin.php", "template.php", $info);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "categories" && !isset($array_ruta[2])) {
     $controller->control();
     unset($_SESSION['tabla']);
     $_SESSION["tabla"] = "Categories";
     $cabecera2 = $dbCategoria->getColumnsName();
-    $contenido2 = $dbCategoria->read(0, 10);
+    $contenido2 = $dbCategoria->read("Id_Categoria", 0, 10);
     $info = [$cabecera2, $contenido2];
     $controller->template("tabla.php", "template.php", $info);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "users" && !isset($array_ruta[2])) {
@@ -67,7 +67,7 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     unset($_SESSION['tabla']);
     $_SESSION["tabla"] = "Users";
     $cabecera2 = $dbUser->getColumnsName();
-    $contenido2 = $dbUser->read(0, 10);
+    $contenido2 = $dbUser->read("Id_Usuario", 0, 10);
     $info = [$cabecera2, $contenido2];
     $controller->template("tabla.php", "template.php", $info);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "sales" && !isset($array_ruta[2])) {
@@ -75,7 +75,7 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     unset($_SESSION['tabla']);
     $_SESSION["tabla"] = "Sales";
     $cabecera2 = $dbSales->getColumnsName();
-    $contenido2 = $dbSales->read(0, 10);
+    $contenido2 = $dbSales->read("Id_Compra", 0, 10);
     $info = [$cabecera2, $contenido2];
     $controller->template("tabla.php", "template.php", $info);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "comments" && !isset($array_ruta[2])) {
@@ -83,7 +83,7 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     unset($_SESSION['tabla']);
     $_SESSION["tabla"] = "Comments";
     $cabecera2 = $dbComments->getColumnsName();
-    $contenido2 = $dbComments->read(0, 10);
+    $contenido2 = $dbComments->read("Id_Comentario", 10);
     $info = [$cabecera2, $contenido2];
     $controller->template("tabla.php", "template.php", $info);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "logout") {
@@ -160,6 +160,10 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     $controller->processaniadirCat();
 } else if (isset($array_ruta[0]) && isset($array_ruta[1]) && $array_ruta[1] == "processProduct") {
     $controller->processaniadirProd();
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && !isset($array_ruta[1])) {
+    $controller->homePage();
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "login") {
+    $controller->loginHome();
 } else {
     $controller->error();
 }

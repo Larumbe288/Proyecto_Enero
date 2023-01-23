@@ -90,7 +90,12 @@ class controller
         } else {
             $inicio = 0;
         }
-        return $db->read($inicio, 10);
+        if (isset($_POST["campo"])) {
+            $campo = $_POST["campo"];
+        } else {
+            $campo = "ID_Producto";
+        }
+        return $db->read($campo,$inicio, 10);
     }
 
     public function categorias()
@@ -125,7 +130,12 @@ class controller
         } else {
             $principio = 0;
         }
-        return $dbCategoria->read($principio, 10);
+        if (isset($_POST["campo"])) {
+            $campo = $_POST["campo"];
+        } else {
+            $campo = "Id_Categoria";
+        }
+        return $dbCategoria->read($campo,$principio, 10);
     }
 
     public function eliminarCategoria($id)
@@ -360,7 +370,12 @@ class controller
         } else {
             $principio = 0;
         }
-        return $dbUsers->read($principio, 10);
+        if (isset($_POST['campo'])) {
+            $campo = $_POST['campo'];
+        } else {
+            $campo = "Id_Usuario";
+        }
+        return $dbUsers->read($campo,$principio, 10);
     }
 
     public function idUser()
@@ -383,7 +398,12 @@ class controller
         } else {
             $principio = 0;
         }
-        return $dbCategoria->read($principio, 10);
+        if (isset($_POST["campo"])) {
+            $campo = $_POST["campo"];
+        } else {
+            $campo = "Id_Compra";
+        }
+        return $dbCategoria->read($campo,$principio, 10);
     }
 
     public function comments()
@@ -394,7 +414,12 @@ class controller
         } else {
             $principio = 0;
         }
-        return $dbCategoria->read($principio);
+        if (isset($_POST["campo"])) {
+            $campo = $_POST["campo"];
+        } else {
+            $campo = "Id_Comentario";
+        }
+        return $dbCategoria->read($campo,$principio);
     }
 
     public function idComments()
@@ -431,6 +456,15 @@ class controller
         header("Location: ../admin/users");
     }
 
+    public function homePage()
+    {
+        require "view/home.php";
+    }
+
+    public function loginHome()
+    {
+        
+    }
     public
     function error()
     {
