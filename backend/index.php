@@ -107,7 +107,7 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     $controller->eliminarProducto((int)$array_ruta[1]);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "eliminarUsers" && isset($array_ruta[1])) {
     $controller->deleteUser((int)$array_ruta[1]);
-}else if (isset($array_ruta[0]) && $array_ruta[0] == "eliminarComments" && isset($array_ruta[1])) {
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "eliminarComments" && isset($array_ruta[1])) {
     $controller->deleteComments((int)$array_ruta[1]);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "products" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
     echo $controller->idProd();
@@ -137,6 +137,12 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     $info = json_decode(json_encode($cat), true);
     $prod = array_values($info);
     $controller->showEditUsr($prod);
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "editarComments" && isset($array_ruta[1]) && !isset($array_ruta[2])) {
+    $controller->control();
+    $cat = $dbComments->getById((int)$array_ruta[1]);
+    $info = json_decode(json_encode($cat), true);
+    $prod = array_values($info);
+    $controller->showEditCom($prod);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "aniadirUsers" && !isset($array_ruta[1])) {
     $controller->control();
     $info = $dbUser->maxId() + 1;
@@ -155,6 +161,8 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     $controller->processCategoria();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "editarProducts" && isset($array_ruta[1]) && isset($array_ruta[2]) && $array_ruta[2] == "processProduct") {
     $controller->processProducto();
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "editarComments" && isset($array_ruta[1]) && isset($array_ruta[2]) && $array_ruta[2] == "processComment") {
+    $controller->processComentario();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "editarUsers" && isset($array_ruta[1]) && isset($array_ruta[2]) && $array_ruta[2] == "processUser") {
     $controller->processUsers();
 } else if (isset($array_ruta[0]) && isset($array_ruta[1]) && $array_ruta[1] == "processUser") {

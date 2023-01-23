@@ -472,6 +472,27 @@ class controller
         require "view/loginHome.php";
     }
 
+    public function showEditCom($info)
+    {
+        require "view/editarComentario.php";
+    }
+
+    public function processComentario()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_POST["submit"])) {
+                $id = (int)$_POST["idCom"];
+                $texto = $_POST["nombre"];
+                $idusr = (int)$_POST["idUsr"];
+                $idProd = (int)$_POST["idProd"];
+                $array = array("Texto" => $texto, "IdUsuario" => $idusr, "IdObjeto" => $idProd);
+                $dbCom = new bdComentario();
+                $dbCom->update($id, $array);
+                header("Location: ../../admin/comments");
+            }
+        }
+    }
+
     public function processLoginHome()
     {
         if (isset($_SESSION["loginU"])) {
@@ -522,10 +543,11 @@ class controller
         $dbComentarios = new bdComentario();
         $dbComentarios->delete($id);
         header("Location: ../admin/comments");
-}
+    }
+
     public
     function error()
     {
-    require "view/error404.php";
+        require "view/error404.php";
     }
 }

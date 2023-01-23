@@ -41,7 +41,7 @@ form label{
     color: #6c6c6c;
 }
 
-form input,form select{
+form input,form select,form textarea{
     border: none;
     background-color: transparent;
     padding: 12px 0;

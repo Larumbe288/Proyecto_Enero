@@ -27,7 +27,7 @@
                                         <?php
                                         $columnas = $info[0];
                                         for ($i = 0; $i < count($columnas); $i++) {
-                                            echo "<th>" . $columnas[$i][0] . "</th>";
+                                            echo "<th class='colun'>" . $columnas[$i][0] . "</th>";
                                         }
                                         if (in_array($_SESSION["tabla"], $arrayTitulos)) {
                                             echo "<th>Show</th>";
@@ -67,7 +67,7 @@
     window.onload = function () {
         getMaxId();
         getCategorias();
-        let th = document.getElementsByTagName("th");
+        let th = document.getElementsByClassName("colun");
         campo = th[0].innerText;
         cargarDatos(campo);
         if (inicio >= id - 10) {
@@ -224,7 +224,7 @@
 
                     tabla.appendChild(tr);
                     if (accion === "products") {
-                        createModal(valores[0], valores[1], valores[3], valores[2]+" €");
+                        createModal(valores[0], valores[1], valores[3], valores[2]+" Christokens");
                     }else if(accion==="categories") {
                         createModal(valores[0], valores[1], valores[3], valores[2]);
                     } else if (accion === "users") {

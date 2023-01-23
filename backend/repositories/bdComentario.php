@@ -44,7 +44,7 @@ class bdComentario
             $sql = "select * from comentario where Id_Comentario=$id";
             $resultado = $db->query($sql);
             $comentario = $resultado->fetch();
-            if ($com) {
+            if ($comentario) {
                 return new comentario((int)$comentario["Id_Comentario"], $comentario["Texto"], (int)$comentario["Id_Usuario"], (int)$comentario["Id_Objeto"], $comentario["Fecha"]);
             }
         } catch (\PDOException $e) {
