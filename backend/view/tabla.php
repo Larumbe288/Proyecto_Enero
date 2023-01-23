@@ -12,7 +12,6 @@
                             <h4 id="titulo" class="card-title"><?php echo $_SESSION["tabla"] ?></h4>
                             <?php
                             $arrayTitulos = ["Categories", "Products", "Users"];
-                            $arrayTitulos2 = ["Categories", "Products", "Users", "Sales"];
                             if (in_array($_SESSION["tabla"], $arrayTitulos)) {
                                 echo "<a href='http://localhost/web/backend/index.php/aniadir" . $_SESSION['tabla'] . "'class='btn btn-primary float-right'><i class='fas fa-plus'></i></a>";
                             }
@@ -30,7 +29,7 @@
                                         for ($i = 0; $i < count($columnas); $i++) {
                                             echo "<th>" . $columnas[$i][0] . "</th>";
                                         }
-                                        if (in_array($_SESSION["tabla"], $arrayTitulos2)) {
+                                        if (in_array($_SESSION["tabla"], $arrayTitulos)) {
                                             echo "<th>Show</th>";
                                         } ?>
                                         <?php if ($_SESSION["tabla"] != 'Sales') {
@@ -208,7 +207,7 @@
                         }
                         tr.appendChild(td);
                     }
-                    let arrayTabla = ["categories", "products", "users", "sales"];
+                    let arrayTabla = ["categories", "products", "users"];
                     if (arrayTabla.includes(accion)) {
                         let iconoMostrar = document.createElement("td");
                         iconoMostrar.innerHTML = "<button class='btn btn-success'  itemid='" + valores[0] + "' data-bs-toggle='modal' data-bs-target='#show" + valores[0] + "'><i class='fas fa-eye'></i></button>";
@@ -224,7 +223,9 @@
                     }
 
                     tabla.appendChild(tr);
-                    if (accion === "categories" || accion === "products") {
+                    if (accion === "products") {
+                        createModal(valores[0], valores[1], valores[3], valores[2]+" €");
+                    }else if(accion==="categories") {
                         createModal(valores[0], valores[1], valores[3], valores[2]);
                     } else if (accion === "users") {
                         let rol = valores[6].charAt(0).toUpperCase() + valores[6].slice(1);

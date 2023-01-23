@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="<?php echo $_SERVER["HTTP_HOST"] ?>/../../view/formulario.css">
 <div>
     <form class="form" action="<?php echo $info ?>/processUser" method="post">
-        <h2>Editar Usuario</h2>
+        <h2>Añadir Usuario</h2>
         <p>
             <label for="correo">Correo: </label>
             <input type="email" name="correo" id="correo" placeholder="Indica el e-mail del usuario" required>

@@ -2,17 +2,108 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14e6a985-c25c-4205-bd50-939e6cf245b2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/view/home.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/view/homeAdmin.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/model/mailer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/autoload.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/composer/ClassLoader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/composer/InstalledVersions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/composer/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/composer/autoload_namespaces.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/composer/autoload_psr4.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/composer/autoload_real.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/composer/autoload_static.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/composer/installed.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/composer/installed.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/composer/platform_check.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/firebase/php-jwt/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/firebase/php-jwt/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/firebase/php-jwt/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/firebase/php-jwt/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/firebase/php-jwt/src/BeforeValidException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/firebase/php-jwt/src/CachedKeySet.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/firebase/php-jwt/src/ExpiredException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/firebase/php-jwt/src/JWK.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/firebase/php-jwt/src/JWT.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/firebase/php-jwt/src/Key.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/firebase/php-jwt/src/SignatureInvalidException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/COMMITMENT" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/SECURITY.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/VERSION" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/get_oauth_token.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-af.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-ar.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-az.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-ba.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-be.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-bg.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-ca.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-cs.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-da.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-de.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-el.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-eo.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-es.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-et.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-fa.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-fi.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-fo.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-fr.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-gl.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-he.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-hi.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-hr.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-hu.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-hy.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-id.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-it.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-ja.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-ka.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-ko.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-lt.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-lv.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-mg.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-mn.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-ms.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-nb.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-nl.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-pl.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-pt.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-pt_br.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-ro.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-ru.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-sk.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-sl.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-sr.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-sr_latn.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-sv.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-tl.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-tr.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-uk.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-vi.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-zh.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/language/phpmailer.lang-zh_cn.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/src/Exception.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/src/OAuth.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/src/OAuthTokenProvider.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/src/PHPMailer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/src/POP3.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/repositories/vendor/phpmailer/phpmailer/src/SMTP.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/view/contacto.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/view/contacto.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/view/error404.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/view/sign-in.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/controller/controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controller/controller.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/repositories/bdCategoria.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/repositories/bdCategoria.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/repositories/bdComentario.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/repositories/bdComentario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/repositories/bdObjeto.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/repositories/bdObjeto.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/repositories/bdUsuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/repositories/bdUsuario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/repositories/bdVentas.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/repositories/bdVentas.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/view/404.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/view/aniadirProducto.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/aniadirProducto.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/view/aniadirUsuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/aniadirUsuario.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/view/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/view/loginHome.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/loginHome.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/view/tabla.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/tabla.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,6 +128,12 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="PhpDebugGeneral" listening_started="true" />
+  <component name="PhpServers">
+    <servers>
+      <server id="d97231d9-5794-4636-be07-c19ba819ce0b" name="Unnamed" />
+    </servers>
+  </component>
+  <component name="PhpWebServerValidation" path_to_validation_script="D:\DWES\xampp\htdocs\web\index.php" selected_validation_type="LOCAL" web_path_to_validation_script="http://127.0.0.1/" />
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 8.1" />
   <component name="ProjectId" id="2KE1qQmChW3xh1Xabhd4wNDH6Dr" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -51,9 +148,16 @@
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "D:/DWES/xampp/htdocs/web",
     "list.type.of.created.stylesheet": "CSS",
+    "settings.editor.selected.configurable": "reference.webide.settings.project.settings.php.debug",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\DWES\xampp\htdocs\web\backend\model" />
+      <recent name="D:\DWES\xampp\htdocs\web\backend\repositories" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -66,7 +170,8 @@
       <workItem from="1674240738464" duration="6141000" />
       <workItem from="1674320911971" duration="1283000" />
       <workItem from="1674375988051" duration="17960000" />
-      <workItem from="1674486729830" duration="8535000" />
+      <workItem from="1674486729830" duration="16141000" />
+      <workItem from="1674504274801" duration="2325000" />
     </task>
     <servers />
   </component>

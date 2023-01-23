@@ -17,19 +17,28 @@
 <header class="p-3 mb-3 border-bottom">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-                <img src="../dashboard/img/logo.png" class="bi me-2" width="40" height="32">
+            <a href="home" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                <img src="../dashboard/img/logo.png" class="bi me-2" width="40" height="40">
             </a>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="home" class="nav-link px-2 link-dark">Home</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Categorías</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Contacto</a></li>
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="outline: none">
+                        Categorías
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Deportes imposibles</a></li>
+                        <li><a class="dropdown-item" href="#">Placeres gastronómicos digitales</a></li>
+                        <li><a class="dropdown-item" href="#">Viajes virtuales</a></li>
+                    </ul>
+                </div>
+                <li><a href="home/contacto" class="nav-link px-2 link-dark">Contacto</a></li>
             </ul>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                 <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
             </form>
-            <?php if (isset($_SESSION["login"])) {
+            <?php if (isset($_SESSION["loginU"])) {
                 echo "<div class='dropdown text-end'>
                 <a href='#' class='d-block link-dark text-decoration-none dropdown-toggle' data-bs-toggle='dropdown'
                    aria-expanded='false'>
@@ -40,13 +49,12 @@
                     <li>
                         <hr class='dropdown-divider'>
                     </li>
-                    <li><a class='dropdown-item' href='#'>Sign out</a></li>
+                    <li><a class='dropdown-item' href='home/logout'>Sign out</a></li>
                 </ul>
             </div>";
             } else {
                 echo "<a href='home/login' class='btn btn-primary'>Iniciar sesión</a>";
             } ?>
-
         </div>
     </div>
 </header>
@@ -134,7 +142,7 @@
       rel="stylesheet" type="text/css"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,regular,italic,700,700italic&subset=latin-ext,greek-ext,cyrillic-ext,greek,vietnamese,latin,cyrillic"
       rel="stylesheet" type="text/css"/>
-<div id="jssor_1">
+<div id="jssor_1" class="my-5">
     <!-- Loading Screen -->
     <div data-u="loading" class="jssorl-004-double-tail-spin cargando">
         <img src="../dashboard/img/double-tail-spin.svg"/>
@@ -181,7 +189,7 @@
 </div>
 <script type="text/javascript">jssor_1_slider_init();
 </script>
-<div id="descripcion" class="my-3 container d-flex justify-content-center flex-column">
+<div id="descripcion" class="py-5 container d-flex justify-content-center flex-column">
     <h1>Welcome to Christies and Meta's</h1>
     <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut turpis consectetur, rhoncus est consectetur,
         euismod ex. Phasellus nibh nibh, tincidunt non placerat non, semper eget enim. Mauris sagittis augue eget magna

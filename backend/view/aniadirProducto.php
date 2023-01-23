@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="<?php echo $_SERVER["HTTP_HOST"] ?>/../../view/formulario.css">
 <div>
     <form class="form" method="post" action="<?php echo $info[0] ?>/processProduct" enctype="multipart/form-data">
-        <h2>Editar Producto</h2>
+        <h2>Añadir Producto</h2>
         <p>
             <label for="nombre">Nombre: </label>
             <input type="text" name="nombre" id="nombre" placeholder="Indica el nombre de la categoría..." required>

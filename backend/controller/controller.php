@@ -57,6 +57,12 @@ class controller
         header("Location: http://localhost/web/backend/index.php/admin/login");
     }
 
+    public function logoutHome()
+    {
+        session_destroy();
+        header("Location: http://localhost/web/backend/index.php/home");
+    }
+
     public function ficha()
     {
         require "view/ficha.php";
@@ -95,7 +101,7 @@ class controller
         } else {
             $campo = "ID_Producto";
         }
-        return $db->read($campo,$inicio, 10);
+        return $db->read($campo, $inicio, 10);
     }
 
     public function categorias()
@@ -135,7 +141,7 @@ class controller
         } else {
             $campo = "Id_Categoria";
         }
-        return $dbCategoria->read($campo,$principio, 10);
+        return $dbCategoria->read($campo, $principio, 10);
     }
 
     public function eliminarCategoria($id)
@@ -375,7 +381,7 @@ class controller
         } else {
             $campo = "Id_Usuario";
         }
-        return $dbUsers->read($campo,$principio, 10);
+        return $dbUsers->read($campo, $principio, 10);
     }
 
     public function idUser()
@@ -403,7 +409,7 @@ class controller
         } else {
             $campo = "Id_Compra";
         }
-        return $dbCategoria->read($campo,$principio, 10);
+        return $dbCategoria->read($campo, $principio, 10);
     }
 
     public function comments()
@@ -419,7 +425,7 @@ class controller
         } else {
             $campo = "Id_Comentario";
         }
-        return $dbCategoria->read($campo,$principio);
+        return $dbCategoria->read($campo, $principio);
     }
 
     public function idComments()
@@ -463,11 +469,63 @@ class controller
 
     public function loginHome()
     {
-        
+        require "view/loginHome.php";
     }
+
+    public function processLoginHome()
+    {
+        if (isset($_SESSION["loginU"])) {
+            header("Location: ../../home");
+        } else {
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if (isset($_POST["submit"])) {
+                    if (isset($_POST["user"]) && !empty($_POST["user"]) && isset($_POST["password"]) && !empty($_POST["password"]) && preg_match("/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/", $_POST["user"]) && preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/", $_POST["password"])) {
+                        $user = $_POST["user"];
+                        $password = sha1($_POST["password"]);
+                        $dbUser = new bdUsuario();
+                        unset($_SESSION["error"]);
+                        $_SESSION["loginU"] = true;
+                        $dbUser->loginHome($user, $password);
+                        header("Location: ../../home");
+                    } else {
+                        $_SESSION["error"] = "El usuario y/o la contraseña son incorrectos";
+                        header("Location: ../login");
+                    }
+                }
+            }
+        }
+    }
+
+    public function processContacto()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_POST["submit"])) {
+                if (isset($_POST["email"]) && !empty($_POST["email"]) && isset($_POST["nombre"]) && !empty($_POST["nombre"]) && isset($_POST["comentario"]) && !empty($_POST["comentario"])) {
+                    $email = $_POST["email"];
+                    $text = $_POST["comentario"];
+                    $texto = "Correo: " . $email . "<br>" . "Nombre: " . $_POST["nombre"] . "<br>" . "Mensaje: " . $text;
+                    $m = new Mailer\Mailer('alvarolarumbe97@gmail.com', $email, '', '', $texto);
+                    $m->enviarEmail();
+                    header("Location: ../contacto");
+                }
+            }
+        }
+    }
+
+    public function contacto()
+    {
+        require "view/contacto.php";
+    }
+
+    public function deleteComments(int $id)
+    {
+        $dbComentarios = new bdComentario();
+        $dbComentarios->delete($id);
+        header("Location: ../admin/comments");
+}
     public
     function error()
     {
-
+    require "view/error404.php";
     }
 }

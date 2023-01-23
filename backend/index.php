@@ -6,6 +6,7 @@ require "model/categoria.php";
 require "model/usuario.php";
 require "model/compra.php";
 require "model/comentario.php";
+require "model/mailer.php";
 require("repositories/bdUsuario.php");
 require "repositories/bdCategoria.php";
 require "repositories/bdObjeto.php";
@@ -106,6 +107,8 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     $controller->eliminarProducto((int)$array_ruta[1]);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "eliminarUsers" && isset($array_ruta[1])) {
     $controller->deleteUser((int)$array_ruta[1]);
+}else if (isset($array_ruta[0]) && $array_ruta[0] == "eliminarComments" && isset($array_ruta[1])) {
+    $controller->deleteComments((int)$array_ruta[1]);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "products" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
     echo $controller->idProd();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "categories" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
@@ -162,8 +165,16 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     $controller->processaniadirProd();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && !isset($array_ruta[1])) {
     $controller->homePage();
-} else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "login") {
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "login" && !isset($array_ruta[2])) {
     $controller->loginHome();
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "logout" && !isset($array_ruta[2])) {
+    $controller->logoutHome();
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "contacto" && !isset($array_ruta[2])) {
+    $controller->contacto();
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "contacto" && isset($array_ruta[2]) && $array_ruta[2] == "process") {
+    $controller->processContacto();
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "login" && isset($array_ruta[2]) && $array_ruta[2] == "process") {
+    $controller->processLoginHome();
 } else {
     $controller->error();
 }

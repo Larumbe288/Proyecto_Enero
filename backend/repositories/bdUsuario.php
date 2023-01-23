@@ -15,6 +15,19 @@ class bdUsuario
             $db = null;
         }
     }
+    function loginHome($user, $password)
+    {
+        $db = Conexion::acceso();
+        try {
+            $sql = "select Correo,Nombre from usuario where Correo='$user' and Password='$password'";
+            $usuarios = $db->query($sql);
+            return $usuarios->fetch();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
+        }
+    }
 
     function create($user, $password, $nombre, $telefono, float $dinero, $rol)
     {
