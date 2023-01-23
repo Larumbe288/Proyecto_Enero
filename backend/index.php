@@ -21,7 +21,7 @@ $dbComments = new bdComentario();
 //Instancio el controlador
 $controller = new controller();
 //Ruta de la home
-$home = "/proyectointegrador/backend/index.php/";
+$home = "/web/backend/index.php/";
 //Quito la home de la ruta de la barra de direcciones
 $ruta = str_replace($home, "", $_SERVER["REQUEST_URI"]);
 //echo $ruta . "<br>";
@@ -104,6 +104,8 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     $controller->eliminarCategoria((int)$array_ruta[1]);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "eliminarProducts" && isset($array_ruta[1])) {
     $controller->eliminarProducto((int)$array_ruta[1]);
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "eliminarUsers" && isset($array_ruta[1])) {
+    $controller->deleteUser((int)$array_ruta[1]);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "products" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
     echo $controller->idProd();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "categories" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
@@ -126,10 +128,38 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     $info[9] = $controller->maxIdCat();
     $prod = array_values($info);
     $controller->showEdit($prod);
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "editarUsers" && isset($array_ruta[1]) && !isset($array_ruta[2])) {
+    $controller->control();
+    $cat = $dbUser->getById((int)$array_ruta[1]);
+    $info = json_decode(json_encode($cat), true);
+    $prod = array_values($info);
+    $controller->showEditUsr($prod);
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "aniadirUsers" && !isset($array_ruta[1])) {
+    $controller->control();
+    $info = $dbUser->maxId() + 1;
+    $controller->aniadirUsrs($info);
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "aniadirCategories" && !isset($array_ruta[1])) {
+    $controller->control();
+    $info = $dbCategoria->getMaxIdCat() + 1;
+    $controller->aniadirCat($info);
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "aniadirProducts" && !isset($array_ruta[1])) {
+    $controller->control();
+    $contenido = $dbObjeto->getIdes();
+    $cabecera = $dbObjeto->getMaxIdProd() + 1;
+    $info = [$cabecera, $contenido];
+    $controller->aniadirProd($info);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "editarCategories" && isset($array_ruta[1]) && isset($array_ruta[2]) && $array_ruta[2] == "processCategoria") {
     $controller->processCategoria();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "editarProducts" && isset($array_ruta[1]) && isset($array_ruta[2]) && $array_ruta[2] == "processProduct") {
     $controller->processProducto();
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "editarUsers" && isset($array_ruta[1]) && isset($array_ruta[2]) && $array_ruta[2] == "processUser") {
+    $controller->processUsers();
+} else if (isset($array_ruta[0]) && isset($array_ruta[1]) && $array_ruta[1] == "processUser") {
+    $controller->processaniadirUsr();
+} else if (isset($array_ruta[0]) && isset($array_ruta[1]) && $array_ruta[1] == "processCategoria") {
+    $controller->processaniadirCat();
+} else if (isset($array_ruta[0]) && isset($array_ruta[1]) && $array_ruta[1] == "processProduct") {
+    $controller->processaniadirProd();
 } else {
     $controller->error();
 }

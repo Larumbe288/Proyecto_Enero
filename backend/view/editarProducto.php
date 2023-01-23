@@ -6,8 +6,8 @@
     <form class="form" method="post" action="<?php echo $info[0] ?>/processProduct" enctype="multipart/form-data">
         <h2>Editar Producto</h2>
         <p>
-            <label for="idProd">ID: </label>
-            <input id="idProd" name="idProd" readonly value="<?php echo $info[0]?>">
+            <label for="idProd">Id Producto: </label>
+            <input type="text" name="idProd" id="idProd" value="<?php echo $info[0] ?>" readonly>
         </p>
         <p>
             <label for="nombre">Nombre: </label>

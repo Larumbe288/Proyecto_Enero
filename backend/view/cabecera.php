@@ -2,9 +2,9 @@
     <div class="main-header">
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="blue">
-            <a href="/proyectointegrador/backend/dashboard/template/examples/demo1/index.html" class="logo"><img
-                    src="/proyectointegrador/backend/dashboard/img/logo.png" alt="navbar brand" class="navbar-brand"
-                    style="width: 25%"></a>
+            <a href="/web/backend/dashboard/template/examples/demo1/index.html" class="logo"><img
+                        src="/web/backend/dashboard/img/logo.png" alt="navbar brand" class="navbar-brand"
+                        style="width: 25%"></a>
             <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                     data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon">
@@ -47,7 +47,7 @@
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
                            aria-expanded="false">
                             <div class="avatar-sm">
-                                <img src="/proyectointegrador/backend/dashboard/template/examples/assets/img/profile.jpg" alt="../..."
+                                <img src="/web/backend/dashboard/template/examples/assets/img/profile.jpg" alt="../..."
                                      class="avatar-img rounded-circle">
                             </div>
                         </a>
@@ -56,14 +56,14 @@
                                 <li>
                                     <div class="user-box">
                                         <div class="avatar-lg"><img
-                                                src="../../dashboard/template/examples/assets/img/profile.jpg"
-                                                alt="image profile" class="avatar-img rounded">
+                                                    src="../../dashboard/template/examples/assets/img/profile.jpg"
+                                                    alt="image profile" class="avatar-img rounded">
                                         </div>
                                         <div class="u-text">
                                             <h4><?php echo $_SESSION["login"] ?></h4>
                                             <p class="text-muted"></p><a
-                                                href="profile.html"
-                                                class="btn btn-xs btn-secondary btn-sm">View
+                                                    href="profile.html"
+                                                    class="btn btn-xs btn-secondary btn-sm">View
                                                 Profile</a>
                                         </div>
                                     </div>
@@ -100,7 +100,7 @@
                                 <span>
                                     <?php echo $_SESSION["login"] ?>
                                     <span class="user-level">Administrator</span>
-                                    <span class="caret"></span>
+
                                 </span>
                         </a>
                         <div class="clearfix"></div>
@@ -137,7 +137,7 @@
                         <a data-toggle="collapse" href="#base">
                             <i class="fas fa-user-alt"></i>
                             <p>Users</p>
-                            <span class="caret"></span>
+
                         </a>
                         <div class="collapse" id="base">
                             <ul class="nav nav-collapse">
@@ -198,7 +198,7 @@
                         <a data-toggle="collapse" href="dashboard/ficha">
                             <i class="fas fa-book"></i>
                             <p>Categories</p>
-                            <span class="caret"></span>
+
                         </a>
                         <div class="collapse" id="sidebarLayouts">
                             <ul class="nav nav-collapse">
@@ -229,7 +229,7 @@
                         <a data-toggle="collapse" href="#forms">
                             <i class="fas fa-box"></i>
                             <p>Products</p>
-                            <span class="caret"></span>
+
                         </a>
                         <div class="collapse" id="forms">
                             <ul class="nav nav-collapse">
@@ -245,7 +245,7 @@
                         <a data-toggle="collapse" href="#tables">
                             <i class="fas fa-money-bill-wave"></i>
                             <p>Sales</p>
-                            <span class="caret"></span>
+
                         </a>
                         <div class="collapse" id="tables">
                             <ul class="nav nav-collapse">
@@ -266,7 +266,7 @@
                         <a data-toggle="collapse" href="#maps">
                             <i class="fab fa-rocketchat"></i>
                             <p>Comments</p>
-                            <span class="caret"></span>
+
                         </a>
                         <div class="collapse" id="maps">
                             <ul class="nav nav-collapse">
@@ -282,7 +282,7 @@
                         <a data-toggle="collapse" href="#charts">
                             <i class="fab fa-wpforms"></i>
                             <p>Contact</p>
-                            <span class="caret"></span>
+
                         </a>
                         <div class="collapse" id="charts">
                             <ul class="nav nav-collapse">

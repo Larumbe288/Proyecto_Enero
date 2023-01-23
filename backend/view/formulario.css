@@ -41,7 +41,7 @@ form label{
     color: #6c6c6c;
 }
 
-form input{
+form input,form select{
     border: none;
     background-color: transparent;
     padding: 12px 0;
@@ -60,7 +60,10 @@ form input[type="submit"]{
     text-decoration: none;
     width: 33.33%;
 }
-#idCat {
-    outline: none;
+/*#idCat {*/
+/*    outline: none;*/
+/*}*/
+input:first-child {
+    outline:none;
 }
 

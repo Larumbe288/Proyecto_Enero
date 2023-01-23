@@ -29,3 +29,13 @@ tr:hover {
     align-items: center;
     padding-top: 425px;
 }
+.flotar h4 {
+    width: 96%;
+    float: left;
+}
+.flotar a {
+    float: right;
+}
+a {
+    text-underline-mode: none;
+}

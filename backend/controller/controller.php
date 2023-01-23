@@ -54,7 +54,7 @@ class controller
     public function logout()
     {
         session_destroy();
-        header("Location: http://localhost/proyectointegrador/backend/index.php/admin/login");
+        header("Location: http://localhost/web/backend/index.php/admin/login");
     }
 
     public function ficha()
@@ -154,6 +154,129 @@ class controller
         require "view/editarCategoria.php";
     }
 
+    public function showEditUsr($info)
+    {
+        require "view/editarUsuario.php";
+    }
+
+    public function aniadirUsrs($info)
+    {
+        require "view/aniadirUsuario.php";
+    }
+
+    public function aniadirCat($info)
+    {
+        require "view/aniadirCategoria.php";
+    }
+
+    public function aniadirProd($info)
+    {
+        require "view/aniadirProducto.php";
+    }
+
+    public function processaniadirCat()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_POST["submit"])) {
+                $nombre = $_POST["nombre"];
+                $descripcion = $_POST["descripcion"];
+                $dbCategoria = new bdCategoria();
+                $id = $dbCategoria->getMaxIdCat() + 1;
+                mkdir($_SERVER['DOCUMENT_ROOT'] . "/web/backend/view/imgCategories/" . $id);
+                $temporal = $_FILES["imagen"]["tmp_name"];
+                $fileName = $_FILES["imagen"]["name"];
+                $path = $_SERVER['DOCUMENT_ROOT'] . "/web/backend/view/imgCategories/" . $id . "/{$fileName}";
+                $absolutePath = __DIR__ . '/' . $path;
+                if (!file_exists($absolutePath)) {
+                    move_uploaded_file($temporal, $path);
+                    $imagen = "http://localhost/web/backend/view/imgCategories/" . $id . "/{$fileName}";
+                }
+                $dbCategoria->create($nombre, $descripcion, $imagen);
+                header("Location: ../admin/categories");
+            }
+        }
+    }
+
+    public function processaniadirUsr()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_POST["submit"])) {
+                $correo = $_POST["correo"];
+                $nombre = $_POST["nombre"];
+                $tel = $_POST["tel"];
+                $dinero = (float)$_POST["dinero"];
+                if ($_POST["password"] == $_POST["password2"] && preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/", $_POST["password"])) {
+                    $password = sha1($_POST["password"]);
+                } else {
+                    $_SESSION["error"] = "El usuario no ha podido ser añadido";
+                    header("Location: ../admin/users");
+                }
+                $rol = 'usuario';
+                $dbUsuario = new bdUsuario();
+                $dbUsuario->create($correo, $password, $nombre, $tel, $dinero, $rol);
+                header("Location: ../admin/users");
+            }
+        }
+    }
+
+    public function processaniadirProd()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_POST["submit"])) {
+                if (isset($_POST["nombre"]) && !empty($_POST["nombre"])) {
+                    $nombre = $_POST["nombre"];
+                } else {
+                    $nombre = '';
+                }
+                if (isset($_POST["precio"]) && !empty($_POST["precio"])) {
+                    $precio = $_POST["precio"];
+                } else {
+                    $precio = '';
+                }
+                if (isset($_POST["latitud"]) && !empty($_POST["latitud"])) {
+                    $latitud = (float)$_POST["latitud"];
+                } else {
+                    $latitud = (float)'';
+                }
+                if (isset($_POST["longitud"]) && !empty($_POST["longitud"])) {
+                    $longitud = (float)$_POST["longitud"];
+                } else {
+                    $longitud = (float)'';
+                }
+                if (isset($_POST["idCat"]) && !empty($_POST["idCat"])) {
+                    $idCat = (int)$_POST["idCat"];
+                } else {
+                    $idCat = '';
+                }
+                $dbProd = new bdObjeto();
+                $id = $dbProd->getMaxIdProd() + 1;
+                $imagen1 = $this->imagenAniadirProd($id, 1);
+                $imagen2 = $this->imagenAniadirProd($id, 2);
+                $imagen3 = $this->imagenAniadirProd($id, 3);
+                $dbProd->create($nombre, $precio, $imagen1, $imagen2, $imagen3, $latitud, $longitud, $idCat);
+                header("Location: ../admin/products");
+            }
+        }
+    }
+
+    private function imagenAniadirProd($id, $ide)
+    {
+        mkdir($_SERVER['DOCUMENT_ROOT'] . "/web/backend/view/imgProducts/" . $id);
+        $temporal = $_FILES["imagen" . $ide]["tmp_name"];
+        $fileName = $_FILES["imagen" . $ide]["name"];
+        $path = $_SERVER['DOCUMENT_ROOT'] . "/web/backend/view/imgProducts/" . $id . "/{$fileName}";
+        $absolutePath = __DIR__ . '/' . $path;
+        if (!file_exists($absolutePath)) {
+            move_uploaded_file($temporal, $path);
+            if ($fileName != '') {
+                return "http://localhost/web/backend/view/imgProducts/" . $id . "/{$fileName}";
+            } else {
+                return "";
+            }
+
+        }
+    }
+
     public function processCategoria()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -166,10 +289,10 @@ class controller
                 $dbCategoria = new bdCategoria();
                 $temporal = $_FILES["imagen"]["tmp_name"];
                 $fileName = $_FILES["imagen"]["name"];
-                $path = $_SERVER['DOCUMENT_ROOT'] . "/php/proyectointegrador/backend/view/imgCategories/" . $_POST['idCat'] . "/{$fileName}";
+                $path = $_SERVER['DOCUMENT_ROOT'] . "/web/backend/view/imgCategories/" . $_POST['idCat'] . "/{$fileName}";
 
                 $absolutePath = __DIR__ . '/' . $path;
-                $dir = $_SERVER['DOCUMENT_ROOT'] . "/php/proyectointegrador/backend/view/imgCategories/" . $_POST['idCat'];
+                $dir = $_SERVER['DOCUMENT_ROOT'] . "/web/backend/view/imgCategories/" . $_POST['idCat'];
                 if (!file_exists($absolutePath)) {
                     $files = glob($dir . "/*"); //obtenemos todos los nombres de los ficheros
                     foreach ($files as $file) {
@@ -177,7 +300,7 @@ class controller
                             unlink($file); //elimino el fichero
                     }
                     move_uploaded_file($temporal, $path);
-                    $categoryImg = "http://localhost/php/proyectointegrador/backend/view/imgCategories/" . $_POST['idCat'] . "/{$fileName}";
+                    $categoryImg = "http://localhost/web/backend/view/imgCategories/" . $_POST['idCat'] . "/{$fileName}";
                 }
                 $array = array("Nombre" => $_POST["nombre"], "Descripcion" => $_POST["descripcion"], "Imagen" => $categoryImg,);
                 $dbCategoria->update($id, $array);
@@ -193,7 +316,7 @@ class controller
                 if (isset($_POST['idProd']) && !empty($_POST['idProd'])) {
                     $id = (int)$_POST['idProd'];
                 } else {
-                    header("Location: ../../admin/categories");
+                    header("Location: ../../admin/products");
                 }
                 $dbObjeto = new bdObjeto();
                 $this->vaciarCarpeta();
@@ -211,17 +334,17 @@ class controller
     {
         $temporal = $_FILES["imagen" . $id]["tmp_name"];
         $fileName = $_FILES["imagen" . $id]["name"];
-        $path = $_SERVER['DOCUMENT_ROOT'] . "/php/proyectointegrador/backend/view/imgProducts/" . $_POST['idProd'] . "/{$fileName}";
+        $path = $_SERVER['DOCUMENT_ROOT'] . "/web/backend/view/imgProducts/" . $_POST['idProd'] . "/{$fileName}";
         $absolutePath = __DIR__ . '/' . $path;
         if (!file_exists($absolutePath)) {
             move_uploaded_file($temporal, $path);
-            return "http://localhost/php/proyectointegrador/backend/view/imgProducts/" . $_POST['idProd'] . "/{$fileName}";
+            return "http://localhost/web/backend/view/imgProducts/" . $_POST['idProd'] . "/{$fileName}";
         }
     }
 
     private function vaciarCarpeta()
     {
-        $dir = $_SERVER['DOCUMENT_ROOT'] . "/php/proyectointegrador/backend/view/imgProducts/" . $_POST['idProd'];
+        $dir = $_SERVER['DOCUMENT_ROOT'] . "/web/backend/view/imgProducts/" . $_POST['idProd'];
         $files = glob($dir . "/*"); //obtenemos todos los nombres de los ficheros
         foreach ($files as $file) {
             if (is_file($file))
@@ -288,15 +411,24 @@ class controller
     public function processUsers()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            if(isset($_POST["submit"])) {
-                if(isset($_POST["idUsr"]) && !empty($_POST["idUsr"])) {
-                    $id = (int) $_POST["idUsr"];
-                    
-                } else {
-                    header("Location: ../../admin/users");
+            if (isset($_POST["submit"])) {
+                if (isset($_POST["idUsr"]) && !empty($_POST["idUsr"])) {
+                    $id = (int)$_POST["idUsr"];
+                    $dbUsr = new bdUsuario();
+                    $array = array("Correo" => $_POST["correo"], "Nombre" => $_POST["nombre"], "Telefono" => $_POST["tel"], "Christokens" => $_POST["dinero"], "Password" => $_POST["password"]);
+                    echo $dbUsr->update($id, $array);
                 }
+                header("Location: ../../admin/users");
+
             }
         }
+    }
+
+    public function deleteUser($id)
+    {
+        $dbUsers = new bdUsuario();
+        $dbUsers->delete($id);
+        header("Location: ../admin/users");
     }
 
     public

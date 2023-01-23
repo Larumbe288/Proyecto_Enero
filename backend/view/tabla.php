@@ -8,12 +8,20 @@
 
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header flotar">
                             <h4 id="titulo" class="card-title"><?php echo $_SESSION["tabla"] ?></h4>
+                            <?php
+                            $arrayTitulos = ["Categories", "Products", "Users"];
+                            $arrayTitulos2 = ["Categories", "Products", "Users", "Sales"];
+                            if (in_array($_SESSION["tabla"], $arrayTitulos)) {
+                                echo "<a href='http://localhost/web/backend/index.php/aniadir" . $_SESSION['tabla'] . "'class='btn btn-primary float-right'><i class='fas fa-plus'></i></a>";
+                            }
+                            ?>
                         </div>
                         <div class="card-body">
 
                             <div class="table-responsive">
+
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
@@ -22,13 +30,14 @@
                                         for ($i = 0; $i < count($columnas); $i++) {
                                             echo "<th>" . $columnas[$i][0] . "</th>";
                                         }
-                                        $arrayTitulos = ["Categories", "Products", "Users"];
-                                        if (in_array($_SESSION["tabla"], $arrayTitulos)) {
+                                        if (in_array($_SESSION["tabla"], $arrayTitulos2)) {
                                             echo "<th>Show</th>";
                                         } ?>
+                                        <?php if ($_SESSION["tabla"] != 'Sales') {
+                                            echo "<th>Edit</th>" . "<br>";
+                                            echo "<th>Erase</th>";
+                                        } ?>
 
-                                        <th>Edit</th>
-                                        <th>Erase</th>
                                     </tr>
                                     </thead>
                                     <tbody id="listado" onchange="cargarDatos()">
@@ -50,31 +59,11 @@
         </div>
     </div>
 </div>
-<div class="modal fade" tabindex="-1" id="show">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Token</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="d-flex justify-content-center align-items flex-column"><img
-                            src="https://dummyimage.com/300x200/000/fff"></div>
-                <h5 class="my-3" style="text-align: center">Título</h5>
-                <p class="my-3" style="text-align: center">Descripción</p>
-                <p class="my-3" style="text-align: center">Precio</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Listo</button>
-            </div>
-        </div>
-    </div>
-</div>
 <script>
     var inicio = 0;
     var id;
     var categorias;
-    var urlBase = "http://localhost/proyectointegrador/backend/index.php/";
+    var urlBase = "http://localhost/web/backend/index.php/";
     window.onload = function () {
         getMaxId();
         getCategorias();
@@ -119,6 +108,65 @@
         xhttp.send();
     }
 
+    function createModal(id, titulo, foto, descripcion) {
+        let div = document.createElement("div");
+        div.classList.add("modal");
+        div.classList.add("fade");
+        div.tabIndex = -1;
+        div.id = "show" + id;
+        let dialog = document.createElement("div");
+        dialog.classList.add("modal-dialog");
+        let content = document.createElement("div");
+        content.classList.add("modal-content");
+        let header = document.createElement("div");
+        header.classList.add("modal-header");
+        let tituloo = document.createElement("h4");
+        tituloo.classList.add("modal-title");
+        tituloo.innerText = "Ficha";
+        let close = document.createElement("button");
+        close.type = "button";
+        close.classList.add("btn-close");
+        close.setAttribute("data-bs-dismiss", "modal");
+        close.setAttribute("aria-label", "Close");
+        header.appendChild(tituloo);
+        header.appendChild(close);
+        let body = document.createElement("div");
+        body.classList.add("modal-body");
+        let contenedorImg = document.createElement("div");
+        contenedorImg.classList.add("d-flex");
+        contenedorImg.classList.add("justify-content-center");
+        contenedorImg.classList.add("align-items");
+        contenedorImg.classList.add("flex-column");
+        let imagen = document.createElement("img");
+        imagen.src = foto;
+        contenedorImg.appendChild(imagen);
+        let subtitulo = document.createElement("h5");
+        subtitulo.innerText = titulo;
+        subtitulo.classList.add("my-3");
+        subtitulo.classList.add("text-center");
+        let precio = document.createElement("p");
+        precio.innerText = descripcion;
+        precio.classList.add("my-3");
+        precio.classList.add("text-center");
+        body.appendChild(contenedorImg);
+        body.appendChild(subtitulo);
+        body.appendChild(precio);
+        let footer = document.createElement("div");
+        footer.classList.add("modal-footer");
+        let boton = document.createElement("button");
+        boton.classList.add("btn");
+        boton.classList.add("btn-primary");
+        boton.type = "button";
+        boton.setAttribute("data-bs-dismiss", "modal");
+        boton.innerText = "Listo";
+        footer.appendChild(boton);
+        content.appendChild(header);
+        content.appendChild(body);
+        content.appendChild(footer);
+        dialog.appendChild(content);
+        div.appendChild(dialog);
+        document.body.appendChild(div);
+    }
 
     function cargarDatos() {
         let accion = document.getElementById("titulo").innerText.toLowerCase();
@@ -135,25 +183,43 @@
                     for (let j = 0; j < valores.length; j++) {
                         let td = document.createElement("td");
                         if (j === valores.length - 1 && accion === "products") {
-                            td.innerText = categorias[valores[j] - 1][valores[j]];
+                            td.innerText = categorias[valores[j]][0];
                         } else {
                             td.innerHTML = valores[j];
                         }
                         tr.appendChild(td);
                     }
-                    let arrayTabla = ["categories", "products", "users"];
+                    let arrayTabla = ["categories", "products", "users", "sales"];
                     if (arrayTabla.includes(accion)) {
                         let iconoMostrar = document.createElement("td");
-                        iconoMostrar.innerHTML = "<button class='btn btn-success'  itemid='" + valores[0] + "' data-bs-toggle='modal' data-bs-target='#show'><i class='fas fa-eye'></i></button>";
+                        iconoMostrar.innerHTML = "<button class='btn btn-success'  itemid='" + valores[0] + "' data-bs-toggle='modal' data-bs-target='#show" + valores[0] + "'><i class='fas fa-eye'></i></button>";
                         tr.appendChild(iconoMostrar);
                     }
-                    let iconoEditar = document.createElement("td");
-                    iconoEditar.innerHTML = "<a href='http://localhost/proyectointegrador/backend/index.php/editar<?php echo $_SESSION["tabla"] ?>/" + valores[0] + "' class='btn btn-primary edit'><i class='fas fa-pencil-alt'></i></a>"
-                    tr.appendChild(iconoEditar);
-                    let iconoBorrar = document.createElement("td");
-                    iconoBorrar.innerHTML = "<a href='http://localhost/proyectointegrador/backend/index.php/eliminar<?php echo $_SESSION["tabla"] ?>/" + valores[0] + "' class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
-                    tr.appendChild(iconoBorrar);
+                    if (accion != "sales") {
+                        let iconoEditar = document.createElement("td");
+                        iconoEditar.innerHTML = "<a href='http://localhost/web/backend/index.php/editar<?php echo $_SESSION["tabla"] ?>/" + valores[0] + "' class='btn btn-primary edit'><i class='fas fa-pencil-alt'></i></a>"
+                        tr.appendChild(iconoEditar);
+                        let iconoBorrar = document.createElement("td");
+                        iconoBorrar.innerHTML = "<a href='http://localhost/web/backend/index.php/eliminar<?php echo $_SESSION["tabla"] ?>/" + valores[0] + "' class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
+                        tr.appendChild(iconoBorrar);
+                    }
+
                     tabla.appendChild(tr);
+                    if (accion === "categories" || accion === "products") {
+                        createModal(valores[0], valores[1], valores[3], valores[2]);
+                    } else if (accion === "users") {
+                        let rol = valores[6].charAt(0).toUpperCase() + valores[6].slice(1);
+                        let foto;
+                        if (rol === "Admin") {
+                            foto = "http://localhost/web/backend/view/imgUsers/admin.png";
+                        } else {
+                            foto = "http://localhost/web/backend/view/imgUsers/user.webp";
+                        }
+                        createModal(valores[0], valores[1], foto, rol);
+                    } else {
+
+                    }
+
                 }
             }
         }
@@ -200,4 +266,5 @@
             boton.setAttribute("disabled", "");
         }
     }
+
 </script>

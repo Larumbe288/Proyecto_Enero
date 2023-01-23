@@ -80,7 +80,7 @@ class bdUsuario
         }
         $db = Conexion::acceso();
         try {
-            $sql = "update usuario set Correo='" . $usr->getCorreo() . "',Nombre='" . $usr->getNombre() . "',Telefono='" . $usr->getTelefono() . "',Christokens=" . $usr->getChristokens() . ",Password='" . $usr->getPassword() . " where Id_Usuario=$id";
+            $sql = "update usuario set Correo='" . $usr->getCorreo() . "',Nombre='" . $usr->getNombre() . "',Telefono='" . $usr->getTelefono() . "',Christokens=" . $usr->getChristokens() . ",Password='" . $usr->getPassword() . "' where Id_Usuario=$id";
             $resultado = $db->query($sql);
             if (!$resultado) {
                 echo "Error: " . $db->errorInfo();
@@ -135,6 +135,24 @@ class bdUsuario
             $ID = 0;
             foreach ($ides as $id) {
                 $ID = $id['COUNT(Id_Usuario)'];
+            }
+            return $ID;
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
+        }
+
+    }
+    public function maxId()
+    {
+        $db = Conexion::acceso();
+        try {
+            $sql = "SELECT MAX(Id_Usuario) FROM usuario";
+            $ides = $db->query($sql);
+            $ID = 0;
+            foreach ($ides as $id) {
+                $ID = $id['MAX(Id_Usuario)'];
             }
             return $ID;
         } catch (\PDOException $e) {

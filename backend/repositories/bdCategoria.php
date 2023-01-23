@@ -6,7 +6,7 @@ class bdCategoria
     {
         $db = Conexion::acceso();
         try {
-            $sql = "insert into categoria (Nombre,Descripcion,Imagen) values($nombre,$descripcion,$imagen)";
+            $sql = "insert into categoria (Nombre,Descripcion,Imagen) values('$nombre','$descripcion','$imagen')";
             $resultado = $db->query($sql);
             if (!$resultado) {
                 echo $db->errorInfo();
@@ -132,7 +132,9 @@ class bdCategoria
             $db = null;
         }
     }
-    function getMaxIdCat() {
+
+    function getMaxIdCat()
+    {
         $db = Conexion::acceso();
         try {
             $sql = "SELECT MAX(Id_Categoria) FROM categoria";

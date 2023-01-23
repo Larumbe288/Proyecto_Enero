@@ -129,20 +129,60 @@ class bdObjeto
             $db = null;
         }
     }
-    function getCategorias() {
+
+    function getMaxIdProd()
+    {
         $db = Conexion::acceso();
-        $arrayCat = array();
+        try {
+            $sql = "SELECT MAX(ID_Producto) FROM objeto";
+            $ides = $db->query($sql);
+            $ID = 0;
+            foreach ($ides as $id) {
+                $ID = $id['MAX(ID_Producto)'];
+            }
+            return $ID;
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
+        }
+    }
+
+    function getCategorias()
+    {
+        $db = Conexion::acceso();
+        $arrayCat = [];
+        $dbCategoria = new bdCategoria();
+        $id = $dbCategoria->getMaxIdCat();
         try {
             $sql = "SELECT Id_Categoria,Nombre from categoria";
             $result = $db->query($sql);
             foreach ($result as $cat) {
-               $arrayCat[]=array($cat['Id_Categoria']=>$cat['Nombre']);
+                $arrayCat[$cat["Id_Categoria"]] = array(0 => $cat['Nombre']);
             }
             return json_encode($arrayCat);
-        } catch(\PDOException $e) {
-        echo "Error: ".$e->getMessage();
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
         } finally {
-        $db=null;
+            $db = null;
+        }
+    }
+
+    public function getIdes()
+    {
+        $db = Conexion::acceso();
+        $arrayId = [];
+        try {
+            $sql = "SELECT Id_Categoria from categoria";
+            $ides = $db->query($sql);
+            foreach ($ides as $ide) {
+                array_push($arrayId, $ide["Id_Categoria"]);
+            }
+            return $arrayId;
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
         }
     }
 }
