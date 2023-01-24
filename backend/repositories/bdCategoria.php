@@ -37,6 +37,24 @@ class bdCategoria
             $db = null;
         }
     }
+    public function readAll()
+    {
+        $arrayCat = [];
+        $db = Conexion::acceso();
+        try {
+            $sql = "select * from categoria";
+            $resultado = $db->query($sql);
+            foreach ($resultado as $cat) {
+                $c = new Categoria((int)$cat["Id_Categoria"], $cat["Nombre"], $cat["Descripcion"], $cat["Imagen"]);
+                array_push($arrayCat, $c);
+            }
+            return json_encode($arrayCat);
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
+        }
+    }
 
     public function getById(int $id)
     {

@@ -148,12 +148,47 @@ class bdObjeto
         }
     }
 
-    function getCategorias()
+    function getCategorias($cantidad)
     {
         $db = Conexion::acceso();
         $arrayCat = [];
         $dbCategoria = new bdCategoria();
-        $id = $dbCategoria->getMaxIdCat();
+        try {
+            $sql = "SELECT Id_Categoria,Nombre from categoria limit 0,$cantidad";
+            $result = $db->query($sql);
+            foreach ($result as $cat) {
+                $arrayCat[$cat["Id_Categoria"]] = array(0 => $cat['Nombre']);
+            }
+            return $arrayCat;
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
+        }
+    }
+    function getCategoriasJSON($cantidad)
+    {
+        $db = Conexion::acceso();
+        $arrayCat = [];
+        $dbCategoria = new bdCategoria();
+        try {
+            $sql = "SELECT Id_Categoria,Nombre from categoria limit 0,$cantidad";
+            $result = $db->query($sql);
+            foreach ($result as $cat) {
+                $arrayCat[$cat["Id_Categoria"]] = array(0 => $cat['Nombre']);
+            }
+            return json_encode($arrayCat);
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
+        }
+    }
+    function getCategorias2()
+    {
+        $db = Conexion::acceso();
+        $arrayCat = [];
+        $dbCategoria = new bdCategoria();
         try {
             $sql = "SELECT Id_Categoria,Nombre from categoria";
             $result = $db->query($sql);

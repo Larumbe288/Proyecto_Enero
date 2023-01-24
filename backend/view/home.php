@@ -23,13 +23,22 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="home" class="nav-link px-2 link-dark">Home</a></li>
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="outline: none">
+                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                            style="outline: none">
                         Categorías
                     </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Deportes imposibles</a></li>
-                        <li><a class="dropdown-item" href="#">Placeres gastronómicos digitales</a></li>
-                        <li><a class="dropdown-item" href="#">Viajes virtuales</a></li>
+                    <ul id="cats" class="dropdown-menu">
+                        <?php
+                        for ($i = 1; $i < count($info) + 1; $i++) {
+                            if (isset($info[$i][0])) {
+                                echo '<li><a class="dropdown-item" href="#">' . $info[$i][0] . '</a></li>';
+                            }
+
+                        }
+                        if (count($info) < $booleano) {
+                            echo '<li><button class="dropdown-item" onclick="cargar()">.&nbsp;.&nbsp;.</button></li>';
+                        };
+                        ?>
                     </ul>
                 </div>
                 <li><a href="home/contacto" class="nav-link px-2 link-dark">Contacto</a></li>
@@ -54,12 +63,67 @@
             </div>";
             } else {
                 echo "<a href='home/login' class='btn btn-primary'>Iniciar sesión</a>";
+                echo "&nbsp;<a href='home/login' class='btn btn-light'>Registrarse</a>";
             } ?>
         </div>
     </div>
 </header>
 <script src="../view/js/jssor.slider-28.1.0.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+    var cantidad = 4;
+    var urlBase = "http://localhost/web/backend/index.php/";
+    var id;
+
+    function getMaxId() {
+        let accion = "categories/id";
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                id = Number.parseInt(this.response);
+            }
+        }
+        xhttp.open("POST", urlBase + accion, true);
+        xhttp.send();
+    }
+
+    getMaxId();
+
+    function cargar() {
+        let accion = "categoorias";
+        cantidad += 4;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                let categorias = JSON.parse(this.response);
+                let lista = document.getElementById("cats");
+                lista.innerHTML = "";
+                let valores = Object.values(categorias);
+                for (let i = 0; i < valores.length; i++) {
+                    let ul = document.createElement("li");
+                    let a = document.createElement("a");
+                    a.classList.add("dropdown-item");
+                    a.href = "#";
+                    a.innerText = valores[i];
+                    ul.appendChild(a);
+                    lista.appendChild(ul);
+                }
+                if (valores.length < id) {
+                    let li = document.createElement("li");
+                    let boton = document.createElement("button");
+                    boton.classList.add("dropdown-item");
+                    boton.onclick = cargar;
+                    boton.innerHTML = ".&nbsp;.&nbsp;.";
+                    li.appendChild(boton);
+                    lista.appendChild(li);
+                }
+            }
+        }
+        var params = "cantidad=" + cantidad;
+        xhttp.open("POST", urlBase + accion, true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(params);
+    }
+
     window.jssor_1_slider_init = function () {
 
         var jssor_1_SlideoTransitions = [

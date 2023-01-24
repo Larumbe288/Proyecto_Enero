@@ -90,7 +90,7 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "logout") {
     $controller->logout();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "categorias" && !isset($array_ruta[1])) {
-    echo $controller->categorias();
+    echo $controller->categorias2();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "products" && !isset($array_ruta[1])) {
     echo $controller->productos();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "users" && !isset($array_ruta[1])) {
@@ -172,7 +172,11 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
 } else if (isset($array_ruta[0]) && isset($array_ruta[1]) && $array_ruta[1] == "processProduct") {
     $controller->processaniadirProd();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && !isset($array_ruta[1])) {
-    $controller->homePage();
+    $info = $controller->categorias();
+    $cant = $controller->idCat();
+    $controller->homePage($info,$cant);
+}else if (isset($array_ruta[0]) && $array_ruta[0] == "categoorias" && !isset($array_ruta[1])) {
+    echo $controller->categoriasJSON();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "login" && !isset($array_ruta[2])) {
     $controller->loginHome();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "logout" && !isset($array_ruta[2])) {

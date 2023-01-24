@@ -106,10 +106,30 @@ class controller
 
     public function categorias()
     {
+        if(isset($_POST["cantidad"])) {
+            $cantidad = (int) $_POST["cantidad"];
+        } else {
+            $cantidad = 4;
+        }
         $dbObjecto = new bdObjeto();
-        return $dbObjecto->getCategorias();
+        return $dbObjecto->getCategorias($cantidad);
     }
 
+    public function categoriasJSON()
+    {
+        $dbObjeto = new bdObjeto();
+        if(isset($_POST["cantidad"])) {
+            $cantidad = (int) $_POST["cantidad"];
+        } else {
+            $cantidad = 4;
+        }
+        return $dbObjeto->getCategoriasJSON($cantidad);
+}
+    public function categorias2()
+    {
+        $dbObjecto = new bdObjeto();
+        return $dbObjecto->getCategorias2();
+}
     public function idProd()
     {
         $db = new bdObjeto();
@@ -462,7 +482,7 @@ class controller
         header("Location: ../admin/users");
     }
 
-    public function homePage()
+    public function homePage($info,$booleano)
     {
         require "view/home.php";
     }
