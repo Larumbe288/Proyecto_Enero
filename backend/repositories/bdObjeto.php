@@ -18,7 +18,7 @@ class bdObjeto
         }
     }
 
-    function read($campo,$principio, $final)
+    function read($campo, $principio, $final)
     {
         $arrayObjetos = [];
         $db = Conexion::acceso();
@@ -166,6 +166,7 @@ class bdObjeto
             $db = null;
         }
     }
+
     function getCategoriasJSON($cantidad)
     {
         $db = Conexion::acceso();
@@ -184,6 +185,7 @@ class bdObjeto
             $db = null;
         }
     }
+
     function getCategorias2()
     {
         $db = Conexion::acceso();
@@ -220,4 +222,79 @@ class bdObjeto
             $db = null;
         }
     }
+
+    private function getIdProductosMasVendidos()
+    {
+        $ides = [];
+        $db = Conexion::acceso();
+        try {
+            $sql = "SELECT objeto.ID_Producto as obj, ifnull(count(compras.Id_Producto),0) + (SELECT ifnull(count(Id_Objeto),0) from comentario where Id_Objeto=obj) as 'puntuacion' from compras join objeto on compras.Id_Producto=objeto.ID_Producto join categoria on objeto.Id_Categoria=categoria.Id_Categoria where compras.Id_Producto=objeto.ID_Producto
+GROUP BY compras.Id_Producto 
+ORDER BY `puntuacion` DESC limit 10";
+            $resultado = $db->query($sql);
+            foreach ($resultado as $value) {
+                array_push($ides, $value["obj"]);
+            }
+            return $ides;
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
+        }
+    }
+
+    public function productosMasVendidos()
+    {
+        $ides = $this->getIdProductosMasVendidos();
+        $arrayProductos = [];
+        foreach ($ides as $ide) {
+            $prod = $this->getById((int)$ide);
+            array_push($arrayProductos, $prod);
+        }
+        return $arrayProductos;
+    }
+
+    private function getIdesUltimosCOmentarios($id)
+    {
+        $ides = [];
+        $db = Conexion::acceso();
+        try {
+            $sql = "select Id_Objeto as obj from comentario where Id_Usuario='$id' order by Fecha desc limit 10;";
+            $resultado = $db->query($sql);
+            foreach ($resultado as $value) {
+                array_push($ides, $value["obj"]);
+            }
+            return $ides;
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
+        }
+    }
+
+    public function productosComentados(int $id)
+    {
+        $ides = $this->getIdesUltimosCOmentarios($id);
+        $arrayProductos = [];
+        foreach ($ides as $value) {
+            $prod = $this->getById();
+        }
+    }
+
+    public function buscador($texto)
+    {
+        $db = Conexion::acceso();
+        try {
+            $sql="select * from objeto where nombre like '%'$texto'%'";
+            $result = $db->query($sql);
+            foreach ($result as $value) {
+                echo $value;
+            }
+        } catch(\PDOException $e) {
+        echo "Error: ".$e->getMessage();
+        } finally {
+        $db=null;
+        }
+    }
+
 }

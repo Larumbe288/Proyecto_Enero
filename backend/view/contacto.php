@@ -24,13 +24,22 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="../home" class="nav-link px-2 link-dark">Home</a></li>
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="outline: none">
+                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                            style="outline: none">
                         Categorías
                     </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Deportes imposibles</a></li>
-                        <li><a class="dropdown-item" href="#">Placeres gastronómicos digitales</a></li>
-                        <li><a class="dropdown-item" href="#">Viajes virtuales</a></li>
+                    <ul id="cats" class="dropdown-menu">
+                        <?php
+                        for ($i = 1; $i < count($info) + 1; $i++) {
+                            if (isset($info[$i][0])) {
+                                echo '<li><a class="dropdown-item" href="#">' . $info[$i][0] . '</a></li>';
+                            }
+
+                        }
+                        if (count($info) < $booleano) {
+                            echo '<li><button class="dropdown-item" onclick="cargar()">.&nbsp;.&nbsp;.</button></li>';
+                        };
+                        ?>
                     </ul>
                 </div>
                 <li><a href="../home/contacto" class="nav-link px-2 link-dark">Contacto</a></li>
@@ -39,7 +48,8 @@
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                 <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
             </form>
-            <?php if (isset($_SESSION["loginU"])) {
+            <?php
+            if (isset($_SESSION["loginU"])) {
                 echo "<div class='dropdown text-end'>
                 <a href='#' class='d-block link-dark text-decoration-none dropdown-toggle' data-bs-toggle='dropdown'
                    aria-expanded='false'>
@@ -50,12 +60,14 @@
                     <li>
                         <hr class='dropdown-divider'>
                     </li>
-                    <li><a class='dropdown-item' href='../home/logout'>Sign out</a></li>
+                    <li><a class='dropdown-item' href='home/logout'>Sign out</a></li>
                 </ul>
             </div>";
             } else {
                 echo "<a href='../home/login' class='btn btn-primary'>Iniciar sesión</a>";
-            } ?>
+                echo "&nbsp;<a href='../home/registro' class='btn btn-light'>Registrarse</a>";
+            }
+            ?>
         </div>
     </div>
 </header>
@@ -66,12 +78,14 @@
             <h1 class="h3 mb-3 fw-normal">Contacta con nosotros</h1>
 
             <div class="form-floating">
-                <input type="email" class="form-control mb-3" name="user" id="floatingInput"
+                <input type="email" class="form-control mb-3" onkeydown="verifyEmail(this)" name="user"
+                       id="floatingInput"
                        placeholder="name@example.com">
                 <label for="floatingInput">Correo electrónico</label>
             </div>
             <div class="form-floating">
-                <input type="text" class="form-control mb-3" name="nombre" id="floatingPassword"
+                <input type="text" class="form-control mb-3" onkeydown="verifyName(this)" name="nombre"
+                       id="floatingPassword"
                        placeholder="Nombre">
                 <label for="floatingPassword">Nombre</label>
             </div>
@@ -80,20 +94,22 @@
                           style="height: 300px;width: 300px"></textarea>
                 <label for="floatingTextarea2">Comments</label>
             </div>
-            <button class="w-100 btn btn-lg btn-primary my-3" name="submit" type="submit">Enviar</button>
+            <button class="w-100 btn btn-lg btn-primary my-3" disabled name="submit" type="submit">Enviar</button>
         </form>
     </main>
 </div>
-<div id="formulario" class="container d-none d-sm-block d-md-block d-lg-block d-xl-block d-xxl-block">
+<div id="formulario" class="container d-none d-sm-block">
     <form class="m-auto w-75" method="post" action="contacto/process">
         <img class="mb-4" src="../../dashboard/img/logo.png" alt="" width="72" height="72">
         <h1 class="h3 mb-3 fw-normal">Contacta con nosotros</h1>
         <div class="form-floating mb-3 col-12">
-            <input type="email" class="form-control" name="email" id="floatingInput" placeholder="name@example.com">
+            <input type="email" class="form-control" onkeydown="verifyEmail(this)" name="email" id="floatingInput"
+                   placeholder="name@example.com">
             <label for="floatingInput">E-mail</label>
         </div>
         <div class="form-floating col-12 mb-3">
-            <input type="text" class="form-control" name="nombre" id="floatingPassword" placeholder="Password">
+            <input type="text" class="form-control" onkeydown="verifyName(this)" name="nombre" id="floatingPassword"
+                   placeholder="Password">
             <label for="floatingPassword">Name</label>
         </div>
         <div id="comments" class="form-floating mb-3 col-12">
@@ -101,8 +117,104 @@
                       id="floatingTextarea"></textarea>
             <label for="floatingTextarea">Comments</label>
         </div>
-        <button class="w-100 btn btn-lg btn-primary my-3" name="submit" type="submit">Enviar</button>
+        <button id="registro" class="w-100 btn btn-lg btn-primary my-3" disabled name="submit" type="submit">Enviar
+        </button>
     </form>
 </div>
+<script>
+    function verifyEmail(input) {
+        if (input.value === "") {
+            input.classList.add("is-invalid");
+        } else {
+            let regex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+            if (regex.test(input.value)) {
+                input.classList.remove("is-invalid");
+                input.classList.add("is-valid");
+            } else {
+                input.classList.add("is-invalid");
+            }
+        }
+    }
+
+    function verifyName(input) {
+        if (input.value === "") {
+            input.classList.add("is-invalid");
+        } else {
+            let regex = /^[A-ZÁÉÍÓÚ][a-záéíóú]+$/;
+            if (regex.test(input.value)) {
+                input.classList.remove("is-invalid");
+                input.classList.add("is-valid");
+            } else {
+                input.classList.add("is-invalid");
+            }
+        }
+    }
+
+
+    setInterval(function () {
+        let inputs = document.getElementsByTagName("input");
+        for (let i = 1; i < inputs.length; i++) {
+            if (inputs[i].classList.contains("is-invalid") || !inputs[i].classList.contains("is-valid")) {
+                return;
+            }
+        }
+        document.getElementById("registro").removeAttribute("disabled");
+    }, 1);
+
+
+    var cantidad = 4;
+    var urlBase = "http://localhost/web/backend/index.php/";
+    var id;
+
+    function getMaxId() {
+        let accion = "categories/id";
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                id = Number.parseInt(this.response);
+            }
+        }
+        xhttp.open("POST", urlBase + accion, true);
+        xhttp.send();
+    }
+
+    getMaxId();
+
+    function cargar() {
+        let accion = "categoorias";
+        cantidad += 4;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                let categorias = JSON.parse(this.response);
+                let lista = document.getElementById("cats");
+                lista.innerHTML = "";
+                let valores = Object.values(categorias);
+                for (let i = 0; i < valores.length; i++) {
+                    let ul = document.createElement("li");
+                    let a = document.createElement("a");
+                    a.classList.add("dropdown-item");
+                    a.href = "#";
+                    a.innerText = valores[i];
+                    ul.appendChild(a);
+                    lista.appendChild(ul);
+                }
+                if (valores.length < id) {
+                    let li = document.createElement("li");
+                    let boton = document.createElement("button");
+                    boton.classList.add("dropdown-item");
+                    boton.onclick = cargar;
+                    boton.innerHTML = ".&nbsp;.&nbsp;.";
+                    li.appendChild(boton);
+                    lista.appendChild(li);
+                }
+            }
+        }
+        var params = "cantidad=" + cantidad;
+        xhttp.open("POST", urlBase + accion, true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(params);
+    }
+</script>
 </body>
 </html>

@@ -63,7 +63,7 @@
             </div>";
             } else {
                 echo "<a href='home/login' class='btn btn-primary'>Iniciar sesión</a>";
-                echo "&nbsp;<a href='home/login' class='btn btn-light'>Registrarse</a>";
+                echo "&nbsp;<a href='home/registro' class='btn btn-light'>Registrarse</a>";
             } ?>
         </div>
     </div>
@@ -212,21 +212,19 @@
         <img src="../dashboard/img/double-tail-spin.svg"/>
     </div>
     <div data-u="slides" class="slides">
-        <div class="slide">
-            <img data-u="image" src="../dashboard/img/px-action-athlete-athletes-848618-image.jpg"/>
-        </div>
-        <div>
-            <img data-u="image" src="../dashboard/img/px-beach-daylight-fun-1430675-image.jpg"/>
-        </div>
-        <div>
-            <img data-u="image" src="../dashboard/img/px-fun-man-person-2361598-image.jpg"/>
-        </div>
-        <div class="slide">
-            <img data-u="image" src="../dashboard/img/faded-monaco-scenery-evening-dark-picjumbo-com-image.jpg"/>
-        </div>
-        <div>
-            <img data-u="image" src="../dashboard/img/px-bloom-blossom-flora-65219-image.jpg"/>
-        </div>
+            <?php
+            for ($i = 0; $i <count($productos);$i++) {
+                if($i==0) {
+                    echo '<div class="slide">';
+                   echo '<img data-u="image" src="'.$productos[$i]->getImagen1().'"/>';
+                   echo '</div>';
+                } else {
+                    echo "<div>";
+                    echo '<img data-u="image" src="'.$productos[$i]->getImagen1().'"/>';
+                    echo "</div>";
+                }
+            }
+            ?>
     </div>
     <!-- Bullet Navigator -->
     <div data-u="navigator" class="jssorb031" data-autocenter="1"

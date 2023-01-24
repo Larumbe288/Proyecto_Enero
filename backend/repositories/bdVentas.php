@@ -2,11 +2,11 @@
 
 class bdVentas
 {
-    function create($idusr, $idprod, $cantidad)
+    function create($idusr, $idprod)
     {
         $db = Conexion::acceso();
         try {
-            $sql = "insert into compras(Id_Compra,Id_Usuario,Cantidad) values($idusr,$idprod,$cantidad)";
+            $sql = "insert into compras(Id_Compra,Id_Usuario) values($idusr,$idprod)";
             $resultado = $db->query($sql);
             if (!$resultado) {
                 echo $db->errorInfo();
@@ -18,7 +18,7 @@ class bdVentas
         }
     }
 
-    function read($campo,$principio, $final)
+    function read($campo, $principio, $final)
     {
         $arrayVentas = [];
         $db = Conexion::acceso();
@@ -26,7 +26,7 @@ class bdVentas
             $sql = "select * from compras order by $campo asc limit $principio,$final";
             $resultado = $db->query($sql);
             foreach ($resultado as $v) {
-                $v = new compra((int)$v['Id_Compra'], (int)$v['Id_Usuario'], (int)$v['Id_Producto'], (int)$v['Cantidad'], $v['Fecha']);
+                $v = new compra((int)$v['Id_Compra'], (int)$v['Id_Usuario'], (int)$v['Id_Producto'], $v['Fecha']);
                 array_push($arrayVentas, $v);
             }
             return json_encode($arrayVentas);
@@ -36,6 +36,7 @@ class bdVentas
             $db = null;
         }
     }
+
     public function getById(int $id)
     {
         $db = Conexion::acceso();
@@ -43,7 +44,7 @@ class bdVentas
             $sql = "select * from compras where Id_Compra=$id";
             $compra = $db->query($sql);
             $v = $compra->fetch();
-            return new compra((int)$v['Id_Compra'], (int)$v['Id_Usuario'], (int)$v['Id_Producto'], (int)$v['Cantidad'], $v['Fecha']);
+            return new compra((int)$v['Id_Compra'], (int)$v['Id_Usuario'], (int)$v['Id_Producto'], $v['Fecha']);
         } catch (\PDOException $e) {
             echo "Error: " . $e->getMessage();
         } finally {
@@ -51,9 +52,10 @@ class bdVentas
         }
     }
 
-    public function update(int $id,$array) {
+    public function update(int $id, $array)
+    {
         $venta = $this->getById($id);
-        $arrayAtributos = ["IdUsuario", "IdProducto", "Cantidad"];
+        $arrayAtributos = ["IdUsuario", "IdProducto"];
         foreach ($arrayAtributos as $atr) {
             if (isset($array[$atr]) && !empty($array[$atr])) {
                 $metodo = "set" . $atr;
@@ -62,7 +64,7 @@ class bdVentas
         }
         $db = Conexion::acceso();
         try {
-            $sql = "update compras set Id_Usuario='" . $venta->getIdusuario() . "',Id_Producto='" . $venta->getIdProducto() . "',Cantidad='" . $venta->getCantidad() . "' where Id_Categoria=$id";
+            $sql = "update compras set Id_Usuario='" . $venta->getIdusuario() . "',Id_Producto='" . $venta->getIdProducto() . "' where Id_Categoria=$id";
             $result = $db->query($sql);
             if (!$result) {
                 echo $db->errorInfo();

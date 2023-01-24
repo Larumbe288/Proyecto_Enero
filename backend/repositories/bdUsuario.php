@@ -15,6 +15,7 @@ class bdUsuario
             $db = null;
         }
     }
+
     function loginHome($user, $password)
     {
         $db = Conexion::acceso();
@@ -29,11 +30,11 @@ class bdUsuario
         }
     }
 
-    function create($user, $password, $nombre, $telefono, float $dinero, $rol)
+    function create($user, $password, $nombre, $telefono, $rol)
     {
         $db = Conexion::acceso();
         try {
-            $sql = "insert into usuario(Correo,Nombre,Telefono,Christokens,Password,Rol) values ('$user', '$nombre','$telefono',$dinero,'$password','$rol')";
+            $sql = "insert into usuario(Correo,Nombre,Telefono,Christokens,Password,Rol) values ('$user', '$nombre','$telefono',100,'$password','$rol')";
             $resultado = $db->query($sql);
             if (!$resultado) {
                 echo "Error: " . $db->errorInfo();
@@ -45,7 +46,7 @@ class bdUsuario
         }
     }
 
-    function read($campo,$principio, $final)
+    function read($campo, $principio, $final)
     {
         $arrayUsuarios = [];
         $db = Conexion::acceso();
@@ -78,6 +79,22 @@ class bdUsuario
             echo "Error: " . $e->getMessage();
         } finally {
             $db = null;
+        }
+    }
+
+    function getIdByCorreo($correo) {
+        $db = Conexion::acceso();
+        try {
+            $sql = "select Id_Usuario as 'idusr' from usuario where Correo=$correo";
+            $res = $db->query($sql);
+            $result = $res->fetch();
+            if($result) {
+                return (int) $res["idusr"];
+            }
+        } catch(\PDOException $e) {
+        echo "Error: ".$e->getMessage();
+        } finally {
+        $db=null;
         }
     }
 
@@ -157,6 +174,7 @@ class bdUsuario
         }
 
     }
+
     public function maxId()
     {
         $db = Conexion::acceso();

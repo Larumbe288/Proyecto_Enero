@@ -174,17 +174,28 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && !isset($array_ruta[1])) {
     $info = $controller->categorias();
     $cant = $controller->idCat();
-    $controller->homePage($info,$cant);
-}else if (isset($array_ruta[0]) && $array_ruta[0] == "categoorias" && !isset($array_ruta[1])) {
+    if (isset($_SESSION["loginU"]) && isset($_SESSION["idUser"])) {
+        $productos = $controller->getProductosComentarios((int)$_SESSION["idUser"]);
+    } else {
+        $productos = $controller->getProductosComprados();
+    }
+    $controller->homePage($info, $cant, $productos);
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "categoorias" && !isset($array_ruta[1])) {
     echo $controller->categoriasJSON();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "login" && !isset($array_ruta[2])) {
     $controller->loginHome();
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "registro" && !isset($array_ruta[2])) {
+    $controller->registro();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "logout" && !isset($array_ruta[2])) {
     $controller->logoutHome();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "contacto" && !isset($array_ruta[2])) {
-    $controller->contacto();
+    $info = $controller->categorias();
+    $cant = $controller->idCat();
+    $controller->contacto($info, $cant);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "contacto" && isset($array_ruta[2]) && $array_ruta[2] == "process") {
     $controller->processContacto();
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "registro" && isset($array_ruta[2]) && $array_ruta[2] == "process") {
+    $controller->processRegistro();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "login" && isset($array_ruta[2]) && $array_ruta[2] == "process") {
     $controller->processLoginHome();
 } else {

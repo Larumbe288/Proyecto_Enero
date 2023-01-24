@@ -106,8 +106,8 @@ class controller
 
     public function categorias()
     {
-        if(isset($_POST["cantidad"])) {
-            $cantidad = (int) $_POST["cantidad"];
+        if (isset($_POST["cantidad"])) {
+            $cantidad = (int)$_POST["cantidad"];
         } else {
             $cantidad = 4;
         }
@@ -118,18 +118,20 @@ class controller
     public function categoriasJSON()
     {
         $dbObjeto = new bdObjeto();
-        if(isset($_POST["cantidad"])) {
-            $cantidad = (int) $_POST["cantidad"];
+        if (isset($_POST["cantidad"])) {
+            $cantidad = (int)$_POST["cantidad"];
         } else {
             $cantidad = 4;
         }
         return $dbObjeto->getCategoriasJSON($cantidad);
-}
+    }
+
     public function categorias2()
     {
         $dbObjecto = new bdObjeto();
         return $dbObjecto->getCategorias2();
-}
+    }
+
     public function idProd()
     {
         $db = new bdObjeto();
@@ -482,7 +484,7 @@ class controller
         header("Location: ../admin/users");
     }
 
-    public function homePage($info,$booleano)
+    public function homePage($info, $booleano, $productos)
     {
         require "view/home.php";
     }
@@ -525,8 +527,9 @@ class controller
                         $password = sha1($_POST["password"]);
                         $dbUser = new bdUsuario();
                         unset($_SESSION["error"]);
-                        $_SESSION["loginU"] = true;
                         $dbUser->loginHome($user, $password);
+                        $_SESSION["loginU"] = true;
+                        $_SESSION["idUser"]= $dbUser->getIdByCorreo($user);
                         header("Location: ../../home");
                     } else {
                         $_SESSION["error"] = "El usuario y/o la contraseña son incorrectos";
@@ -535,6 +538,50 @@ class controller
                 }
             }
         }
+    }
+
+    public function processRegistro()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_POST["submit"])) {
+                if (isset($_POST["user"]) && !empty($_POST["user"]) && preg_match("/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/", $_POST["user"]) && isset($_POST["password"]) && !empty($_POST["password"]) && preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/", $_POST["password"]) && isset($_POST["nombre"]) && !empty($_POST["nombre"]) && preg_match("/^[A-ZÁÉÍÓÚ][a-záéíóú]+$/", $_POST["nombre"]) && isset($_POST["tel"]) && !empty($_POST["tel"]) && preg_match("/^\d{9}$/", $_POST["tel"])) {
+                    $correo = $_POST["user"];
+                    $password = $_POST["password"];
+                    $nombre = $_POST["nombre"];
+                    $tel = $_POST["tel"];
+                    $dbUsuario = new bdUsuario();
+                    $dbUsuario->create($correo, $password, $nombre, $tel, "usuario");
+                    $_SESSION["loginU"] = true;
+                    $_SESSION["idUser"]= $dbUsuario->getIdByCorreo($correo);
+                    header("Location: ../../home");
+                } else {
+                    $_SESSION["errorR"] = "El usuario introducido ya existe";
+                    header("Location: ../registro");
+                }
+            }
+        }
+    }
+
+    public function getProductosComprados()
+    {
+        $dbObjeto = new bdObjeto();
+        return $dbObjeto->productosMasVendidos();
+    }
+
+    public function getProductosComentarios(int $id)
+    {
+        $dbObjeto = new bdObjeto();
+        return $dbObjeto->productosComentados($id);
+    }
+
+    public function registro()
+    {
+        require "view/registro.php";
+    }
+
+    public function processBuscador()
+    {
+
     }
 
     public function processContacto()
@@ -553,7 +600,7 @@ class controller
         }
     }
 
-    public function contacto()
+    public function contacto($info, $booleano)
     {
         require "view/contacto.php";
     }
@@ -568,6 +615,6 @@ class controller
     public
     function error()
     {
-        require "view/error404.php";
+        require "view/productos.php";
     }
 }

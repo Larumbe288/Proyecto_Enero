@@ -8,9 +8,11 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../view/sign-in.css">
 </head>
-
 <body>
 <header class="p-3 mb-3 border-bottom">
     <div class="container">
@@ -21,7 +23,8 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="../home" class="nav-link px-2 link-dark">Home</a></li>
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="outline: none">
+                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                            style="outline: none">
                         Categorías
                     </button>
                     <ul class="dropdown-menu">
@@ -36,45 +39,42 @@
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                 <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
             </form>
-            <?php if (isset($_SESSION["login"])) {
-                echo "<div class='dropdown text-end'>
-                <a href='#' class='d-block link-dark text-decoration-none dropdown-toggle' data-bs-toggle='dropdown'
-                   aria-expanded='false'>
-                    <img src='https://github.com/mdo.png' alt='mdo' width='32' height='32' class='rounded-circle'>
-                </a>
-                <ul id='perfil' class='dropdown-menu text-small'>
-                    <li><a class='dropdown-item' href='#'>Profile</a></li>
-                    <li>
-                        <hr class='dropdown-divider'>
-                    </li>
-                    <li><a class='dropdown-item' href='home/logout'>Sign out</a></li>
-                </ul>
-            </div>";
-            } else {
-                echo "<a href='../home/registro' class='btn btn-light'>Registrarse</a>";
-            } ?>
+            <a href='../home/login' class='btn btn-primary'>Iniciar sesión</a>
         </div>
     </div>
 </header>
 <div id="formulario" class="text-center">
     <main class="form-signin w-100 m-auto">
-        <form method="post" action="login/process">
+        <form method="post" action="registro/process">
             <img class="mb-4" src="../../dashboard/img/logo.png" alt="" width="72" height="72">
-            <h1 class="h3 mb-3 fw-normal">Iniciar sesión</h1>
+            <h1 class="h3 mb-3 fw-normal">Registro</h1>
 
             <div class="form-floating mb-3">
-                <input type="email" class="form-control" onkeydown="verifyEmail(this)" name="user" id="floatingInput" placeholder="name@example.com">
+                <input type="email" class="form-control" onkeydown="verifyEmail(this)" name="user" id="floatingInput"
+                       placeholder="name@example.com">
                 <label for="floatingInput">Correo electrónico</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="password" class="form-control" onkeydown="verifyPassword(this)" name="password" id="floatingPassword"
+                <input type="password" class="form-control" onkeydown="verifyPassword(this)" name="password"
+                       id="floatingPassword"
                        placeholder="Password">
                 <label for="floatingPassword">Contraseña</label>
             </div>
-
-            <button id="registro" class="w-100 btn btn-lg btn-primary my-3" disabled name="submit" type="submit">Sign in</button>
-            <?php if (isset($_SESSION["error"])) {
-                echo "<div class='alert alert-danger' role='alert'>" . $_SESSION["error"] . "
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" onkeydown="verifyName(this)" name="nombre" id="floatingInput"
+                       placeholder="name@example.com">
+                <label for="floatingInput">Nombre</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="tel" class="form-control" onblur="verifyPhone(this)" name="tel" id="floatingInput"
+                       placeholder="name@example.com">
+                <label for="floatingInput">Teléfono</label>
+            </div>
+            <button id="registro" class="w-100 btn btn-lg btn-primary my-3" name="submit" type="submit" disabled>
+                Registro
+            </button>
+            <?php if (isset($_SESSION["errorR"])) {
+                echo "<div class='alert alert-danger' role='alert'>" . $_SESSION["errorR"] . "
 </div>";
             } ?>
         </form>
@@ -94,6 +94,7 @@
             }
         }
     }
+
     function verifyPassword(input) {
         if (input.value === "") {
             input.classList.add("is-invalid");
@@ -107,6 +108,36 @@
             }
         }
     }
+
+    function verifyName(input) {
+        if (input.value === "") {
+            input.classList.add("is-invalid");
+        } else {
+            let regex = /^[A-ZÁÉÍÓÚ][a-záéíóú]+$/;
+            if (regex.test(input.value)) {
+                input.classList.remove("is-invalid");
+                input.classList.add("is-valid");
+            } else {
+                input.classList.add("is-invalid");
+            }
+        }
+
+    }
+
+    function verifyPhone(input) {
+        if (input.value === "") {
+            input.classList.add("is-invalid");
+        } else {
+            let regex = /^\d{9}$/;
+            if (regex.test(input.value)) {
+                input.classList.remove("is-invalid");
+                input.classList.add("is-valid");
+            } else {
+                input.classList.add("is-invalid");
+            }
+        }
+    }
+
     setInterval(function () {
         let inputs = document.getElementsByTagName("input");
         for (let i = 1; i < inputs.length; i++) {
