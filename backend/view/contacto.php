@@ -24,22 +24,11 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="../home" class="nav-link px-2 link-dark">Home</a></li>
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                            style="outline: none">
-                        Categorías
-                    </button>
-                    <ul id="cats" class="dropdown-menu">
-                        <?php
-                        for ($i = 1; $i < count($info) + 1; $i++) {
-                            if (isset($info[$i][0])) {
-                                echo '<li><a class="dropdown-item" href="#">' . $info[$i][0] . '</a></li>';
-                            }
-
-                        }
-                        if (count($info) < $booleano) {
-                            echo '<li><button class="dropdown-item" onclick="cargar()">.&nbsp;.&nbsp;.</button></li>';
-                        };
-                        ?>
+                    <li><a href="#" class="nav-link px-2 link-dark">Categorías</a></li>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Deportes imposibles</a></li>
+                        <li><a class="dropdown-item" href="#">Placeres gastronómicos digitales</a></li>
+                        <li><a class="dropdown-item" href="#">Viajes virtuales</a></li>
                     </ul>
                 </div>
                 <li><a href="../home/contacto" class="nav-link px-2 link-dark">Contacto</a></li>
@@ -48,8 +37,7 @@
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                 <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
             </form>
-            <?php
-            if (isset($_SESSION["loginU"])) {
+            <?php if (isset($_SESSION["login"])) {
                 echo "<div class='dropdown text-end'>
                 <a href='#' class='d-block link-dark text-decoration-none dropdown-toggle' data-bs-toggle='dropdown'
                    aria-expanded='false'>
@@ -64,10 +52,9 @@
                 </ul>
             </div>";
             } else {
-                echo "<a href='../home/login' class='btn btn-primary'>Iniciar sesión</a>";
-                echo "&nbsp;<a href='../home/registro' class='btn btn-light'>Registrarse</a>";
-            }
-            ?>
+                echo "<a href='../home/login' class='btn btn-primary'>Iniciar sesión</a>&nbsp;&nbsp;";
+                echo "<a href='../home/registro' class='btn btn-light'>Registrarse</a>";
+            } ?>
         </div>
     </div>
 </header>

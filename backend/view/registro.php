@@ -23,10 +23,7 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="../home" class="nav-link px-2 link-dark">Home</a></li>
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                            style="outline: none">
-                        Categorías
-                    </button>
+                    <li><a href="#" class="nav-link px-2 link-dark">Categorías</a></li>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Deportes imposibles</a></li>
                         <li><a class="dropdown-item" href="#">Placeres gastronómicos digitales</a></li>
@@ -39,7 +36,23 @@
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                 <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
             </form>
-            <a href='../home/login' class='btn btn-primary'>Iniciar sesión</a>
+            <?php if (isset($_SESSION["login"])) {
+                echo "<div class='dropdown text-end'>
+                <a href='#' class='d-block link-dark text-decoration-none dropdown-toggle' data-bs-toggle='dropdown'
+                   aria-expanded='false'>
+                    <img src='https://github.com/mdo.png' alt='mdo' width='32' height='32' class='rounded-circle'>
+                </a>
+                <ul id='perfil' class='dropdown-menu text-small'>
+                    <li><a class='dropdown-item' href='#'>Profile</a></li>
+                    <li>
+                        <hr class='dropdown-divider'>
+                    </li>
+                    <li><a class='dropdown-item' href='home/logout'>Sign out</a></li>
+                </ul>
+            </div>";
+            } else {
+                echo "<a href='../home/login' class='btn btn-primary'>Iniciar sesión</a>";
+            } ?>
         </div>
     </div>
 </header>

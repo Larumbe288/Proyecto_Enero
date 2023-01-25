@@ -190,7 +190,6 @@ class bdObjeto
     {
         $db = Conexion::acceso();
         $arrayCat = [];
-        $dbCategoria = new bdCategoria();
         try {
             $sql = "SELECT Id_Categoria,Nombre from categoria";
             $result = $db->query($sql);

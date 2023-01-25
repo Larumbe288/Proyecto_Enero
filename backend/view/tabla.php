@@ -58,6 +58,7 @@
         </div>
     </div>
 </div>
+<div id="modales"></div>
 <script>
     var inicio = 0;
     var id;
@@ -66,7 +67,7 @@
     var urlBase = "http://localhost/web/backend/index.php/";
     window.onload = function () {
         getMaxId();
-        getCategorias();
+        getCategorias,1000;
         let th = document.getElementsByClassName("colun");
         campo = th[0].innerText;
         cargarDatos(campo);
@@ -183,7 +184,7 @@
         content.appendChild(footer);
         dialog.appendChild(content);
         div.appendChild(dialog);
-        document.body.appendChild(div);
+        document.getElementById("modales").appendChild(div);
     }
 
     function cargarDatos(campo) {
@@ -193,18 +194,22 @@
             if (this.readyState === 4 && this.status === 200) {
                 let productos = JSON.parse(this.response);
                 console.log(productos);
+                if(categorias===undefined || categorias === null) {
+                    getCategorias();
+                }
                 let tabla = document.getElementById("listado");
+                document.getElementById("modales").innerHTML="";
                 for (let i = 0; i < productos.length; i++) {
                     let tr = document.createElement("tr");
                     let valores = Object.values(productos[i]);
                     tr.setAttribute("data-id", valores[0]);
                     for (let j = 0; j < valores.length; j++) {
                         let td = document.createElement("td");
-                        if (j === valores.length - 1 && accion === "products") {
-                            td.innerText = categorias[valores[j]][0];
-                        } else {
+                        // if (j === valores.length - 1 && accion === "products") {
+                        //     td.innerText = categorias[valores[j]][0];
+                        // } else {
                             td.innerHTML = valores[j];
-                        }
+                        // }
                         tr.appendChild(td);
                     }
                     let arrayTabla = ["categories", "products", "users"];
