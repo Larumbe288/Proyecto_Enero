@@ -2,18 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14e6a985-c25c-4205-bd50-939e6cf245b2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/view/productos.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/view/registro.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/controller/controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controller/controller.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/model/compra.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/model/compra.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/model/objeto.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/model/objeto.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/repositories/bdObjeto.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/repositories/bdObjeto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/repositories/bdUsuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/repositories/bdUsuario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/repositories/bdVentas.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/repositories/bdVentas.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/view/contacto.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/contacto.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/view/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/view/loginHome.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/loginHome.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/view/productos.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/productos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/view/tabla.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/tabla.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +77,8 @@
       <workItem from="1674375988051" duration="17960000" />
       <workItem from="1674486729830" duration="16141000" />
       <workItem from="1674504274801" duration="2388000" />
-      <workItem from="1674573124376" duration="14200000" />
+      <workItem from="1674573124376" duration="14244000" />
+      <workItem from="1674659200091" duration="8875000" />
     </task>
     <servers />
   </component>

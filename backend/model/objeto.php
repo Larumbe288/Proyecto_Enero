@@ -5,6 +5,7 @@ class objeto
     public int $id;
     public string $nombre;
     public float $precio;
+    public string $descripcion;
     public string $imagen1;
     public string $imagen2;
     public string $imagen3;
@@ -16,6 +17,7 @@ class objeto
      * @param int $id
      * @param string $nombre
      * @param float $precio
+     * @param string $descripcion
      * @param string $imagen1
      * @param string $imagen2
      * @param string $imagen3
@@ -23,11 +25,12 @@ class objeto
      * @param float $longitud
      * @param int $idCategoria
      */
-    public function __construct(int $id, string $nombre, float $precio, string $imagen1, string $imagen2 = null, string $imagen3 = null, float $latitud = null, float $longitud = null, int $idCategoria)
+    public function __construct(int $id, string $nombre, float $precio, string $descripcion, string $imagen1, string $imagen2 = null, string $imagen3 = null, float $latitud = null, float $longitud = null, int $idCategoria)
     {
         $this->id = $id;
         $this->nombre = $nombre;
         $this->precio = $precio;
+        $this->descripcion = $descripcion;
         $this->imagen1 = $imagen1;
         $this->imagen2 = $imagen2 ?? '';
         $this->imagen3 = $imagen3 ?? '';

@@ -67,7 +67,7 @@
     var urlBase = "http://localhost/web/backend/index.php/";
     window.onload = function () {
         getMaxId();
-        getCategorias,1000;
+        getCategorias();
         let th = document.getElementsByClassName("colun");
         campo = th[0].innerText;
         cargarDatos(campo);

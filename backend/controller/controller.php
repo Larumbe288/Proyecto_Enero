@@ -581,7 +581,18 @@ class controller
 
     public function processBuscador()
     {
-
+        $dbObjeto = new bdObjeto();
+        if(isset($_POST["buscar"])) {
+            $texto = $_POST["buscar"];
+        } else {
+            $texto = '';
+        }
+        if(isset($_POST["inicio"])) {
+            $principio = (int) $_POST["inicio"];
+        } else {
+            $principio=0;
+        }
+        return $dbObjeto->buscador($texto,$principio);
     }
 
     public function processContacto()
@@ -615,6 +626,6 @@ class controller
     public
     function error()
     {
-        require "view/productos.php";
+//        require "view/productos.php";
     }
 }

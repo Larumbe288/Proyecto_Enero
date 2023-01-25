@@ -11,17 +11,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../view/home.css">
+    <link rel="stylesheet" href="../../view/home.css">
 </head>
 <body>
 <header class="p-3 mb-3 border-bottom">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a href="home" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-                <img src="../dashboard/img/logo.png" class="bi me-2" width="40" height="40">
+            <a href="../home" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                <img src="../../dashboard/img/logo.png" class="bi me-2" width="40" height="40">
             </a>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="home" class="nav-link px-2 link-dark">Home</a></li>
+                <li><a href="../home" class="nav-link px-2 link-dark">Home</a></li>
                 <div class="dropdown">
                     <li><a href="#" class="nav-link px-2 link-dark">Categorías</a></li>
                     <ul class="dropdown-menu">
@@ -51,159 +51,185 @@
                 </ul>
             </div>";
             } else {
-                echo "<a href='home/login' class='btn btn-primary'>Iniciar sesión</a>&nbsp;&nbsp;";
-                echo "<a href='home/registro' class='btn btn-light'>Registrarse</a>";
+                echo "<a href='../home/login' class='btn btn-primary'>Iniciar sesión</a>&nbsp;&nbsp;";
+                echo "<a href='../home/registro' class='btn btn-light'>Registrarse</a>";
             } ?>
         </div>
     </div>
 </header>
 <div class="container mt-5 mb-5">
     <div class="d-flex justify-content-center row">
-        <div class="col-md-10">
-            <div class="row p-2 bg-white border rounded">
-                <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"
-                                                src="../dashboard/img/cascos.jpg" width="300" height="300"></div>
-                <div class="col-md-6 mt-1">
-                    <h5>Quant olap shirts</h5>
-                    <div class="d-flex flex-row">
-                        <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                    class="fa fa-star"></i><i class="fa fa-star"></i></div>
-                        <span>310</span>
-                    </div>
-                    <div class="mt-1 mb-1 spec-1"><span>100% cotton</span><span
-                                class="dot"></span><span>Light weight</span><span
-                                class="dot"></span><span>Best finish<br></span></div>
-                    <div class="mt-1 mb-1 spec-1"><span>Unique design</span><span
-                                class="dot"></span><span>For men</span><span class="dot"></span><span>Casual<br></span>
-                    </div>
-                    <p class="text-justify text-truncate para mb-0">There are many variations of passages of Lorem Ipsum
-                        available, but the majority have suffered alteration in some form, by injected humour, or
-                        randomised words which don't look even slightly believable.</p>
-                    <div class="d-flex flex-column mt-4">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Comprar
-                        </button>
-
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                             data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <strong>This is the third item's accordion body.</strong> It is hidden by default, until
-                                the collapse
-                                plugin adds the appropriate classes that we use to style each element. These classes
-                                control the overall
-                                appearance, as well as the showing and hiding via CSS transitions. You can modify any of
-                                this with
-                                custom CSS or overriding our default variables. It's also worth noting that just about
-                                any HTML can go
-                                within the <code>.accordion-body</code>, though the transition does limit overflow.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                    <div class="d-flex flex-row align-items-center">
-                        <h4 class="mr-1">$13.99</h4>
-                    </div>
-
-                </div>
-            </div>
-            <div class="row p-2 bg-white border rounded mt-2">
-                <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"
-                                                src="https://i.imgur.com/JvPeqEF.jpg"></div>
-                <div class="col-md-6 mt-1">
-                    <h5>Quant trident shirts</h5>
-                    <div class="d-flex flex-row">
-                        <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                    class="fa fa-star"></i><i class="fa fa-star"></i></div>
-                        <span>310</span>
-                    </div>
-                    <div class="mt-1 mb-1 spec-1"><span>100% cotton</span><span
-                                class="dot"></span><span>Light weight</span><span
-                                class="dot"></span><span>Best finish<br></span></div>
-                    <div class="mt-1 mb-1 spec-1"><span>Unique design</span><span
-                                class="dot"></span><span>For men</span><span
-                                class="dot"></span><span>Casual<br></span></div>
-                    <p class="text-justify text-truncate para mb-0">There are many variations of passages of Lorem
-                        Ipsum available, but the majority have suffered alteration in some form, by injected humour,
-                        or randomised words which don't look even slightly believable.<br><br></p>
-                </div>
-                <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                    <div class="d-flex flex-row align-items-center">
-                        <h4 class="mr-1">$14.99</h4><span class="strike-text">$20.99</span>
-                    </div>
-                    <h6 class="text-success">Free shipping</h6>
-                    <div class="d-flex flex-column mt-4">
-                        <button class="btn btn-primary btn-sm" type="button">Details</button>
-                        <button class="btn btn-outline-primary btn-sm mt-2" type="button">Add to wishlist</button>
-                    </div>
-                </div>
-            </div>
-            <div class="row p-2 bg-white border rounded mt-2">
-                <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"
-                                                src="https://i.imgur.com/Bf4dIaN.jpg"></div>
-                <div class="col-md-6 mt-1">
-                    <h5>Quant ruybi shirts</h5>
-                    <div class="d-flex flex-row">
-                        <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                    class="fa fa-star"></i><i class="fa fa-star"></i></div>
-                        <span>123</span>
-                    </div>
-                    <div class="mt-1 mb-1 spec-1"><span>100% cotton</span><span
-                                class="dot"></span><span>Light weight</span><span
-                                class="dot"></span><span>Best finish<br></span></div>
-                    <div class="mt-1 mb-1 spec-1"><span>Unique design</span><span
-                                class="dot"></span><span>For men</span><span
-                                class="dot"></span><span>Casual<br></span></div>
-                    <p class="text-justify text-truncate para mb-0">There are many variations of passages of Lorem
-                        Ipsum available, but the majority have suffered alteration in some form, by injected humour,
-                        or randomised words which don't look even slightly believable.<br><br></p>
-                </div>
-                <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                    <div class="d-flex flex-row align-items-center">
-                        <h4 class="mr-1">$13.99</h4><span class="strike-text">$20.99</span>
-                    </div>
-                    <h6 class="text-success">Free shipping</h6>
-                    <div class="d-flex flex-column mt-4">
-                        <button class="btn btn-primary btn-sm" type="button">Details</button>
-                        <button class="btn btn-outline-primary btn-sm mt-2" type="button">Add to wishlist</button>
-                    </div>
-                </div>
-            </div>
-            <div class="row p-2 bg-white border rounded mt-2">
-                <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"
-                                                src="https://i.imgur.com/HO8e9b8.jpg"></div>
-                <div class="col-md-6 mt-1">
-                    <h5>Quant tinor shirts</h5>
-                    <div class="d-flex flex-row">
-                        <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                    class="fa fa-star"></i><i class="fa fa-star"></i></div>
-                        <span>110</span>
-                    </div>
-                    <div class="mt-1 mb-1 spec-1"><span>100% cotton</span><span
-                                class="dot"></span><span>Light weight</span><span
-                                class="dot"></span><span>Best finish<br></span></div>
-                    <div class="mt-1 mb-1 spec-1"><span>Unique design</span><span
-                                class="dot"></span><span>For men</span><span
-                                class="dot"></span><span>Casual<br></span></div>
-                    <p class="text-justify text-truncate para mb-0">There are many variations of passages of Lorem
-                        Ipsum available, but the majority have suffered alteration in some form, by injected humour,
-                        or randomised words which don't look even slightly believable.<br><br></p>
-                </div>
-                <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                    <div class="d-flex flex-row align-items-center">
-                        <h4 class="mr-1">$15.99</h4><span class="strike-text">$21.99</span>
-                    </div>
-                    <h6 class="text-success">Free shipping</h6>
-                    <div class="d-flex flex-column mt-4">
-                        <button class="btn btn-primary btn-sm" type="button">Details</button>
-                        <button class="btn btn-outline-primary btn-sm mt-2" type="button">Add to wishlist</button>
-                    </div>
-                </div>
-            </div>
+        <div id="listado" class="col-md-10">
+        </div>
+        <div class="my-3">
+            <button id="anterior" class="btn btn-primary btn-rounded" disabled onclick="anterior()">
+                Anterior
+            </button>
+            <button id="siguiente" class="btn btn-primary btn-rounded" onclick="siguiente()">
+                Siguiente
+            </button>
         </div>
     </div>
 
 </div>
+<script>
+    sessionStorage.setItem("buscar", "");
+    window.onload = function () {
+        getMaxId();
+        cargarDatos();
+        if (inicio >= id - 3) {
+            let boton = document.getElementById("siguiente");
+            boton.setAttribute("disabled", "");
+        }
+    }
+    var urlBase = "http://localhost/web/backend/index.php/";
+    var inicio = 0;
+    var id;
+    // createCard("https://www.consumoteca.com/wp-content/uploads/Enjuague-bucal-Gabriel-Manlake-Unsplash.png", "Enjuage Bucal", 350,
+    //     "Higiene Bucal  Dientes Blancos",
+    //     "Es un enjuage bucal que permite tener tus dientes limpios y con olor a frescura",
+    //     150.1267);
+    function getMaxId() {
+        let accion = "products/id";
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                id = Number.parseInt(this.response);
+            }
+        }
+        xhttp.open("POST", urlBase + accion, true);
+        xhttp.send();
+    }
+
+    function createCard(imagen, titulo, puntos, descripCat, descripObj, pasta,id) {
+        let listado = document.getElementById("listado");
+        let fondo = document.createElement("div");
+        fondo.classList.add("row", "p-2", "bg-white", "border", "rounded","mb-3");
+        let izqda = document.createElement("div");
+        izqda.classList.add("col-md-3", "mt-1");
+        let img = document.createElement("img");
+        img.classList.add("img-fluid", "img-responsive", "rounded", "product-image");
+        img.setAttribute("src", imagen);
+        izqda.appendChild(img);
+        let dcha = document.createElement("div");
+        dcha.classList.add("col-md-6", "mt-1");
+        let title = document.createElement("h5");
+        title.innerText = titulo;
+        dcha.appendChild(title);
+        let puntuacion = document.createElement("div");
+        puntuacion.classList.add("d-flex", "flex-row");
+        let span = document.createElement("span");
+        span.innerHTML = puntos + "&nbsp;";
+        puntuacion.appendChild(span);
+        let corazon = document.createElement("div");
+        corazon.classList.add("ratings", "mr-2");
+        corazon.innerText = "❤";
+        puntuacion.appendChild(corazon);
+        dcha.appendChild(puntuacion);
+        let descripcion = document.createElement("div");
+        descripcion.classList.add("mt-2", "mb-1", "spec-1");
+        let textoDesc = document.createElement("span");
+        textoDesc.innerText = descripCat;
+        descripcion.appendChild(textoDesc);
+        dcha.appendChild(descripcion);
+        let descripcionObj = document.createElement("p");
+        descripcionObj.classList.add("text-justify", "para", "mb-0");
+        descripcionObj.innerText = descripObj;
+        dcha.appendChild(descripcionObj);
+        let acordeon = document.createElement("div");
+        acordeon.classList.add("d-flex", "flex-column", "mt-4");
+        let boton = document.createElement("button");
+        boton.type = "button";
+        boton.classList.add("accordion-button", "collapsed");
+        boton.setAttribute("aria-expanded", "false");
+        boton.setAttribute("data-bs-toggle", "collapse");
+        boton.setAttribute("data-bs-target", "#collapseThree"+id);
+        boton.setAttribute("aria-controls", "collapseThree"+id);
+        boton.innerText = "Ver ficha producto";
+        acordeon.appendChild(boton);
+        let bodyAc = document.createElement("div");
+        bodyAc.classList.add("accordion-collapse", "collapse");
+        bodyAc.setAttribute("id", "collapseThree"+id);
+        bodyAc.setAttribute("aria-labelledby", "headingThree");
+        bodyAc.setAttribute("data-bs-parent", "#accordionExample");
+        let cuerpo = document.createElement("div");
+        cuerpo.classList.add("accordion-body");
+        let ficha = document.createElement("a");
+        ficha.classList.add("btn", "btn-primary", "my-5");
+        ficha.setAttribute("href", "#");
+        ficha.innerText = "Ver ficha de producto";
+        cuerpo.appendChild(ficha);
+        bodyAc.appendChild(cuerpo);
+        acordeon.appendChild(bodyAc);
+        dcha.appendChild(acordeon);
+        let precio = document.createElement("div");
+        precio.classList.add("align-items-center", "align-content-center", "col-md-3", "border-left", "mt-1");
+        let centrar = document.createElement("div");
+        centrar.classList.add("d-flex", "flex-row", "align-items-center");
+        let dinero = document.createElement("h4");
+        dinero.innerText = pasta + " Christokens";
+        centrar.appendChild(dinero);
+        precio.appendChild(centrar);
+        fondo.appendChild(izqda);
+        fondo.appendChild(dcha);
+        fondo.appendChild(precio);
+        listado.appendChild(fondo);
+    }
+
+    function cargarDatos() {
+        let accion = "prooductos";
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                let productos = JSON.parse(this.response);
+                for (let i = 0; i < productos.length; i++) {
+                    createCard(productos[i].imagen1,productos[i].nombre,325,"Descripcion Categoría IdCAt akldfja",productos[i].descripcion,productos[i].precio,productos[i].id);
+                }
+            }
+        }
+        var params = "buscar=" + sessionStorage.getItem("buscar") + "&inicio=" + inicio;
+        xhttp.open("POST", urlBase + accion, true);
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send(params);
+    }
+
+    function siguiente() {
+        if (inicio < id - 3) {
+            inicio += 3;
+            document.getElementById("listado").innerHTML = "";
+            cargarDatos();
+
+        } else {
+            let boton = document.getElementById("siguiente");
+            boton.setAttribute("disabled", "");
+        }
+        if (inicio >= id - 3) {
+            let boton = document.getElementById("siguiente");
+            boton.setAttribute("disabled", "");
+            return;
+        }
+        if (inicio > 0) {
+            let boton = document.getElementById("anterior");
+            boton.removeAttribute("disabled");
+        }
+    }
+
+    function anterior() {
+
+        if (inicio > 0) {
+            inicio -= 3;
+        }
+        document.getElementById("listado").innerHTML = "";
+        cargarDatos();
+        if (inicio < id - 3) {
+            let boton = document.getElementById("siguiente");
+            boton.removeAttribute("disabled");
+        }
+        if (inicio === 0) {
+            let boton = document.getElementById("anterior");
+            boton.setAttribute("disabled", "");
+        }
+    }
+</script>
 </body>
 </html>

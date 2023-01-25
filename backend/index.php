@@ -192,12 +192,16 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     $info = $controller->categorias();
     $cant = $controller->idCat();
     $controller->contacto($info, $cant);
-} else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "contacto" && isset($array_ruta[2]) && $array_ruta[2] == "process") {
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "products" && !isset($array_ruta[2])) {
+    require ("view/productos.php");
+}else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "contacto" && isset($array_ruta[2]) && $array_ruta[2] == "process") {
     $controller->processContacto();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "registro" && isset($array_ruta[2]) && $array_ruta[2] == "process") {
     $controller->processRegistro();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "login" && isset($array_ruta[2]) && $array_ruta[2] == "process") {
     $controller->processLoginHome();
+}else if(isset($array_ruta[0]) && $array_ruta[0]=="prooductos"){
+    echo $controller->processBuscador();
 } else {
     $controller->error();
 }

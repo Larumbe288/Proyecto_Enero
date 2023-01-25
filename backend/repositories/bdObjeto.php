@@ -280,20 +280,27 @@ ORDER BY `puntuacion` DESC limit 10";
         }
     }
 
-    public function buscador($texto)
+    public function buscador($texto,$principio)
     {
+        $arrayProductos = [];
         $db = Conexion::acceso();
         try {
-            $sql="select * from objeto where nombre like '%'$texto'%'";
+            $sql = "select DISTINCT(objeto.ID_Producto),objeto.Nombre,Precio,objeto.Descripcion,Imagen_1,Imagen_2,Imagen_3,Latitud,Longitud,objeto.Id_Categoria 
+from objeto left join comentario on objeto.ID_Producto=comentario.Id_Objeto left join categoria on objeto.Id_Categoria=categoria.Id_Categoria 
+where objeto.Nombre like '%$texto%' or categoria.Nombre like '%$texto%' or categoria.Descripcion like '%$texto%' or comentario.Texto like '%$texto%' order by objeto.ID_Producto asc limit $principio,3;";
             $result = $db->query($sql);
-            foreach ($result as $value) {
-                echo $value;
+            foreach ($result as $obj) {
+                $ob = new objeto((int)$obj["ID_Producto"], $obj["Nombre"], (float)$obj["Precio"],$obj["Descripcion"], $obj["Imagen_1"], $obj["Imagen_2"], $obj["Imagen_3"], (float)$obj["Latitud"], (float)$obj["Longitud"], (int)$obj["Id_Categoria"]);
+                array_push($arrayProductos,$ob);
             }
-        } catch(\PDOException $e) {
-        echo "Error: ".$e->getMessage();
+            return json_encode($arrayProductos);
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
         } finally {
-        $db=null;
+            $db = null;
         }
     }
+
+//    public function
 
 }
