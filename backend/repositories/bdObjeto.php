@@ -45,7 +45,7 @@ class bdObjeto
             $resultado = $db->query($sql);
             $obj = $resultado->fetch();
             if ($obj) {
-                return new objeto((int)$obj["ID_Producto"], $obj["Nombre"], (float)$obj["Precio"], $obj["Imagen_1"], $obj["Imagen_2"], $obj["Imagen_3"], (float)$obj["Latitud"], (float)$obj["Longitud"], (int)$obj["Id_Categoria"]);
+                return new objeto((int)$obj["ID_Producto"], $obj["Nombre"], (float)$obj["Precio"],$obj["Descripcion"], $obj["Imagen_1"], $obj["Imagen_2"], $obj["Imagen_3"], (float)$obj["Latitud"], (float)$obj["Longitud"], (int)$obj["Id_Categoria"]);
             }
         } catch (\PDOException $e) {
             echo "Error: " . $e->getMessage();

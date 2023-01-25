@@ -65,7 +65,7 @@ class controller
 
     public function ficha()
     {
-        require "view/ficha.php";
+        require "view/ficha.html";
     }
 
     public function admin()
