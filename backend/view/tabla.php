@@ -208,6 +208,9 @@
                         // if (j === valores.length - 1 && accion === "products") {
                         //     td.innerText = categorias[valores[j]][0];
                         // } else {
+                        if(j===3) {
+                            td.classList.add("text-parted")
+                        }
                             td.innerHTML = valores[j];
                         // }
                         tr.appendChild(td);
@@ -229,7 +232,7 @@
 
                     tabla.appendChild(tr);
                     if (accion === "products") {
-                        createModal(valores[0], valores[1], valores[3], valores[2]+" Christokens");
+                        createModal(valores[0], valores[1], valores[4], valores[2]+" Christokens");
                     }else if(accion==="categories") {
                         createModal(valores[0], valores[1], valores[3], valores[2]);
                     } else if (accion === "users") {

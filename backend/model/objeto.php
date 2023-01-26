@@ -176,5 +176,21 @@ class objeto
         $this->idCategoria = $idCategoria;
     }
 
+    /**
+     * @return string
+     */
+    public function getDescripcion(): string
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * @param string $descripcion
+     */
+    public function setDescripcion(string $descripcion): void
+    {
+        $this->descripcion = $descripcion;
+    }
+
 
 }

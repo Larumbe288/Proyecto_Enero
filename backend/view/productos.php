@@ -22,19 +22,12 @@
             </a>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="../home" class="nav-link px-2 link-dark">Home</a></li>
-                <div class="dropdown">
-                    <li><a href="#" class="nav-link px-2 link-dark">Categorías</a></li>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Deportes imposibles</a></li>
-                        <li><a class="dropdown-item" href="#">Placeres gastronómicos digitales</a></li>
-                        <li><a class="dropdown-item" href="#">Viajes virtuales</a></li>
-                    </ul>
-                </div>
                 <li><a href="home/contacto" class="nav-link px-2 link-dark">Contacto</a></li>
             </ul>
 
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+            <form onsubmit="buscador(this.firstElementChild)" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3"
+                  role="search" method="post" action="../home/products">
+                <input type="text" name="buscar" class="form-control" placeholder="Search..." aria-label="Search">
             </form>
             <?php if (isset($_SESSION["login"])) {
                 echo "<div class='dropdown text-end'>
@@ -73,7 +66,6 @@
 
 </div>
 <script>
-    sessionStorage.setItem("buscar", "");
     window.onload = function () {
         getMaxId();
         cargarDatos();
@@ -81,30 +73,46 @@
             let boton = document.getElementById("siguiente");
             boton.setAttribute("disabled", "");
         }
+        if (inicio === id - 3) {
+            let boton = document.getElementById("anterior");
+            boton.setAttribute("disabled", "");
+        }
     }
+
+    function buscador(input) {
+        sessionStorage.setItem("buscar", input.value);
+    }
+
     var urlBase = "http://localhost/web/backend/index.php/";
     var inicio = 0;
     var id;
-    // createCard("https://www.consumoteca.com/wp-content/uploads/Enjuague-bucal-Gabriel-Manlake-Unsplash.png", "Enjuage Bucal", 350,
-    //     "Higiene Bucal  Dientes Blancos",
-    //     "Es un enjuage bucal que permite tener tus dientes limpios y con olor a frescura",
-    //     150.1267);
+    getMaxId();
+    if (inicio >= id - 3) {
+        let boton = document.getElementById("siguiente");
+        boton.setAttribute("disabled", "");
+    } else if (inicio === id - 3) {
+        let boton = document.getElementById("anterior");
+        boton.setAttribute("disabled", "");
+    }
+
     function getMaxId() {
-        let accion = "products/id";
+        let accion = "prooductos/id";
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 id = Number.parseInt(this.response);
             }
         }
+        var params = "texto=" + sessionStorage.getItem("buscar");
         xhttp.open("POST", urlBase + accion, true);
-        xhttp.send();
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send(params);
     }
 
-    function createCard(imagen, titulo, puntos, descripCat, descripObj, pasta,id) {
+    function createCard(imagen, titulo, puntos, descripCat, descripObj, pasta, id) {
         let listado = document.getElementById("listado");
         let fondo = document.createElement("div");
-        fondo.classList.add("row", "p-2", "bg-white", "border", "rounded","mb-3");
+        fondo.classList.add("row", "p-2", "bg-white", "border", "rounded", "mb-3");
         let izqda = document.createElement("div");
         izqda.classList.add("col-md-3", "mt-1");
         let img = document.createElement("img");
@@ -143,20 +151,20 @@
         boton.classList.add("accordion-button", "collapsed");
         boton.setAttribute("aria-expanded", "false");
         boton.setAttribute("data-bs-toggle", "collapse");
-        boton.setAttribute("data-bs-target", "#collapseThree"+id);
-        boton.setAttribute("aria-controls", "collapseThree"+id);
-        boton.innerText = "Ver ficha producto";
+        boton.setAttribute("data-bs-target", "#collapseThree" + id);
+        boton.setAttribute("aria-controls", "collapseThree" + id);
+        boton.innerText = "Mostrar más...";
         acordeon.appendChild(boton);
         let bodyAc = document.createElement("div");
         bodyAc.classList.add("accordion-collapse", "collapse");
-        bodyAc.setAttribute("id", "collapseThree"+id);
+        bodyAc.setAttribute("id", "collapseThree" + id);
         bodyAc.setAttribute("aria-labelledby", "headingThree");
         bodyAc.setAttribute("data-bs-parent", "#accordionExample");
         let cuerpo = document.createElement("div");
         cuerpo.classList.add("accordion-body");
         let ficha = document.createElement("a");
         ficha.classList.add("btn", "btn-primary", "my-5");
-        ficha.setAttribute("href", "#");
+        ficha.setAttribute("href", "products/"+id);
         ficha.innerText = "Ver ficha de producto";
         cuerpo.appendChild(ficha);
         bodyAc.appendChild(cuerpo);
@@ -182,8 +190,16 @@
         xhttp.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 let productos = JSON.parse(this.response);
-                for (let i = 0; i < productos.length; i++) {
-                    createCard(productos[i].imagen1,productos[i].nombre,325,"Descripcion Categoría IdCAt akldfja",productos[i].descripcion,productos[i].precio,productos[i].id);
+                document.getElementById("listado").innerHTML="";
+                if (productos.length === 0) {
+                    document.getElementById("listado").innerHTML="<h4>No se han encontrado resultados con esas coincidencias</h4>";
+                    document.getElementById("anterior").style.display="none";
+                    document.getElementById("siguiente").style.display="none";
+                } else {
+                    for (let i = 0; i < productos.length; i++) {
+                        let puntos = random(50, 300);
+                        createCard(productos[i][1], productos[i][5], puntos, productos[i][2], productos[i][3], productos[i][4], productos[i][0]);
+                    }
                 }
             }
         }
@@ -191,6 +207,10 @@
         xhttp.open("POST", urlBase + accion, true);
         xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhttp.send(params);
+    }
+
+    function random(min, max) {
+        return Math.floor((Math.random() * (max - min + 1)) + min);
     }
 
     function siguiente() {
@@ -203,15 +223,16 @@
             let boton = document.getElementById("siguiente");
             boton.setAttribute("disabled", "");
         }
+        if (inicio > 0) {
+            let boton = document.getElementById("anterior");
+            boton.removeAttribute("disabled");
+        }
         if (inicio >= id - 3) {
             let boton = document.getElementById("siguiente");
             boton.setAttribute("disabled", "");
             return;
         }
-        if (inicio > 0) {
-            let boton = document.getElementById("anterior");
-            boton.removeAttribute("disabled");
-        }
+
     }
 
     function anterior() {

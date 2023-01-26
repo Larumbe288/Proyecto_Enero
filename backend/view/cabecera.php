@@ -62,7 +62,7 @@
                                         <div class="u-text">
                                             <h4><?php echo $_SESSION["login"] ?></h4>
                                             <p class="text-muted"></p><a
-                                                    href="profile.html"
+                                                    href="profile.php"
                                                     class="btn btn-xs btn-secondary btn-sm">View
                                                 Profile</a>
                                         </div>

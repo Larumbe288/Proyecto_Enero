@@ -85,11 +85,11 @@ class bdUsuario
     function getIdByCorreo($correo) {
         $db = Conexion::acceso();
         try {
-            $sql = "select Id_Usuario as 'idusr' from usuario where Correo=$correo";
+            $sql = "select Id_Usuario from usuario where Correo='$correo'";
             $res = $db->query($sql);
             $result = $res->fetch();
             if($result) {
-                return (int) $res["idusr"];
+                return $result["Id_Usuario"];
             }
         } catch(\PDOException $e) {
         echo "Error: ".$e->getMessage();

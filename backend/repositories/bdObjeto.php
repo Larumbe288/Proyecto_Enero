@@ -26,7 +26,7 @@ class bdObjeto
             $sql = "select * from objeto order by $campo asc limit $principio,$final";
             $objetos = $db->query($sql);
             foreach ($objetos as $obj) {
-                $ob = new objeto((int)$obj["ID_Producto"], $obj["Nombre"], (float)$obj["Precio"], $obj["Imagen_1"], $obj["Imagen_2"], $obj["Imagen_3"], (float)$obj["Latitud"], (float)$obj["Longitud"], (int)$obj["Id_Categoria"]);
+                $ob = new objeto((int)$obj["ID_Producto"], $obj["Nombre"], (float)$obj["Precio"],$obj["Descripcion"], $obj["Imagen_1"], $obj["Imagen_2"], $obj["Imagen_3"], (float)$obj["Latitud"], (float)$obj["Longitud"], (int)$obj["Id_Categoria"]);
                 array_push($arrayObjetos, $ob);
             }
             return json_encode($arrayObjetos);
@@ -276,24 +276,23 @@ ORDER BY `puntuacion` DESC limit 10";
         $ides = $this->getIdesUltimosCOmentarios($id);
         $arrayProductos = [];
         foreach ($ides as $value) {
-            $prod = $this->getById();
+            $prod = $this->getById($value);
+            array_push($arrayProductos,$prod);
         }
+        return $arrayProductos;
     }
 
     public function buscador($texto,$principio)
     {
-        $arrayProductos = [];
         $db = Conexion::acceso();
         try {
-            $sql = "select DISTINCT(objeto.ID_Producto),objeto.Nombre,Precio,objeto.Descripcion,Imagen_1,Imagen_2,Imagen_3,Latitud,Longitud,objeto.Id_Categoria 
+            $sql = "select DISTINCT(objeto.ID_Producto),Imagen_1,categoria.Descripcion,objeto.Descripcion,Precio,objeto.Nombre
 from objeto left join comentario on objeto.ID_Producto=comentario.Id_Objeto left join categoria on objeto.Id_Categoria=categoria.Id_Categoria 
-where objeto.Nombre like '%$texto%' or categoria.Nombre like '%$texto%' or categoria.Descripcion like '%$texto%' or comentario.Texto like '%$texto%' order by objeto.ID_Producto asc limit $principio,3;";
+where objeto.Nombre like '%$texto%' or categoria.Nombre like '%$texto%' or objeto.Descripcion like '%$texto%' or categoria.Descripcion like '%$texto%' 
+   or comentario.Texto like '%$texto%' limit $principio,3";
             $result = $db->query($sql);
-            foreach ($result as $obj) {
-                $ob = new objeto((int)$obj["ID_Producto"], $obj["Nombre"], (float)$obj["Precio"],$obj["Descripcion"], $obj["Imagen_1"], $obj["Imagen_2"], $obj["Imagen_3"], (float)$obj["Latitud"], (float)$obj["Longitud"], (int)$obj["Id_Categoria"]);
-                array_push($arrayProductos,$ob);
-            }
-            return json_encode($arrayProductos);
+            $productos = $result->fetchAll();
+            return json_encode($productos);
         } catch (\PDOException $e) {
             echo "Error: " . $e->getMessage();
         } finally {
@@ -301,6 +300,25 @@ where objeto.Nombre like '%$texto%' or categoria.Nombre like '%$texto%' or categ
         }
     }
 
-//    public function
+    public function getIdBuscador($texto) {
+        $db=Conexion::acceso();
+        try {
+            $sql = "select count(objeto.ID_Producto) as 'cuenta'
+from objeto left join comentario on objeto.ID_Producto=comentario.Id_Objeto left join categoria on objeto.Id_Categoria=categoria.Id_Categoria 
+where objeto.Nombre like '%$texto%' or categoria.Nombre like '%$texto%' or objeto.Descripcion like '%$texto%' or categoria.Descripcion like '%$texto%' 
+   or comentario.Texto like '%$texto%'";
+            $ides = $db->query($sql);
+            $ID = 0;
+            foreach ($ides as $id) {
+                $ID = $id['cuenta'];
+            }
+            return $ID;
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
+        }
+
+    }
 
 }

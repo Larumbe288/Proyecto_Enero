@@ -65,7 +65,7 @@ class controller
 
     public function ficha()
     {
-        require "view/ficha.html";
+        require "view/ficha.php";
     }
 
     public function admin()
@@ -528,8 +528,9 @@ class controller
                         $dbUser = new bdUsuario();
                         unset($_SESSION["error"]);
                         $dbUser->loginHome($user, $password);
-                        $_SESSION["loginU"] = true;
-                        $_SESSION["idUser"]= $dbUser->getIdByCorreo($user);
+                        $_SESSION["loginU"] = $user;
+                        $_SESSION["idUser"] = (int) $dbUser->getIdByCorreo($user);
+                        var_dump($_SESSION["idUser"]);
                         header("Location: ../../home");
                     } else {
                         $_SESSION["error"] = "El usuario y/o la contraseña son incorrectos";
@@ -552,7 +553,7 @@ class controller
                     $dbUsuario = new bdUsuario();
                     $dbUsuario->create($correo, $password, $nombre, $tel, "usuario");
                     $_SESSION["loginU"] = true;
-                    $_SESSION["idUser"]= $dbUsuario->getIdByCorreo($correo);
+                    $_SESSION["idUser"] = $dbUsuario->getIdByCorreo($correo);
                     header("Location: ../../home");
                 } else {
                     $_SESSION["errorR"] = "El usuario introducido ya existe";
@@ -582,17 +583,28 @@ class controller
     public function processBuscador()
     {
         $dbObjeto = new bdObjeto();
-        if(isset($_POST["buscar"])) {
+        if (isset($_POST["buscar"])) {
             $texto = $_POST["buscar"];
         } else {
             $texto = '';
         }
-        if(isset($_POST["inicio"])) {
-            $principio = (int) $_POST["inicio"];
+        if (isset($_POST["inicio"])) {
+            $principio = (int)$_POST["inicio"];
         } else {
-            $principio=0;
+            $principio = 0;
         }
-        return $dbObjeto->buscador($texto,$principio);
+        return $dbObjeto->buscador($texto, $principio);
+    }
+
+    public function idBuscador()
+    {
+        $dbObjeto = new bdObjeto();
+        if(isset($_POST["texto"])) {
+            $texto=$_POST["texto"];
+        } else {
+            $texto='';
+        }
+        return $dbObjeto->getIdBuscador($texto);
     }
 
     public function processContacto()
@@ -623,9 +635,13 @@ class controller
         header("Location: ../admin/comments");
     }
 
+    public function profile($info)
+    {
+        require "view/profile.php";
+}
     public
     function error()
     {
-//        require "view/productos.php";
+        require "view/error404.php";
     }
 }

@@ -3,7 +3,7 @@
         crossorigin="anonymous"></script>
 <link rel="stylesheet" href="<?php echo $_SERVER["HTTP_HOST"] ?>/../../view/formulario.css">
 <div>
-    <form class="form" action="<?php echo $info ?>/processUser" method="post">
+    <form id="usr" class="form" action="<?php echo $info ?>/processUser" method="post">
         <h2>Añadir Usuario</h2>
         <p>
             <label for="correo">Correo: </label>

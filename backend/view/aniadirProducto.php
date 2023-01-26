@@ -3,7 +3,7 @@
         crossorigin="anonymous"></script>
 <link rel="stylesheet" href="<?php echo $_SERVER["HTTP_HOST"] ?>/../../view/formulario.css">
 <div>
-    <form class="form" method="post" action="<?php echo $info[0] ?>/processProduct" enctype="multipart/form-data">
+    <form id="obj2" class="form" method="post" action="<?php echo $info[0] ?>/processProduct" enctype="multipart/form-data">
         <h2>Añadir Producto</h2>
         <p>
             <label for="nombre">Nombre: </label>
@@ -18,18 +18,14 @@
             <label for="imagen">Imagen:</label>
             <input onchange="previewFile(this,1)" name="imagen1" type="file" accept="image/*" id="imagen" required>
         </p>
-
-        <img id="previewImg1" src="" width="100px" height="100px">
         <p>
             <label for="imagen2">Imagen 2:</label>
-            <input onchange="previewFile(this,2)" name="imagen2" type="file" accept="image/*" id="imagen2">
+            <input name="imagen2" type="file" accept="image/*" id="imagen2">
         </p>
-        <img id="previewImg2" src="" width="100px" height="100px">
         <p>
             <label for="imagen3">Imagen 3:</label>
-            <input onchange="previewFile(this,3)" name="imagen3" type="file" accept="image/*" id="imagen3">
+            <input name="imagen3" type="file" accept="image/*" id="imagen3">
         </p>
-        <img id="previewImg3" src="" width="100px" height="100px">
         <p>
             <label for="latitud">Latitud:</label>
             <input type="number" step="any" name="latitud" id="latitud" min="-90" max="90">

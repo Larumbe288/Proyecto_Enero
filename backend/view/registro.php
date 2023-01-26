@@ -22,28 +22,20 @@
             </a>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="../home" class="nav-link px-2 link-dark">Home</a></li>
-                <div class="dropdown">
-                    <li><a href="#" class="nav-link px-2 link-dark">Categorías</a></li>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Deportes imposibles</a></li>
-                        <li><a class="dropdown-item" href="#">Placeres gastronómicos digitales</a></li>
-                        <li><a class="dropdown-item" href="#">Viajes virtuales</a></li>
-                    </ul>
-                </div>
                 <li><a href="../home/contacto" class="nav-link px-2 link-dark">Contacto</a></li>
             </ul>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                 <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
             </form>
-            <?php if (isset($_SESSION["login"])) {
+            <?php if (isset($_SESSION["loginU"])) {
                 echo "<div class='dropdown text-end'>
                 <a href='#' class='d-block link-dark text-decoration-none dropdown-toggle' data-bs-toggle='dropdown'
                    aria-expanded='false'>
                     <img src='https://github.com/mdo.png' alt='mdo' width='32' height='32' class='rounded-circle'>
                 </a>
                 <ul id='perfil' class='dropdown-menu text-small'>
-                    <li><a class='dropdown-item' href='#'>Profile</a></li>
+                    <li><a class='dropdown-item' href='../home/profile'>Profile</a></li>
                     <li>
                         <hr class='dropdown-divider'>
                     </li>

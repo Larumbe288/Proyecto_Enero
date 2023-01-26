@@ -67,3 +67,15 @@ input:first-child {
     outline:none;
 }
 
+#obj {
+    height: 920px;
+    margin-top: 47px;
+    margin-bottom: 50px;
+}
+#obj2 {
+    height: 832px;
+    margin-bottom: 50px;
+}
+#usr {
+    height: 631px;
+}

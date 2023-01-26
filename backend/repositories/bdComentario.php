@@ -129,4 +129,19 @@ class bdComentario
             $db = null;
         }
     }
+
+    public function getComentariosPorObjeto(int $id)
+    {
+        $db = Conexion::acceso();
+        try {
+            $sql = "select Texto from comentario where Id_Usuario=$id";
+            $result = $db->query($sql);
+            $mensajes = $result->fetchAll();
+            return $mensajes;
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
+        }
+    }
 }
