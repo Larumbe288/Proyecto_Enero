@@ -39,3 +39,6 @@ tr:hover {
 a {
     text-underline-mode: none;
 }
+.texto-partido {
+    text-overflow: ellipsis;
+}

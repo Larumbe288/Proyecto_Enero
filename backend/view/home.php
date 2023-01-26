@@ -182,11 +182,9 @@
 <script type="text/javascript">jssor_1_slider_init();
 </script>
 <div id="descripcion" class="py-5 container d-flex justify-content-center flex-column">
-    <h1>Welcome to Christies and Meta's</h1>
-    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut turpis consectetur, rhoncus est consectetur,
-        euismod ex. Phasellus nibh nibh, tincidunt non placerat non, semper eget enim. Mauris sagittis augue eget magna
-        ultrices laoreet. Ut venenatis ante ac lacus interdum luctus. Fusce mattis aliquam ligula, gravida efficitur
-        nisi efficitur in.</h3>
+    <h1>Bienvenidos a Christies and Meta's</h1>
+    <h3>A través de esta tienda electrónica podemos navegar, comprar y vender artículos en cualquier momento relacionados con el metaverso.
+        Tenemos desde deportes imposibles hasta viajes virtuales pasando por placeres gastronómicos digitales y un sinfín de categorías diferentes.</h3>
 </div>
 </body>
 </html>

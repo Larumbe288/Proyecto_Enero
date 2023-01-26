@@ -174,11 +174,7 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && !isset($array_ruta[1])) {
     $info = $controller->categorias();
     $cant = $controller->idCat();
-    if (isset($_SESSION["loginU"]) && isset($_SESSION["idUser"])) {
-        $productos = $controller->getProductosComentarios((int)$_SESSION["idUser"]);
-    } else {
-        $productos = $controller->getProductosComprados();
-    }
+    $productos = $controller->getProductosComprados();
     $controller->homePage($info, $cant, $productos);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "categoorias" && !isset($array_ruta[1])) {
     echo $controller->categoriasJSON();
@@ -192,26 +188,26 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     $info = $controller->categorias();
     $cant = $controller->idCat();
     $controller->contacto($info, $cant);
-}else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "profile" && !isset($array_ruta[2])) {
-   $id= (int) $_SESSION["idUser"];
-   echo $id;
-   $info = $dbUser->getById($id);
-   $controller->profile($info);
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "profile" && !isset($array_ruta[2])) {
+    $id = (int)$_SESSION["idUser"];
+    echo $id;
+    $info = $dbUser->getById($id);
+    $controller->profile($info);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "products" && !isset($array_ruta[2])) {
-    require ("view/productos.php");
-}else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "products" && isset($array_ruta[2])) {
-    $info = $dbObjeto->getById((int) $array_ruta[2]);
-    $comentarios = $dbComments->getComentariosPorObjeto((int) $array_ruta[2]);
+    require("view/productos.php");
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "products" && isset($array_ruta[2])) {
+    $info = $dbObjeto->getById((int)$array_ruta[2]);
+    $comentarios = $dbComments->getComentariosPorObjeto((int)$array_ruta[2]);
     require("view/ficha.php");
-}else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "contacto" && isset($array_ruta[2]) && $array_ruta[2] == "process") {
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "contacto" && isset($array_ruta[2]) && $array_ruta[2] == "process") {
     $controller->processContacto();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "registro" && isset($array_ruta[2]) && $array_ruta[2] == "process") {
     $controller->processRegistro();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "login" && isset($array_ruta[2]) && $array_ruta[2] == "process") {
     $controller->processLoginHome();
-}else if(isset($array_ruta[0]) && $array_ruta[0]=="prooductos" && !isset($array_ruta[1])){
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "prooductos" && !isset($array_ruta[1])) {
     echo $controller->processBuscador();
-}else if(isset($array_ruta[0]) && $array_ruta[0]=="prooductos" && isset($array_ruta[1]) && $array_ruta[1]=="id"){
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "prooductos" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
     echo $controller->idBuscador();
 } else {
     $controller->error();

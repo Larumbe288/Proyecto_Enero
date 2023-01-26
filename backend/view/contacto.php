@@ -93,7 +93,7 @@
             <label for="floatingPassword">Name</label>
         </div>
         <div id="comments" class="form-floating mb-3 col-12">
-            <textarea class="form-control" name="comentario" placeholder="Leave a comment here"
+            <textarea onblur="validateTextarea(this)" class="form-control" name="comentario" placeholder="Leave a comment here"
                       id="floatingTextarea"></textarea>
             <label for="floatingTextarea">Comments</label>
         </div>
@@ -133,7 +133,20 @@
         }
     }
 
+function validateTextarea(input) {
+        if(input.value==="") {
+            input.classList.add("is-invalid");
 
+        } else {
+            let regex = /^[a-zA-Z0-9 ]{3,}$/gm;
+            if(regex.test(input.innerText)) {
+                input.classList.remove("is-invalid");
+                input.classList.add("is-valid");
+            } else {
+                input.classList.add("is-invalid");
+            }
+        }
+}
     setInterval(function () {
         let inputs = document.getElementsByTagName("input");
         for (let i = 1; i < inputs.length; i++) {

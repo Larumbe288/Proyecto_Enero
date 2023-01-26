@@ -45,18 +45,18 @@
                             <p class="text-white-50 mb-5">Please enter your username and password!</p>
                             <form action="../../index.php/admin/login/process" method="post">
                                 <div class="form-outline form-white mb-4">
-                                    <input type="email" id="typeEmailX" class="form-control form-control-lg" name="username"/>
+                                    <input onkeydown="verifyEmail(this)" type="email" id="typeEmailX" class="form-control form-control-lg" name="username"/>
                                     <label class="form-label" for="typeEmailX">Username</label>
                                 </div>
 
                                 <div class="form-outline form-white mb-4">
-                                    <input type="password" id="typePasswordX" class="form-control form-control-lg" name="password"/>
+                                    <input onkeydown="verifyPassword(this)" type="password" id="typePasswordX" class="form-control form-control-lg" name="password"/>
                                     <label class="form-label" for="typePasswordX">Password</label>
                                 </div>
                                 <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="remember">Forgot
                                         password?</a>
                                 </p>
-                                <button class="btn btn-outline-light btn-lg px-5" type="submit" name="submit">Login
+                                <button id="registro" disabled class="btn btn-outline-light btn-lg px-5" type="submit" name="submit">Login
                                 </button>
                             </form>
                         </div>
@@ -66,6 +66,44 @@
         </div>
     </div>
 </section>
+<script>
+    function verifyEmail(input) {
+        if (input.value === "") {
+            input.classList.add("is-invalid");
+        } else {
+            let regex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+            if (regex.test(input.value)) {
+                input.classList.remove("is-invalid");
+                input.classList.add("is-valid");
+            } else {
+                input.classList.add("is-invalid");
+            }
+        }
+    }
+    function verifyPassword(input) {
+        if (input.value === "") {
+            input.classList.add("is-invalid");
+        } else {
+            let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+            if (regex.test(input.value)) {
+                input.classList.remove("is-invalid");
+                input.classList.add("is-valid");
+            } else {
+                input.classList.add("is-invalid");
+            }
+        }
+    }
+    setInterval(function () {
+        let inputs = document.getElementsByTagName("input");
+        for (let i = 1; i < inputs.length; i++) {
+            if (inputs[i].classList.contains("is-invalid") || !inputs[i].classList.contains("is-valid")) {
+                return;
+            }
+        }
+        document.getElementById("registro").removeAttribute("disabled");
+    }, 1);
+
+</script>
 </body>
 
 </html>

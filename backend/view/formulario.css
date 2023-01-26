@@ -6,7 +6,7 @@ body{
 
 form{
     background-color: #e6e6e6;
-    width: 310px;
+    width: 50%;
     height: 525px;
     padding: 30px;
     border-radius: 8px;
@@ -77,5 +77,11 @@ input:first-child {
     margin-bottom: 50px;
 }
 #usr {
-    height: 631px;
+    height: 827px;
+}
+#usr2 {
+    height: 635px;
+}
+#cat {
+    height: 441px;
 }

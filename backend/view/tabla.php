@@ -4,8 +4,6 @@
             <div class="page-header">
             </div>
             <div class="row">
-
-
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header flotar">
@@ -77,7 +75,7 @@
         }
         for (let i = 0; i < th.length; i++) {
             th[i].onclick = function () {
-                if(document.getElementById("flecha")!==null) {
+                if (document.getElementById("flecha") !== null) {
                     document.getElementById("flecha").parentElement.firstElementChild.remove();
                 }
                 inicio = 0;
@@ -194,25 +192,27 @@
             if (this.readyState === 4 && this.status === 200) {
                 let productos = JSON.parse(this.response);
                 console.log(productos);
-                if(categorias===undefined || categorias === null) {
+                if (categorias === undefined || categorias === null) {
                     getCategorias();
                 }
                 let tabla = document.getElementById("listado");
-                document.getElementById("modales").innerHTML="";
+                document.getElementById("modales").innerHTML = "";
                 for (let i = 0; i < productos.length; i++) {
                     let tr = document.createElement("tr");
                     let valores = Object.values(productos[i]);
                     tr.setAttribute("data-id", valores[0]);
                     for (let j = 0; j < valores.length; j++) {
                         let td = document.createElement("td");
-                        // if (j === valores.length - 1 && accion === "products") {
-                        //     td.innerText = categorias[valores[j]][0];
-                        // } else {
-                        if(j===3) {
-                            td.classList.add("text-parted")
-                        }
+                        if (j === valores.length - 1 && accion === "products") {
+                            td.innerText = categorias[valores[j]][0];
+                        } else {
+                            if (accion === "products" && j === 3) {
+                                if (valores[j].length > 15) {
+                                    valores[j] = valores[j].substring(0, 12) + "...";
+                                }
+                            }
                             td.innerHTML = valores[j];
-                        // }
+                        }
                         tr.appendChild(td);
                     }
                     let arrayTabla = ["categories", "products", "users"];
@@ -232,8 +232,8 @@
 
                     tabla.appendChild(tr);
                     if (accion === "products") {
-                        createModal(valores[0], valores[1], valores[4], valores[2]+" Christokens");
-                    }else if(accion==="categories") {
+                        createModal(valores[0], valores[1], valores[4], valores[2] + " Christokens");
+                    } else if (accion === "categories") {
                         createModal(valores[0], valores[1], valores[3], valores[2]);
                     } else if (accion === "users") {
                         let rol = valores[6].charAt(0).toUpperCase() + valores[6].slice(1);
