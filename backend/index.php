@@ -106,7 +106,7 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "products" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
     echo $prodcontroller->idProd();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "categories" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
-    echo $controller->idCat();
+    echo $catcontroller->idCat();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "users" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
     echo $controller->idUser();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "sales" && isset($array_ruta[1]) && $array_ruta[1] == "id") {

@@ -1,7 +1,16 @@
 <?php
 
+/**
+ *
+ */
 class bdCategoria
 {
+    /**
+     * @param string $nombre
+     * @param string $descripcion
+     * @param string $imagen
+     * @return void
+     */
     public function create(string $nombre, string $descripcion, string $imagen)
     {
         $db = Conexion::acceso();
@@ -19,7 +28,13 @@ class bdCategoria
 
     }
 
-    public function read($campo,$principio, $final)
+    /**
+     * @param $campo
+     * @param $principio
+     * @param $final
+     * @return false|string|void
+     */
+    public function read($campo, $principio, $final)
     {
         $arrayCat = [];
         $db = Conexion::acceso();
@@ -37,6 +52,10 @@ class bdCategoria
             $db = null;
         }
     }
+
+    /**
+     * @return false|string|void
+     */
     public function readAll()
     {
         $arrayCat = [];
@@ -56,6 +75,10 @@ class bdCategoria
         }
     }
 
+    /**
+     * @param int $id
+     * @return categoria|void
+     */
     public function getById(int $id)
     {
         $db = Conexion::acceso();
@@ -72,6 +95,11 @@ class bdCategoria
     }
 
 
+    /**
+     * @param int $id
+     * @param $array
+     * @return void
+     */
     public function update(int $id, $array)
     {
         $cat = $this->getById($id);
@@ -96,6 +124,10 @@ class bdCategoria
         }
     }
 
+    /**
+     * @param int $id
+     * @return bool|void
+     */
     public function delete(int $id)
     {
         $db = Conexion::acceso();
@@ -115,6 +147,9 @@ class bdCategoria
         }
     }
 
+    /**
+     * @return array|void
+     */
     function getColumnsName()
     {
         $columns = [];
@@ -133,6 +168,9 @@ class bdCategoria
         }
     }
 
+    /**
+     * @return int|mixed|void
+     */
     function getMaxId()
     {
         $db = Conexion::acceso();
@@ -151,6 +189,9 @@ class bdCategoria
         }
     }
 
+    /**
+     * @return int|mixed|void
+     */
     function getMaxIdCat()
     {
         $db = Conexion::acceso();

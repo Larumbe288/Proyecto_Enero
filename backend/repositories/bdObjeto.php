@@ -1,7 +1,21 @@
 <?php
 
+/**
+ *
+ */
 class bdObjeto
 {
+    /**
+     * @param string $nombre
+     * @param float $precio
+     * @param string $imagen1
+     * @param string|null $imagen2
+     * @param string|null $imagen3
+     * @param float|null $latitud
+     * @param float|null $longitud
+     * @param int $idCategoria
+     * @return void
+     */
     function create(string $nombre, float $precio, string $imagen1, string $imagen2 = null, string $imagen3 = null, float $latitud = null, float $longitud = null, int $idCategoria)
     {
         $db = Conexion::acceso();
@@ -18,6 +32,12 @@ class bdObjeto
         }
     }
 
+    /**
+     * @param $campo
+     * @param $principio
+     * @param $final
+     * @return false|string|void
+     */
     function read($campo, $principio, $final)
     {
         $arrayObjetos = [];
@@ -37,6 +57,10 @@ class bdObjeto
         }
     }
 
+    /**
+     * @param int $id
+     * @return objeto|void
+     */
     function getById(int $id)
     {
         $db = Conexion::acceso();
@@ -54,6 +78,11 @@ class bdObjeto
         }
     }
 
+    /**
+     * @param int $id
+     * @param $array
+     * @return void
+     */
     function update(int $id, $array)
     {
         $obj = $this->getById($id);
@@ -78,6 +107,10 @@ class bdObjeto
         }
     }
 
+    /**
+     * @param $id
+     * @return void
+     */
     function delete($id)
     {
         $db = Conexion::acceso();
@@ -94,6 +127,9 @@ class bdObjeto
         }
     }
 
+    /**
+     * @return array|void
+     */
     function getColumnsName()
     {
         $columns = [];
@@ -112,6 +148,9 @@ class bdObjeto
         }
     }
 
+    /**
+     * @return int|mixed|void
+     */
     function getMaxId()
     {
         $db = Conexion::acceso();
@@ -130,6 +169,9 @@ class bdObjeto
         }
     }
 
+    /**
+     * @return int|mixed|void
+     */
     function getMaxIdProd()
     {
         $db = Conexion::acceso();
@@ -148,6 +190,10 @@ class bdObjeto
         }
     }
 
+    /**
+     * @param $cantidad
+     * @return array|void
+     */
     function getCategorias($cantidad)
     {
         $db = Conexion::acceso();
@@ -167,6 +213,10 @@ class bdObjeto
         }
     }
 
+    /**
+     * @param $cantidad
+     * @return false|string|void
+     */
     function getCategoriasJSON($cantidad)
     {
         $db = Conexion::acceso();
@@ -186,6 +236,9 @@ class bdObjeto
         }
     }
 
+    /**
+     * @return false|string|void
+     */
     function getCategorias2()
     {
         $db = Conexion::acceso();
@@ -204,6 +257,9 @@ class bdObjeto
         }
     }
 
+    /**
+     * @return array|void
+     */
     public function getIdes()
     {
         $db = Conexion::acceso();
@@ -222,6 +278,9 @@ class bdObjeto
         }
     }
 
+    /**
+     * @return array|void
+     */
     private function getIdProductosMasVendidos()
     {
         $ides = [];
@@ -242,6 +301,9 @@ ORDER BY `puntuacion` DESC limit 10";
         }
     }
 
+    /**
+     * @return array
+     */
     public function productosMasVendidos()
     {
         $ides = $this->getIdProductosMasVendidos();
@@ -253,6 +315,10 @@ ORDER BY `puntuacion` DESC limit 10";
         return $arrayProductos;
     }
 
+    /**
+     * @param $id
+     * @return array|void
+     */
     private function getIdesUltimosCOmentarios($id)
     {
         $ides = [];
@@ -271,6 +337,10 @@ ORDER BY `puntuacion` DESC limit 10";
         }
     }
 
+    /**
+     * @param int $id
+     * @return array
+     */
     public function productosComentados(int $id)
     {
         $ides = $this->getIdesUltimosCOmentarios($id);
@@ -282,7 +352,12 @@ ORDER BY `puntuacion` DESC limit 10";
         return $arrayProductos;
     }
 
-    public function buscador($texto,$principio)
+    /**
+     * @param $texto
+     * @param $principio
+     * @return false|string|void
+     */
+    public function buscador($texto, $principio)
     {
         $db = Conexion::acceso();
         try {
@@ -300,6 +375,10 @@ where objeto.Nombre like '%$texto%' or categoria.Nombre like '%$texto%' or objet
         }
     }
 
+    /**
+     * @param $texto
+     * @return int|mixed|void
+     */
     public function getIdBuscador($texto) {
         $db=Conexion::acceso();
         try {

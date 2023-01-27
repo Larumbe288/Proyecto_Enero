@@ -1,7 +1,17 @@
 <?php
 
+/**
+ *
+ */
 class bdComentario
 {
+    /**
+     * @param string $texto
+     * @param int $idUsuario
+     * @param int $idObjeto
+     * @param string $fecha
+     * @return void
+     */
     function create(string $texto, int $idUsuario, int $idObjeto, string $fecha)
     {
         $db = Conexion::acceso();
@@ -18,7 +28,12 @@ class bdComentario
         }
     }
 
-    function read($campo,$principio)
+    /**
+     * @param $campo
+     * @param $principio
+     * @return false|string|void
+     */
+    function read($campo, $principio)
     {
         $arrayComentarios = [];
         $db = Conexion::acceso();
@@ -37,6 +52,10 @@ class bdComentario
         }
     }
 
+    /**
+     * @param int $id
+     * @return comentario|void
+     */
     function getById(int $id)
     {
         $db = Conexion::acceso();
@@ -54,6 +73,11 @@ class bdComentario
         }
     }
 
+    /**
+     * @param int $id
+     * @param $array
+     * @return void
+     */
     function update(int $id, $array)
     {
         $comentario = $this->getById($id);
@@ -78,6 +102,10 @@ class bdComentario
         }
     }
 
+    /**
+     * @param int $id
+     * @return void
+     */
     function delete(int $id)
     {
         $db = Conexion::acceso();
@@ -94,6 +122,9 @@ class bdComentario
         }
     }
 
+    /**
+     * @return array|void
+     */
     function getColumnsName()
     {
         $columns = [];
@@ -112,6 +143,9 @@ class bdComentario
         }
     }
 
+    /**
+     * @return int|mixed|void
+     */
     function getMaxId()
     {
         $db = Conexion::acceso();
@@ -130,6 +164,10 @@ class bdComentario
         }
     }
 
+    /**
+     * @param int $id
+     * @return array|false|void
+     */
     public function getComentariosPorObjeto(int $id)
     {
         $db = Conexion::acceso();

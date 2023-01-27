@@ -1,6 +1,13 @@
 <?php
+
+/**
+ *
+ */
 class FrontController
 {
+    /**
+     * @return void
+     */
     public function profile()
     {
         $dbUser = new bdUsuario();
@@ -8,10 +15,19 @@ class FrontController
         $info = $dbUser->getById($id);
         require "view/profile.php";
     }
+
+    /**
+     * @return void
+     */
     public function error()
     {
         require "view/error404.php";
     }
+
+    /**
+     * @param int $id
+     * @return void
+     */
     public function mostrarFicha(int $id)
     {
         $dbComments = new bdComentario();
@@ -20,10 +36,20 @@ class FrontController
         $comentarios = $dbComments->getComentariosPorObjeto($id);
         require("view/ficha.php");
     }
+
+    /**
+     * @param $info
+     * @param $booleano
+     * @return void
+     */
     public function contacto($info, $booleano)
     {
         require "view/contacto.php";
     }
+
+    /**
+     * @return void
+     */
     public function processContacto()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -31,11 +57,11 @@ class FrontController
                 if (isset($_POST["email"]) && !empty($_POST["email"]) && isset($_POST["nombre"]) && !empty($_POST["nombre"]) && isset($_POST["comentario"]) && !empty($_POST["comentario"])) {
                     $ip = $_SERVER["REMOTE_ADDR"];
                     $captcha = $_POST["g-recaptcha-response"];
-                    $secretkey="6LdHhi8kAAAAAOIs3YEWBhY61k-rvRQfKusnXUwF";
+                    $secretkey = "6LdHhi8kAAAAAOIs3YEWBhY61k-rvRQfKusnXUwF";
                     $respuesta = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secretkey&response=$captcha&remoteip=$ip");
-                    $atributos = json_decode($respuesta,true);
-                    if(!$atributos['success']) {
-                        $_SESSION["errorContact"]="No se ha validado el Captcha";
+                    $atributos = json_decode($respuesta, true);
+                    if (!$atributos['success']) {
+                        $_SESSION["errorContact"] = "No se ha validado el Captcha";
                         header("Location: ../contacto");
                     }
                     $email = $_POST["email"];
@@ -46,12 +72,16 @@ class FrontController
                     unset($_SESSION["errorContact"]);
                     header("Location: ../contacto");
                 } else {
-                    $_SESSION["errorContact"]="Los datos no cumplen con las especificaciones";
+                    $_SESSION["errorContact"] = "Los datos no cumplen con las especificaciones";
                     header("Location: ../contacto");
                 }
             }
         }
     }
+
+    /**
+     * @return false|string|null
+     */
     public function processBuscador()
     {
         $dbObjeto = new bdObjeto();
@@ -67,6 +97,10 @@ class FrontController
         }
         return $dbObjeto->buscador($texto, $principio);
     }
+
+    /**
+     * @return int|mixed|null
+     */
     public function idBuscador()
     {
         $dbObjeto = new bdObjeto();
@@ -77,15 +111,27 @@ class FrontController
         }
         return $dbObjeto->getIdBuscador($texto);
     }
+
+    /**
+     * @return void
+     */
     public function registro()
     {
         require "view/registro.php";
     }
+
+    /**
+     * @return array
+     */
     public function getProductosComprados()
     {
         $dbObjeto = new bdObjeto();
         return $dbObjeto->productosMasVendidos();
     }
+
+    /**
+     * @return void
+     */
     public function processRegistro()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -96,10 +142,16 @@ class FrontController
                     $nombre = $_POST["nombre"];
                     $tel = $_POST["tel"];
                     $dbUsuario = new bdUsuario();
-                    $dbUsuario->create($correo, $password, $nombre, $tel, "usuario");
-                    $_SESSION["loginU"] = true;
-                    $_SESSION["idUser"] = $dbUsuario->getIdByCorreo($correo);
-                    header("Location: ../../home");
+                    if ($dbUsuario->existeCorreo($correo)) {
+                        $dbUsuario->create($correo, $password, $nombre, $tel, "usuario");
+                        $_SESSION["loginU"] = true;
+                        $_SESSION["idUser"] = $dbUsuario->getIdByCorreo($correo);
+                        header("Location: ../../home");
+                    } else {
+                        unset($_SESSION["errorR"]);
+                        $_SESSION["errorR"] = "El correo introducido ya está dado de alta";
+                        header("Location: ../registro");
+                    }
                 } else {
                     $_SESSION["errorR"] = "El usuario introducido ya existe";
                     header("Location: ../registro");
@@ -107,7 +159,12 @@ class FrontController
             }
         }
     }
-    public function processLoginHome()
+
+    /**
+     * @return void
+     */
+    public
+    function processLoginHome()
     {
         if (isset($_SESSION["loginU"])) {
             header("Location: ../../home");
@@ -132,20 +189,43 @@ class FrontController
             }
         }
     }
-    public function homePage($info, $booleano, $productos)
+
+    /**
+     * @param $info
+     * @param $booleano
+     * @param $productos
+     * @return void
+     */
+    public
+    function homePage($info, $booleano, $productos)
     {
         require "view/home.php";
     }
-    public function loginHome()
+
+    /**
+     * @return void
+     */
+    public
+    function loginHome()
     {
         require "view/loginHome.php";
     }
-    public function logoutHome()
+
+    /**
+     * @return void
+     */
+    public
+    function logoutHome()
     {
         session_destroy();
         header("Location: http://localhost/web/backend/index.php/home");
     }
-    public function showProducts()
+
+    /**
+     * @return void
+     */
+    public
+    function showProducts()
     {
         require "view/productos.php";
     }

@@ -3,17 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="14e6a985-c25c-4205-bd50-939e6cf245b2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controller/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controller/CategoryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controller/FrontController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controller/FrontController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controller/controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controller/controller.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/view/aniadirCategoria.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/aniadirCategoria.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/view/aniadirUsuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/aniadirUsuario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/view/contacto.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/contacto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/view/editarUsuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/editarUsuario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/view/estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/estilos.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/view/formulario.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/formulario.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/view/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/view/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/view/productos.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/productos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/view/tabla.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/view/tabla.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/repositories/bdCategoria.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/repositories/bdCategoria.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/repositories/bdComentario.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/repositories/bdComentario.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/repositories/bdObjeto.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/repositories/bdObjeto.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/repositories/bdUsuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/repositories/bdUsuario.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/repositories/bdVentas.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/repositories/bdVentas.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/view/imgCategories/1/metaverso.webp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +85,7 @@
       <workItem from="1674659200091" duration="9067000" />
       <workItem from="1674670340166" duration="2646000" />
       <workItem from="1674748938635" duration="4046000" />
+      <workItem from="1674832286040" duration="8024000" />
     </task>
     <servers />
   </component>

@@ -1,7 +1,15 @@
 <?php
 
+/**
+ *
+ */
 class bdUsuario
 {
+    /**
+     * @param $user
+     * @param $password
+     * @return mixed|void
+     */
     function login($user, $password)
     {
         $db = Conexion::acceso();
@@ -16,6 +24,11 @@ class bdUsuario
         }
     }
 
+    /**
+     * @param $user
+     * @param $password
+     * @return mixed|void
+     */
     function loginHome($user, $password)
     {
         $db = Conexion::acceso();
@@ -30,6 +43,14 @@ class bdUsuario
         }
     }
 
+    /**
+     * @param $user
+     * @param $password
+     * @param $nombre
+     * @param $telefono
+     * @param $rol
+     * @return void
+     */
     function create($user, $password, $nombre, $telefono, $rol)
     {
         $db = Conexion::acceso();
@@ -46,6 +67,12 @@ class bdUsuario
         }
     }
 
+    /**
+     * @param $campo
+     * @param $principio
+     * @param $final
+     * @return false|string|void
+     */
     function read($campo, $principio, $final)
     {
         $arrayUsuarios = [];
@@ -65,6 +92,10 @@ class bdUsuario
         }
     }
 
+    /**
+     * @param int $id
+     * @return usuario|void
+     */
     function getById(int $id)
     {
         $db = Conexion::acceso();
@@ -82,22 +113,50 @@ class bdUsuario
         }
     }
 
-    function getIdByCorreo($correo) {
+    /**
+     * @param $correo
+     * @return mixed|void
+     */
+    function getIdByCorreo($correo)
+    {
         $db = Conexion::acceso();
         try {
             $sql = "select Id_Usuario from usuario where Correo='$correo'";
             $res = $db->query($sql);
             $result = $res->fetch();
-            if($result) {
+            if ($result) {
                 return $result["Id_Usuario"];
             }
-        } catch(\PDOException $e) {
-        echo "Error: ".$e->getMessage();
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
         } finally {
-        $db=null;
+            $db = null;
         }
     }
 
+    /**
+     * @param $correo
+     * @return mixed|void
+     */
+    function existeCorreo($correo)
+    {
+        $db = Conexion::acceso();
+        try {
+            $sql = "select correo from usuario where correo='$correo'";
+            $res = $db->query($sql);
+            return $res->fetch();
+        } catch (\PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
+        }
+    }
+
+    /**
+     * @param int $id
+     * @param $array
+     * @return void
+     */
     function update(int $id, $array)
     {
         $usr = $this->getById($id);
@@ -122,6 +181,10 @@ class bdUsuario
         }
     }
 
+    /**
+     * @param int $id
+     * @return void
+     */
     function delete(int $id)
     {
         $db = Conexion::acceso();
@@ -138,6 +201,9 @@ class bdUsuario
         }
     }
 
+    /**
+     * @return array|void
+     */
     function getColumnsName()
     {
         $columns = [];
@@ -156,6 +222,9 @@ class bdUsuario
         }
     }
 
+    /**
+     * @return int|mixed|void
+     */
     function getMaxId()
     {
         $db = Conexion::acceso();
@@ -175,6 +244,9 @@ class bdUsuario
 
     }
 
+    /**
+     * @return int|mixed|void
+     */
     public function maxId()
     {
         $db = Conexion::acceso();

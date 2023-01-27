@@ -1,6 +1,13 @@
 <?php
+
+/**
+ *
+ */
 class ProductController
 {
+    /**
+     * @return false|string|null
+     */
     public function productos()
     {
         $db = new bdObjeto();
@@ -16,11 +23,20 @@ class ProductController
         }
         return $db->read($campo, $inicio, 10);
     }
+
+    /**
+     * @return int|mixed|null
+     */
     public function idProd()
     {
         $db = new bdObjeto();
         return $db->getMaxId();
     }
+
+    /**
+     * @param $id
+     * @return void
+     */
     public function eliminarProducto($id)
     {
         $dbObjeto = new bdObjeto();
@@ -28,6 +44,11 @@ class ProductController
         header("Location: ../admin/products");
 
     }
+
+    /**
+     * @param $id
+     * @return void
+     */
     public function showEdit($id)
     {
         $dbObjeto = new bdObjeto();
@@ -37,6 +58,10 @@ class ProductController
         $prod = array_values($info);
         require "view/editarProducto.php";
     }
+
+    /**
+     * @return array
+     */
     public function getDatosTablaObj()
     {
         $dbObjeto = new bdObjeto();
@@ -44,6 +69,10 @@ class ProductController
         $info = [$cabecera];
         return $info;
     }
+
+    /**
+     * @return void
+     */
     public function aniadirProd()
     {
         $dbObjeto = new bdObjeto();
@@ -52,26 +81,30 @@ class ProductController
         $info = [$cabecera, $contenido];
         require "view/aniadirProducto.php";
     }
+
+    /**
+     * @return void
+     */
     public function processaniadirProd()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($_POST["submit"])) {
-                if (isset($_POST["nombre"]) && !empty($_POST["nombre"])) {
+                if (isset($_POST["nombre"]) && !empty($_POST["nombre"]) && preg_match("/^[A-ZÁÉÍÓÚ][a-záéíóú]+$/", $_POST["nombre"])) {
                     $nombre = $_POST["nombre"];
                 } else {
-                    $nombre = '';
+                    header("Location: ../admin/products/aniadirProducts");
                 }
-                if (isset($_POST["precio"]) && !empty($_POST["precio"])) {
+                if (isset($_POST["precio"]) && !empty($_POST["precio"]) && preg_match("/^(\d)*(\.)?([0-9]{1,4})?$/", $_POST["precio"])) {
                     $precio = $_POST["precio"];
                 } else {
-                    $precio = '';
+                    header("Location: ../admin/products/aniadirProducts");
                 }
-                if (isset($_POST["latitud"]) && !empty($_POST["latitud"])) {
+                if (isset($_POST["latitud"]) && preg_match("/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/", $_POST["latitud"])) {
                     $latitud = (float)$_POST["latitud"];
                 } else {
                     $latitud = (float)'';
                 }
-                if (isset($_POST["longitud"]) && !empty($_POST["longitud"])) {
+                if (isset($_POST["longitud"]) && preg_match("/^-?([1]?[1-7][1-9]|[1]?[1-8][0]|[1-9]?[0-9])\.{1}\d{1,6}$/", $_POST["longitud"])) {
                     $longitud = (float)$_POST["longitud"];
                 } else {
                     $longitud = (float)'';
@@ -79,7 +112,7 @@ class ProductController
                 if (isset($_POST["idCat"]) && !empty($_POST["idCat"])) {
                     $idCat = (int)$_POST["idCat"];
                 } else {
-                    $idCat = '';
+                    header("Location: ../admin/products/aniadirProducts");
                 }
                 $dbProd = new bdObjeto();
                 $id = $dbProd->getMaxIdProd() + 1;
@@ -91,6 +124,12 @@ class ProductController
             }
         }
     }
+
+    /**
+     * @param $id
+     * @param $ide
+     * @return string|void
+     */
     private function imagenAniadirProd($id, $ide)
     {
         mkdir($_SERVER['DOCUMENT_ROOT'] . "/web/backend/view/imgProducts/" . $id);
@@ -108,6 +147,10 @@ class ProductController
 
         }
     }
+
+    /**
+     * @return void
+     */
     public function processProducto()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -118,7 +161,7 @@ class ProductController
                     header("Location: ../../admin/products");
                 }
                 $dir = $_SERVER['DOCUMENT_ROOT'] . "/web/backend/view/imgProducts/" . $_POST['idProd'];
-                if(!is_dir($dir)) {
+                if (!is_dir($dir)) {
                     mkdir($dir);
                 }
                 $dbObjeto = new bdObjeto();
@@ -126,23 +169,54 @@ class ProductController
                 $img = $this->imagen("");
                 $img2 = $this->imagen(2);
                 $img3 = $this->imagen(3);
-                $array = array("Nombre" => $_POST["nombre"], "Precio" => (float)$_POST["precio"], "Imagen1" => $img, "Imagen2" => $img2, "Imagen3" => $img3, "Latitud" => (float)$_POST["latitud"], "Longitud" => (float)$_POST["longitud"], "IdCategoria" => (int)$_POST["idCat"]);
+                if (isset($_POST["nombre"]) && !empty($_POST['nombre']) && preg_match("/^[A-ZÁÉÍÓÚ][a-záéíóú]+$/", $_POST["nombre"])) {
+                    $nombre = $_POST["nombre"];
+                } else {
+                    header("Location: ../../admin/products/editarProducts/" . $id);
+                }
+                if (isset($_POST["precio"]) && !empty($_POST["precio"]) && preg_match("/^(\d)*(\.)?([0-9]{1,4})?$/", $_POST["precio"])) {
+                    $precio = (float)$_POST["precio"];
+                } else {
+                    header("Location: ../../admin/products/editarProducts/" . $id);
+                }
+                if (isset($_POST["latitud"]) && preg_match("/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/", $_POST["latitud"])) {
+                    $latitud = (float)$_POST["latitud"];
+                } else {
+                    header("Location: ../../admin/products/editarProducts/" . $id);
+                }
+                if (isset($_POST["longitud"]) && preg_match("/^-?([1]?[1-7][1-9]|[1]?[1-8][0]|[1-9]?[0-9])\.{1}\d{1,6}$/", $_POST["longitud"])) {
+                    $longitud = (float)$_POST["longitud"];
+                } else {
+                    header("Location: ../../admin/products/editarProducts/" . $id);
+                }
+                $array = array("Nombre" => $nombre, "Precio" => $precio, "Imagen1" => $img, "Imagen2" => $img2, "Imagen3" => $img3, "Latitud" => $latitud, "Longitud" => $longitud, "IdCategoria" => (int)$_POST["idCat"]);
                 $dbObjeto->update($id, $array);
                 header("Location: ../../admin/products");
             }
         }
     }
+
+    /**
+     * @param $id
+     * @return string|void|null
+     */
     private function imagen($id)
     {
-        $temporal = $_FILES["imagen" . $id]["tmp_name"];
-        $fileName = $_FILES["imagen" . $id]["name"];
-        $path = $_SERVER['DOCUMENT_ROOT'] . "/web/backend/view/imgProducts/" . $_POST['idProd'] . "/{$fileName}";
-        $absolutePath = __DIR__ . '/' . $path;
-        if (!file_exists($absolutePath)) {
-            move_uploaded_file($temporal, $path);
-            return "http://localhost/web/backend/view/imgProducts/" . $_POST['idProd'] . "/{$fileName}";
+        if (isset($_FILES["imagen" . $id]["name"]) && !empty($_FILES["imagen" . $id]["name"])) {
+            $temporal = $_FILES["imagen" . $id]["tmp_name"];
+            $fileName = $_FILES["imagen" . $id]["name"];
+            $path = $_SERVER['DOCUMENT_ROOT'] . "/web/backend/view/imgProducts/" . $_POST['idProd'] . "/{$fileName}";
+            $absolutePath = __DIR__ . '/' . $path;
+            if (!file_exists($absolutePath)) {
+                move_uploaded_file($temporal, $path);
+                return "http://localhost/web/backend/view/imgProducts/" . $_POST['idProd'] . "/{$fileName}";
+            }
+        } else {
+            return NULL;
         }
+
     }
+
     private function vaciarCarpeta()
     {
         $dir = $_SERVER['DOCUMENT_ROOT'] . "/web/backend/view/imgProducts/" . $_POST['idProd'];
@@ -152,6 +226,10 @@ class ProductController
                 unlink($file); //elimino el fichero
         }
     }
+
+    /**
+     * @return int|mixed|null
+     */
     public function maxIdCat()
     {
         $db = new bdCategoria();

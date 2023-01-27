@@ -1,7 +1,15 @@
 <?php
 
+/**
+ *
+ */
 class bdVentas
 {
+    /**
+     * @param $idusr
+     * @param $idprod
+     * @return void
+     */
     function create($idusr, $idprod)
     {
         $db = Conexion::acceso();
@@ -18,6 +26,12 @@ class bdVentas
         }
     }
 
+    /**
+     * @param $campo
+     * @param $principio
+     * @param $final
+     * @return false|string|void
+     */
     function read($campo, $principio, $final)
     {
         $arrayVentas = [];
@@ -37,6 +51,10 @@ class bdVentas
         }
     }
 
+    /**
+     * @param int $id
+     * @return compra|void
+     */
     public function getById(int $id)
     {
         $db = Conexion::acceso();
@@ -52,6 +70,11 @@ class bdVentas
         }
     }
 
+    /**
+     * @param int $id
+     * @param $array
+     * @return void
+     */
     public function update(int $id, $array)
     {
         $venta = $this->getById($id);
@@ -76,6 +99,10 @@ class bdVentas
         }
     }
 
+    /**
+     * @param int $id
+     * @return bool|void
+     */
     public function delete(int $id)
     {
         $db = Conexion::acceso();
@@ -95,6 +122,9 @@ class bdVentas
         }
     }
 
+    /**
+     * @return array|void
+     */
     public function getColumnsName()
     {
         $columns = [];
@@ -113,6 +143,9 @@ class bdVentas
         }
     }
 
+    /**
+     * @return int|mixed|void
+     */
     function getMaxId()
     {
         $db = Conexion::acceso();
