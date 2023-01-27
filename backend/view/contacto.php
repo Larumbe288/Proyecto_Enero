@@ -41,7 +41,7 @@
                     <li>
                         <hr class='dropdown-divider'>
                     </li>
-                    <li><a class='dropdown-item' href='home/logout'>Sign out</a></li>
+                    <li><a class='dropdown-item' href='../home/logout'>Sign out</a></li>
                 </ul>
             </div>";
             } else {
@@ -74,37 +74,51 @@
                           style="height: 300px;width: 300px"></textarea>
                 <label for="floatingTextarea2">Comments</label>
             </div>
+            <div>
+                <div class="g-recaptcha" data-sitekey="6LdHhi8kAAAAAHWmX9ono2jyJQbw9N0bDWx2oFuV"></div>
+            </div>
             <button class="w-100 btn btn-lg btn-primary my-3" disabled name="submit" type="submit">Enviar</button>
         </form>
     </main>
 </div>
 <div id="formulario" class="container d-none d-sm-block">
+    <?php
+    if (isset($_SESSION["errorContact"])) {
+        echo '<div class="alert alert-danger" role="alert">' . $_SESSION["errorContact"] . '</div>';
+    }
+    ?>
     <form class="m-auto w-75" method="post" action="contacto/process">
         <img class="mb-4" src="../../dashboard/img/logo.png" alt="" width="72" height="72">
         <h1 class="h3 mb-3 fw-normal">Contacta con nosotros</h1>
         <div class="form-floating mb-3 col-12">
-            <input type="email" class="form-control" onkeydown="verifyEmail(this)" name="email" id="floatingInput"
+            <input type="email" class="form-control form1" maxlength="255" onkeydown="verifyEmail(this)" name="email" id="floatingInput"
                    placeholder="name@example.com">
             <label for="floatingInput">E-mail</label>
         </div>
         <div class="form-floating col-12 mb-3">
-            <input type="text" class="form-control" onkeydown="verifyName(this)" name="nombre" id="floatingPassword"
+            <input type="text" class="form-control form1" onkeydown="verifyName(this)" name="nombre" id="floatingPassword"
                    placeholder="Password">
             <label for="floatingPassword">Name</label>
         </div>
         <div id="comments" class="form-floating mb-3 col-12">
-            <textarea onblur="validateTextarea(this)" class="form-control" name="comentario" placeholder="Leave a comment here"
+            <textarea onblur="validateTextarea(this)" class="form-control form1" name="comentario"
+                      placeholder="Leave a comment here"
                       id="floatingTextarea"></textarea>
             <label for="floatingTextarea">Comments</label>
+        </div>
+        <div class="mb-3">
+            <div class="g-recaptcha" data-sitekey="6LdHhi8kAAAAAHWmX9ono2jyJQbw9N0bDWx2oFuV"></div>
         </div>
         <button id="registro" class="w-100 btn btn-lg btn-primary my-3" disabled name="submit" type="submit">Enviar
         </button>
     </form>
 </div>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
     function buscador(input) {
-        sessionStorage.setItem("buscar",input.value);
+        sessionStorage.setItem("buscar", input.value);
     }
+
     function verifyEmail(input) {
         if (input.value === "") {
             input.classList.add("is-invalid");
@@ -133,22 +147,23 @@
         }
     }
 
-function validateTextarea(input) {
-        if(input.value==="") {
+    function validateTextarea(input) {
+        if (input.value === "") {
             input.classList.add("is-invalid");
 
         } else {
             let regex = /^[a-zA-Z0-9 ]{3,}$/gm;
-            if(regex.test(input.innerText)) {
+            if (regex.test(input.value)) {
                 input.classList.remove("is-invalid");
                 input.classList.add("is-valid");
             } else {
                 input.classList.add("is-invalid");
             }
         }
-}
+    }
+
     setInterval(function () {
-        let inputs = document.getElementsByTagName("input");
+        let inputs = document.getElementsByClassName("input");
         for (let i = 1; i < inputs.length; i++) {
             if (inputs[i].classList.contains("is-invalid") || !inputs[i].classList.contains("is-valid")) {
                 return;

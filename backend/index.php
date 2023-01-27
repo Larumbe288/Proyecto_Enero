@@ -13,6 +13,9 @@ require "repositories/bdObjeto.php";
 require "repositories/bdVentas.php";
 require "repositories/bdComentario.php";
 require "./controller/controller.php";
+require "./controller/FrontController.php";
+require "./controller/ProductController.php";
+require "./controller/CategoryController.php";
 session_start();
 $dbObjeto = new bdObjeto();
 $dbCategoria = new bdCategoria();
@@ -21,6 +24,9 @@ $dbSales = new bdVentas();
 $dbComments = new bdComentario();
 //Instancio el controlador
 $controller = new controller();
+$frontcontroller = new FrontController();
+$prodcontroller = new ProductController();
+$catcontroller = new CategoryController();
 //Ruta de la home
 $home = "/web/backend/index.php/";
 //Quito la home de la ruta de la barra de direcciones
@@ -43,74 +49,62 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == 'login' && isset($array_ruta[2]) && $array_ruta[2] == "process") {
     $controller->autenticacion();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "products" && !isset($array_ruta[2])) {
-//    $controller->home();
     $controller->control();
     unset($_SESSION['tabla']);
     $_SESSION["tabla"] = "Products";
-    $cabecera = $dbObjeto->getColumnsName();
-    $contenido = $dbObjeto->read("ID_Producto", 0, 10);
-    $info = [$cabecera, $contenido];
+    $info = $prodcontroller->getDatosTablaObj();
     $controller->template("tabla.php", "template.php", $info);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "dashboard" && !isset($array_ruta[2])) {
     $controller->control();
-    $info = 0;
-    $controller->template("homeAdmin.php", "template.php", $info);
+    $controller->template("homeAdmin.php", "template.php", 0);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "categories" && !isset($array_ruta[2])) {
     $controller->control();
     unset($_SESSION['tabla']);
     $_SESSION["tabla"] = "Categories";
-    $cabecera2 = $dbCategoria->getColumnsName();
-    $contenido2 = $dbCategoria->read("Id_Categoria", 0, 10);
-    $info = [$cabecera2, $contenido2];
+    $info = $catcontroller->getDatosTablaCat();
     $controller->template("tabla.php", "template.php", $info);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "users" && !isset($array_ruta[2])) {
     $controller->control();
     unset($_SESSION['tabla']);
     $_SESSION["tabla"] = "Users";
-    $cabecera2 = $dbUser->getColumnsName();
-    $contenido2 = $dbUser->read("Id_Usuario", 0, 10);
-    $info = [$cabecera2, $contenido2];
+    $info = $controller->getDatosTablaUsr();
     $controller->template("tabla.php", "template.php", $info);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "sales" && !isset($array_ruta[2])) {
     $controller->control();
     unset($_SESSION['tabla']);
     $_SESSION["tabla"] = "Sales";
-    $cabecera2 = $dbSales->getColumnsName();
-    $contenido2 = $dbSales->read("Id_Compra", 0, 10);
-    $info = [$cabecera2, $contenido2];
+    $info = $controller->getDatosTablaSales();
     $controller->template("tabla.php", "template.php", $info);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "comments" && !isset($array_ruta[2])) {
     $controller->control();
     unset($_SESSION['tabla']);
     $_SESSION["tabla"] = "Comments";
-    $cabecera2 = $dbComments->getColumnsName();
-    $contenido2 = $dbComments->read("Id_Comentario", 10);
-    $info = [$cabecera2, $contenido2];
+    $info = $controller->getDatosTablaCom();
     $controller->template("tabla.php", "template.php", $info);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "logout") {
     $controller->logout();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "categorias" && !isset($array_ruta[1])) {
-    echo $controller->categorias2();
+    echo $catcontroller->categorias2();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "products" && !isset($array_ruta[1])) {
-    echo $controller->productos();
+    echo $prodcontroller->productos();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "users" && !isset($array_ruta[1])) {
     echo $controller->users();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "categories" && !isset($array_ruta[1])) {
-    echo $controller->categories();
+    echo $catcontroller->categories();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "sales" && !isset($array_ruta[1])) {
     echo $controller->sales();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "comments" && !isset($array_ruta[1])) {
     echo $controller->comments();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "eliminarCategories" && isset($array_ruta[1])) {
-    $controller->eliminarCategoria((int)$array_ruta[1]);
+    $catcontroller->eliminarCategoria((int)$array_ruta[1]);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "eliminarProducts" && isset($array_ruta[1])) {
-    $controller->eliminarProducto((int)$array_ruta[1]);
+    $prodcontroller->eliminarProducto((int)$array_ruta[1]);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "eliminarUsers" && isset($array_ruta[1])) {
     $controller->deleteUser((int)$array_ruta[1]);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "eliminarComments" && isset($array_ruta[1])) {
     $controller->deleteComments((int)$array_ruta[1]);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "products" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
-    echo $controller->idProd();
+    echo $prodcontroller->idProd();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "categories" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
     echo $controller->idCat();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "users" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
@@ -121,46 +115,29 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
     echo $controller->idComments();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "editarCategories" && isset($array_ruta[1]) && !isset($array_ruta[2])) {
     $controller->control();
-    $cat = $dbCategoria->getById((int)$array_ruta[1]);
-    $info = array_values(json_decode(json_encode($cat), true));
-    $controller->showEditCat($info);
+    $catcontroller->showEditCat((int)$array_ruta[1]);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "editarProducts" && isset($array_ruta[1]) && !isset($array_ruta[2])) {
     $controller->control();
-    $cat = $dbObjeto->getById((int)$array_ruta[1]);
-    $info = json_decode(json_encode($cat), true);
-    $info[9] = $controller->maxIdCat();
-    $prod = array_values($info);
-    $controller->showEdit($prod);
+    $prodcontroller->showEdit((int)$array_ruta[1]);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "editarUsers" && isset($array_ruta[1]) && !isset($array_ruta[2])) {
     $controller->control();
-    $cat = $dbUser->getById((int)$array_ruta[1]);
-    $info = json_decode(json_encode($cat), true);
-    $prod = array_values($info);
-    $controller->showEditUsr($prod);
+    $controller->showEditUsr((int)$array_ruta[1]);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "editarComments" && isset($array_ruta[1]) && !isset($array_ruta[2])) {
     $controller->control();
-    $cat = $dbComments->getById((int)$array_ruta[1]);
-    $info = json_decode(json_encode($cat), true);
-    $prod = array_values($info);
-    $controller->showEditCom($prod);
+    $controller->showEditCom((int)$array_ruta[1]);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "aniadirUsers" && !isset($array_ruta[1])) {
     $controller->control();
-    $info = $dbUser->maxId() + 1;
-    $controller->aniadirUsrs($info);
+    $controller->aniadirUsrs();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "aniadirCategories" && !isset($array_ruta[1])) {
     $controller->control();
-    $info = $dbCategoria->getMaxIdCat() + 1;
-    $controller->aniadirCat($info);
+    $catcontroller->aniadirCat();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "aniadirProducts" && !isset($array_ruta[1])) {
     $controller->control();
-    $contenido = $dbObjeto->getIdes();
-    $cabecera = $dbObjeto->getMaxIdProd() + 1;
-    $info = [$cabecera, $contenido];
-    $controller->aniadirProd($info);
+    $prodcontroller->aniadirProd();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "editarCategories" && isset($array_ruta[1]) && isset($array_ruta[2]) && $array_ruta[2] == "processCategoria") {
-    $controller->processCategoria();
+    $catcontroller->processCategoria();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "editarProducts" && isset($array_ruta[1]) && isset($array_ruta[2]) && $array_ruta[2] == "processProduct") {
-    $controller->processProducto();
+    $prodcontroller->processProducto();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "editarComments" && isset($array_ruta[1]) && isset($array_ruta[2]) && $array_ruta[2] == "processComment") {
     $controller->processComentario();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "editarUsers" && isset($array_ruta[1]) && isset($array_ruta[2]) && $array_ruta[2] == "processUser") {
@@ -168,47 +145,42 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) 
 } else if (isset($array_ruta[0]) && isset($array_ruta[1]) && $array_ruta[1] == "processUser") {
     $controller->processaniadirUsr();
 } else if (isset($array_ruta[0]) && isset($array_ruta[1]) && $array_ruta[1] == "processCategoria") {
-    $controller->processaniadirCat();
+    $catcontroller->processaniadirCat();
 } else if (isset($array_ruta[0]) && isset($array_ruta[1]) && $array_ruta[1] == "processProduct") {
-    $controller->processaniadirProd();
+    $prodcontroller->processaniadirProd();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && !isset($array_ruta[1])) {
-    $info = $controller->categorias();
-    $cant = $controller->idCat();
-    $productos = $controller->getProductosComprados();
-    $controller->homePage($info, $cant, $productos);
+    $info = $catcontroller->categorias();
+    $cant = $catcontroller->idCat();
+    $productos = $frontcontroller->getProductosComprados();
+    $frontcontroller->homePage($info, $cant, $productos);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "categoorias" && !isset($array_ruta[1])) {
-    echo $controller->categoriasJSON();
+    echo $catcontroller->categoriasJSON();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "login" && !isset($array_ruta[2])) {
-    $controller->loginHome();
+    $frontcontroller->loginHome();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "registro" && !isset($array_ruta[2])) {
-    $controller->registro();
+    $frontcontroller->registro();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "logout" && !isset($array_ruta[2])) {
-    $controller->logoutHome();
+    $frontcontroller->logoutHome();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "contacto" && !isset($array_ruta[2])) {
-    $info = $controller->categorias();
-    $cant = $controller->idCat();
-    $controller->contacto($info, $cant);
+    $info = $catcontroller->categorias();
+    $cant = $catcontroller->idCat();
+    $frontcontroller->contacto($info, $cant);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "profile" && !isset($array_ruta[2])) {
-    $id = (int)$_SESSION["idUser"];
-    echo $id;
-    $info = $dbUser->getById($id);
-    $controller->profile($info);
+    $frontcontroller->profile();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "products" && !isset($array_ruta[2])) {
-    require("view/productos.php");
+    $frontcontroller->showProducts();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "products" && isset($array_ruta[2])) {
-    $info = $dbObjeto->getById((int)$array_ruta[2]);
-    $comentarios = $dbComments->getComentariosPorObjeto((int)$array_ruta[2]);
-    require("view/ficha.php");
+    $frontcontroller->mostrarFicha((int)$array_ruta[2]);
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "contacto" && isset($array_ruta[2]) && $array_ruta[2] == "process") {
-    $controller->processContacto();
+    $frontcontroller->processContacto();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "registro" && isset($array_ruta[2]) && $array_ruta[2] == "process") {
-    $controller->processRegistro();
+    $frontcontroller->processRegistro();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && isset($array_ruta[1]) && $array_ruta[1] == "login" && isset($array_ruta[2]) && $array_ruta[2] == "process") {
-    $controller->processLoginHome();
+    $frontcontroller->processLoginHome();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "prooductos" && !isset($array_ruta[1])) {
-    echo $controller->processBuscador();
+    echo $frontcontroller->processBuscador();
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "prooductos" && isset($array_ruta[1]) && $array_ruta[1] == "id") {
-    echo $controller->idBuscador();
+    echo $frontcontroller->idBuscador();
 } else {
-    $controller->error();
+    $frontcontroller->error();
 }

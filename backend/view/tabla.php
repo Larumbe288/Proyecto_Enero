@@ -203,16 +203,13 @@
                     tr.setAttribute("data-id", valores[0]);
                     for (let j = 0; j < valores.length; j++) {
                         let td = document.createElement("td");
-                        if (j === valores.length - 1 && accion === "products") {
-                            td.innerText = categorias[valores[j]][0];
-                        } else {
-                            if (accion === "products" && j === 3) {
-                                if (valores[j].length > 15) {
-                                    valores[j] = valores[j].substring(0, 12) + "...";
-                                }
+                        if (accion === "products" && j === 3) {
+                            if (valores[j].length > 15) {
+                                valores[j] = valores[j].substring(0, 12) + "...";
                             }
-                            td.innerHTML = valores[j];
                         }
+                        td.innerHTML = valores[j];
+
                         tr.appendChild(td);
                     }
                     let arrayTabla = ["categories", "products", "users"];
